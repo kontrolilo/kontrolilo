@@ -1,6 +1,6 @@
 -   id: check-license
     name: Check against license whitelist
     description: This hook scans the local Pipfile against a configured license whitelist.
-    entry: check-license
+    entry: check_license
     language: python
-    types: [Pipfile]
+    files: Pipfile
