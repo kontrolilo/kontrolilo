@@ -2,7 +2,7 @@
 import argparse
 import sys
 from builtins import dict
-from json import loads
+from json import loads, load, dumps
 from os.path import abspath, exists
 from pathlib import Path
 from subprocess import run
@@ -37,38 +37,44 @@ def extract_installed_licenses(directory) -> List[str]:
     return parse_licenses(result.stdout)
 
 
-ALLOW_LIST_FILE = '.licenses-allowed-pipenv'
+CONFIG_FILE_NAME = '.license-check-pipenv.json'
 
 
-def get_allow_list_path(directory: str) -> str:
-    return str(Path(directory, ALLOW_LIST_FILE).absolute())
+def get_config_file_path(directory: str) -> str:
+    return str(Path(directory, CONFIG_FILE_NAME).absolute())
 
 
-def load_allow_list(directory) -> List[str]:
-    list_path = get_allow_list_path(directory)
-    if not exists(list_path):
-        return []
+def load_configuration(directory):
+    config_file_path = get_config_file_path(directory)
+    if not exists(config_file_path):
+        print('2')
+        return {}
 
-    with open(list_path) as list_file:
-        lines = list_file.readlines()
-        return [line.strip() for line in lines]
-
-
-def find_unallowed_licenses(used_licenses: List[str], allow_list: List[str]) -> List[str]:
-    return list(set(used_licenses) - set(allow_list))
+    with open(config_file_path) as list_file:
+        return load(list_file)
 
 
-def print_license_warning(directory: str, unallowed_licenses: List[str]):
-    unallowed_licenses.sort()
+def find_forbidden_licenses(used_licenses: List[str], configuration) -> List[str]:
+    license_list = []
+    if 'allowed_licenses' in configuration:
+        license_list = configuration['allowed_licenses']
+    return list(set(used_licenses) - set(license_list))
+
+
+def print_license_warning(directory: str, forbidden_licenses: List[str]):
+    forbidden_licenses.sort()
+    demo_configuration = {
+        'allowed_licenses': forbidden_licenses
+    }
+
     print('**************************************************************')
-    print(f'Not all license used by pipenv in directory {directory} are using allowed licenses.')
+    print(f'Not all licenses used by pipenv in directory {directory} are allowed.')
     print()
     print('If you want to allow these licenses, please put the following lines into')
-    print(f'the allow list file: {get_allow_list_path(directory)}: ')
-    print('---')
-    for unallowed_license in unallowed_licenses:
-        print(unallowed_license)
-    print('---')
+    print(f'the allow list file: {get_config_file_path(directory)}: ')
+    print()
+    print(dumps(demo_configuration, indent=2, sort_keys=True))
+    print()
     print('**************************************************************')
 
 
@@ -84,12 +90,14 @@ def main(argv=None):
     for directory in directories:
         print('**************************************************************')
         print(f'Starting scan in {directory}...')
+
+        configuration = load_configuration(directory)
         used_licenses = extract_installed_licenses(directory)
-        allow_list = load_allow_list(directory)
-        unallowed_licenses = find_unallowed_licenses(used_licenses, allow_list)
-        if len(unallowed_licenses) > 0:
+
+        forbidden_licenses = find_forbidden_licenses(used_licenses, configuration)
+        if len(forbidden_licenses) > 0:
             return_code = 1
-            print_license_warning(directory, unallowed_licenses)
+            print_license_warning(directory, forbidden_licenses)
 
     return return_code
 

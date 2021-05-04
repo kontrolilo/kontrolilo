@@ -2,7 +2,7 @@
 from pathlib import Path
 
 from pre_commit_hooks.license_check import get_pipenv_directories, remove_duplicates, parse_licenses, \
-    find_unallowed_licenses
+    find_forbidden_licenses
 
 
 def test_remove_duplicates():
@@ -48,9 +48,11 @@ def test_parse_licenses():
     assert licenses == ['BSD License', 'MIT License']
 
 
-def test_find_unallowed_licenses():
-    allowed_licenses = ['BSD License', 'MIT License']
+def test_find_forbidden_licenses():
+    configuration = {
+        'allowed_licenses': ['BSD License', 'MIT License']
+    }
     used_licenses = ['BSD License', 'GPL', 'MIT License']
 
-    unallowed_licenses = find_unallowed_licenses(used_licenses, allowed_licenses)
-    assert unallowed_licenses == ['GPL']
+    forbidden_licenses = find_forbidden_licenses(used_licenses, configuration)
+    assert forbidden_licenses == ['GPL']
