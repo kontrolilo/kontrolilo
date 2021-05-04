@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from pathlib import Path
 
-from pre_commit_hooks.license_check import get_pipenv_directories, remove_duplicates, parse_licenses, \
+from pre_commit_hooks.license_check_pipenv import get_pipenv_directories, remove_duplicates, parse_licenses, \
     find_forbidden_licenses
 
 

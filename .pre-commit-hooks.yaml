@@ -1,6 +1,6 @@
--   id: check-license
-    name: Check against license whitelist
-    description: This hook scans the local Pipfile against a configured license whitelist.
-    entry: python -m pre_commit_hooks.license_check
+-   id: license-check-pipenv
+    name: Check the licenses of a pipenv environment.
+    description: This hook scans the local Pipfile against a configured list of allowed open source licenses.
+    entry: python -m pre_commit_hooks.license_check_pipenv
     files: Pipfile
     language: python
