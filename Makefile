@@ -11,3 +11,6 @@ test:
 
 ci-setup-environment:
 	pip install pipenv
+
+release:
+	pipenv run semantic-release version
