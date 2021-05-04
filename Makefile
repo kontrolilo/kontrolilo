@@ -10,4 +10,4 @@ test:
 	pipenv run pytest
 
 ci-setup-environment:
-    pip install pipenv
+	pip install pipenv
