@@ -5,6 +5,10 @@ repos:
     hooks:
       - id: commitizen
         stages: [commit-msg]
+  - repo: https://github.com/frnmst/md-toc
+    rev: 7.0.2
+    hooks:
+      - id: md-toc
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
