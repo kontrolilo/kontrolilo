@@ -44,7 +44,46 @@ def test_parse_licenses():
       }
     ]
     '''
-    licenses = parse_licenses(stdout)
+    configuration = {}
+    licenses = parse_licenses(stdout, configuration)
+    assert licenses == ['BSD License', 'MIT License']
+
+
+def test_parse_licenses_with_excluded_packages():
+    stdout = '''[
+      {
+        "License": "BSD License",
+        "Name": "starlette",
+        "Version": "0.14.1"
+      },
+      {
+        "License": "GPL",
+        "Name": "demo1234",
+        "Version": "0.14.1"
+      },
+      {
+        "License": "MIT License",
+        "Name": "urllib3",
+        "Version": "1.26.4"
+      },
+      {
+        "License": "BSD License",
+        "Name": "uvicorn",
+        "Version": "0.13.3"
+      },
+      {
+        "License": "MIT License",
+        "Name": "zipp",
+        "Version": "3.4.1"
+      }
+    ]
+    '''
+    configuration = {
+        'excluded_packages': [
+            'demo1234'
+        ]
+    }
+    licenses = parse_licenses(stdout, configuration)
     assert licenses == ['BSD License', 'MIT License']
 
 

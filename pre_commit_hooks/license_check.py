@@ -20,21 +20,25 @@ def get_pipenv_directories(filenames) -> List[str]:
     return remove_duplicates(directories)
 
 
-def parse_licenses(output) -> List[str]:
+def parse_licenses(output: str, configuration: dict) -> List[str]:
     values = loads(output)
     licenses = []
+    excluded_packages = []
+    if 'excluded_packages' in configuration:
+        excluded_packages = configuration['excluded_packages']
 
     for license_structure in values:
-        licenses.append(license_structure['License'])
+        if not license_structure['Name'] in excluded_packages:
+            licenses.append(license_structure['License'])
 
     return remove_duplicates(licenses)
 
 
-def extract_installed_licenses(directory) -> List[str]:
+def extract_installed_licenses(directory: str, configuration: dict) -> List[str]:
     run("pipenv run pip install 'pip-licenses==3.3.1'", check=True, cwd=directory, shell=True)
     result = run('pipenv run pip-licenses --format=json', capture_output=True, check=True, cwd=directory, shell=True,
                  text=True)
-    return parse_licenses(result.stdout)
+    return parse_licenses(result.stdout, configuration)
 
 
 CONFIG_FILE_NAME = '.license-check-pipenv.json'
@@ -92,7 +96,7 @@ def main(argv=None):
         print(f'Starting scan in {directory}...')
 
         configuration = load_configuration(directory)
-        used_licenses = extract_installed_licenses(directory)
+        used_licenses = extract_installed_licenses(directory, configuration)
 
         forbidden_licenses = find_forbidden_licenses(used_licenses, configuration)
         if len(forbidden_licenses) > 0:
