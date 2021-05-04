@@ -19,7 +19,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: setup environment
       run: |
-        make install
+        make ci-setup-environment
+        make local-setup
     - name: run test
       run: |
         make test
