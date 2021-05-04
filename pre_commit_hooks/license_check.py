@@ -1,5 +1,15 @@
+# -*- coding: utf-8 -*-
+import argparse
+import sys
+
 def main(argv=None):
-    print("hello World!")
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filenames', nargs='*', help='filenames to check')
+    args = parser.parse_args(argv)
+
+
+    print(args.filenames)
+
     return_code = 0
     return return_code
 
