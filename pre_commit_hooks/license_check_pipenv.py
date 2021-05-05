@@ -35,6 +35,7 @@ def parse_licenses(output: str, configuration: dict) -> List[str]:
 
 
 def install_tools(directory: str):
+    run('pipenv install -d', check=True, cwd=directory, shell=True)
     run("pipenv run pip install 'pip-licenses==3.3.1'", check=True, cwd=directory, shell=True)
 
 
@@ -100,7 +101,7 @@ def main(argv=None):
         configuration = load_configuration(directory)
         install_tools(directory)
         used_licenses = extract_installed_licenses(directory, configuration)
-
+        print(used_licenses)
         forbidden_licenses = find_forbidden_licenses(used_licenses, configuration)
         if len(forbidden_licenses) > 0:
             return_code = 1
