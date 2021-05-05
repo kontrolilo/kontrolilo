@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.0 (2021-05-05)
+### Feature
+* Test automatic release ([`514c6a2`](https://github.com/nbyl/pre-commit-license-check-python/commit/514c6a2eae7300c7f5bcc9f32d488ccc5c5412ed))
+* Test automatic release ([`9407591`](https://github.com/nbyl/pre-commit-license-check-python/commit/94075914bc2262ac9b10b697a2a98a0fb667bc30))
+
 ## v0.1.0 (2021-05-04)
 ### Feature
 * Implement package exclusion ([`8d1e1c8`](https://github.com/nbyl/pre-commit-license-check-python/commit/8d1e1c86346ceda5a218c455c09fb671fdb1e2aa))
