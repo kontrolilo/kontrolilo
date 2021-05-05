@@ -13,7 +13,7 @@ ci-setup-environment:
 	pip install pipenv
 
 release:
-	pipenv run semantic-release version
+	pipenv run semantic-release publish
 
 print-release:
 	pipenv run semantic-release print-version
