@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2021-05-05)
+
+
 ## v0.2.0 (2021-05-05)
 ### Feature
 * Test automatic release ([`514c6a2`](https://github.com/nbyl/pre-commit-license-check-python/commit/514c6a2eae7300c7f5bcc9f32d488ccc5c5412ed))
