@@ -34,8 +34,11 @@ def parse_licenses(output: str, configuration: dict) -> List[str]:
     return remove_duplicates(licenses)
 
 
-def extract_installed_licenses(directory: str, configuration: dict) -> List[str]:
+def install_tools(directory: str):
     run("pipenv run pip install 'pip-licenses==3.3.1'", check=True, cwd=directory, shell=True)
+
+
+def extract_installed_licenses(directory: str, configuration: dict) -> List[str]:
     result = run('pipenv run pip-licenses --format=json', capture_output=True, check=True, cwd=directory, shell=True,
                  text=True)
     return parse_licenses(result.stdout, configuration)
@@ -48,10 +51,9 @@ def get_config_file_path(directory: str) -> str:
     return str(Path(directory, CONFIG_FILE_NAME).absolute())
 
 
-def load_configuration(directory):
+def load_configuration(directory) -> dict:
     config_file_path = get_config_file_path(directory)
     if not exists(config_file_path):
-        print('2')
         return {}
 
     with open(config_file_path) as list_file:
@@ -96,6 +98,7 @@ def main(argv=None):
         print(f'Starting scan in {directory}...')
 
         configuration = load_configuration(directory)
+        install_tools(directory)
         used_licenses = extract_installed_licenses(directory, configuration)
 
         forbidden_licenses = find_forbidden_licenses(used_licenses, configuration)
