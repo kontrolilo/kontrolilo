@@ -14,3 +14,6 @@ ci-setup-environment:
 
 release:
 	pipenv run semantic-release version
+
+print-release:
+	pipenv run semantic-release print-version
