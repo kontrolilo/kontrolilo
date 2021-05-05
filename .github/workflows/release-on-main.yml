@@ -1,7 +1,7 @@
 name: release project
 on:
   push:
-#    branches: [ main ]
+    branches: [ main ]
 jobs:
   release:
     runs-on: ubuntu-latest
