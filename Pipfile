@@ -8,6 +8,7 @@ name = "pypi"
 [dev-packages]
 pre-commit = "*"
 pytest = "*"
+pytest-cov = "*"
 python-semantic-release="*"
 
 [requires]
