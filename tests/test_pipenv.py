@@ -132,7 +132,7 @@ class TestPipenvLicenseChecker:
         run_mock.return_value = {}
 
         with TemporaryDirectory() as directory:
-            self.checker.install_tools(directory)
+            self.checker.prepare_directory(directory)
             run_mock.assert_has_calls([
                 call('pipenv install -d', check=True, cwd=directory, shell=True),
                 call("pipenv run pip install 'pip-licenses==3.3.1'", check=True, cwd=directory, shell=True),
