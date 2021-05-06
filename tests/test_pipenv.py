@@ -6,7 +6,7 @@ from shutil import copy2
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, Mock, call
 
-from license_checks.license_check_pipenv import get_pipenv_directories, remove_duplicates, parse_licenses, \
+from license_checks.pipenv import get_pipenv_directories, remove_duplicates, parse_licenses, \
     find_forbidden_licenses, load_configuration, CONFIG_FILE_NAME, print_license_warning, install_tools, \
     extract_installed_licenses, PipenvLicenseChecker
 
