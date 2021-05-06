@@ -6,18 +6,29 @@ from builtins import dict
 from json import load, dumps
 from os.path import abspath, exists
 from pathlib import Path
+from subprocess import run
 from typing import List
 
 
 class BaseLicenseChecker(metaclass=abc.ABCMeta):
+    CONFIG_FILE_NAME = '.license-check-pipenv.json'
 
     @abc.abstractmethod
     def prepare_directory(self, directory: str):
         """Prepare the directory for the license check, e.g. by installing all needed tools."""
 
     @abc.abstractmethod
-    def extract_installed_licenses(self, directory: str, configuration: dict) -> List[str]:
-        """"""
+    def get_license_checker_command(self) -> str:
+        """Return the command needed to run in the target directory"""
+
+    @abc.abstractmethod
+    def parse_licenses(self, output: str, configuration: dict) -> List[str]:
+        """Parse the licenses from the output of the checker program."""
+
+    def load_installed_licenses(self, directory: str, configuration: dict) -> List[str]:
+        result = run(self.get_license_checker_command(), capture_output=True, check=True, cwd=directory,
+                     shell=True, text=True)
+        return self.parse_licenses(result.stdout, configuration)
 
     def remove_duplicates(self, values: List[str]) -> List[str]:
         return list(dict.fromkeys(values))
@@ -76,7 +87,7 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
 
             configuration = self.load_configuration(directory)
             self.prepare_directory(directory)
-            used_licenses = self.extract_installed_licenses(directory, configuration)
+            used_licenses = self.load_installed_licenses(directory, configuration)
             forbidden_licenses = self.find_forbidden_licenses(used_licenses, configuration)
             if len(forbidden_licenses) > 0:
                 return_code = 1

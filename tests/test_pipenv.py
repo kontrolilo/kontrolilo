@@ -128,7 +128,7 @@ class TestPipenvLicenseChecker:
             self.checker.print_license_warning(directory, [])
 
     @patch('license_checks.pipenv.run')
-    def test_install_tools(self, run_mock):
+    def prepare_directory(self, run_mock):
         run_mock.return_value = {}
 
         with TemporaryDirectory() as directory:
@@ -138,14 +138,14 @@ class TestPipenvLicenseChecker:
                 call("pipenv run pip install 'pip-licenses==3.3.1'", check=True, cwd=directory, shell=True),
             ])
 
-    @patch('license_checks.pipenv.run')
-    def test_extract_installed_licenses(self, run_mock):
+    @patch('license_checks.base_checker.run')
+    def test_load_installed_licenses(self, run_mock):
         result_mock = Mock()
         result_mock.configure_mock(**{'stdout': self.DEMO_LICENSE_OUTPUT})
         run_mock.return_value = result_mock
 
         with TemporaryDirectory() as directory:
-            self.checker.extract_installed_licenses(directory, {})
+            self.checker.load_installed_licenses(directory, {})
             run_mock.assert_called_once_with('pipenv run pip-licenses --format=json', capture_output=True, check=True,
                                              cwd=directory, shell=True, text=True)
 
