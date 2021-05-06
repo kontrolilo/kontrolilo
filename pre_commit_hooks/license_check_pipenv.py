@@ -85,30 +85,34 @@ def print_license_warning(directory: str, forbidden_licenses: List[str]):
     print('**************************************************************')
 
 
-def main(argv=None):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('filenames', nargs='*', help='filenames to check')
-    args = parser.parse_args(argv)
+class PipenvLicenseChecker:
 
-    return_code = 0
+    def __init__(self) -> None:
+        super().__init__()
 
-    directories = get_pipenv_directories(args.filenames)
+    def run(self, argv=None) -> int:
+        parser = argparse.ArgumentParser()
+        parser.add_argument('filenames', nargs='*', help='filenames to check')
+        args = parser.parse_args(argv)
 
-    for directory in directories:
-        print('**************************************************************')
-        print(f'Starting scan in {directory}...')
+        return_code = 0
 
-        configuration = load_configuration(directory)
-        install_tools(directory)
-        used_licenses = extract_installed_licenses(directory, configuration)
-        print(used_licenses)
-        forbidden_licenses = find_forbidden_licenses(used_licenses, configuration)
-        if len(forbidden_licenses) > 0:
-            return_code = 1
-            print_license_warning(directory, forbidden_licenses)
+        directories = get_pipenv_directories(args.filenames)
 
-    return return_code
+        for directory in directories:
+            print('**************************************************************')
+            print(f'Starting scan in {directory}...')
 
+            configuration = load_configuration(directory)
+            install_tools(directory)
+            used_licenses = extract_installed_licenses(directory, configuration)
+            print(used_licenses)
+            forbidden_licenses = find_forbidden_licenses(used_licenses, configuration)
+            if len(forbidden_licenses) > 0:
+                return_code = 1
+                print_license_warning(directory, forbidden_licenses)
+
+        return return_code
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(PipenvLicenseChecker().run(sys.argv[1:]))
