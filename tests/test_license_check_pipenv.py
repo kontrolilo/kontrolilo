@@ -8,7 +8,7 @@ from unittest.mock import patch, Mock, call
 
 from pre_commit_hooks.license_check_pipenv import get_pipenv_directories, remove_duplicates, parse_licenses, \
     find_forbidden_licenses, load_configuration, CONFIG_FILE_NAME, print_license_warning, install_tools, \
-    extract_installed_licenses, main
+    extract_installed_licenses, PipenvLicenseChecker
 
 
 def test_remove_duplicates():
@@ -157,37 +157,42 @@ def test_extract_installed_licenses(run_mock):
                                          cwd=directory, shell=True, text=True)
 
 
-def test_main_returns_failure_on_no_config():
-    with TemporaryDirectory() as directory:
-        copy2('Pipfile', directory)
-        copy2('Pipfile.lock', directory)
+class TestPipenvLicenseChecker:
+    checker: PipenvLicenseChecker
 
-        result = main([join(directory, 'Pipfile')])
-        assert result == 1
+    def setup(self):
+        self.checker = PipenvLicenseChecker()
 
+    def test_main_returns_failure_on_no_config(self):
+        with TemporaryDirectory() as directory:
+            copy2('Pipfile', directory)
+            copy2('Pipfile.lock', directory)
 
-def test_main_returns_success():
-    with TemporaryDirectory() as directory:
-        copy2('Pipfile', directory)
-        copy2('Pipfile.lock', directory)
+            result = self.checker.run([join(directory, 'Pipfile')])
+            assert result == 1
 
-        with open(join(directory, CONFIG_FILE_NAME), 'w+') as config_file:
-            dump(
-                {'allowed_licenses': [
-                    'Apache Software License',
-                    'Apache Software License, BSD License',
-                    'BSD License',
-                    'GNU Lesser General Public License v3 (LGPLv3)',
-                    'GNU Library or Lesser General Public License (LGPL)',
-                    'MIT',
-                    'MIT License',
-                    'MIT License, Mozilla Public License 2.0 (MPL 2.0)',
-                    'Mozilla Public License 2.0 (MPL 2.0)',
-                    'Public Domain',
-                    'Public Domain, Python Software Foundation License, BSD License, GNU General Public License (GPL)',
-                    'Python Software Foundation License',
-                    'Python Software Foundation License, MIT License'
-                ]}, config_file)
+    def test_main_returns_success(self):
+        with TemporaryDirectory() as directory:
+            copy2('Pipfile', directory)
+            copy2('Pipfile.lock', directory)
 
-        result = main([join(directory, 'Pipfile')])
-        assert result == 0
+            with open(join(directory, CONFIG_FILE_NAME), 'w+') as config_file:
+                dump(
+                    {'allowed_licenses': [
+                        'Apache Software License',
+                        'Apache Software License, BSD License',
+                        'BSD License',
+                        'GNU Lesser General Public License v3 (LGPLv3)',
+                        'GNU Library or Lesser General Public License (LGPL)',
+                        'MIT',
+                        'MIT License',
+                        'MIT License, Mozilla Public License 2.0 (MPL 2.0)',
+                        'Mozilla Public License 2.0 (MPL 2.0)',
+                        'Public Domain',
+                        'Public Domain, Python Software Foundation License, BSD License, GNU General Public License (GPL)',
+                        'Python Software Foundation License',
+                        'Python Software Foundation License, MIT License'
+                    ]}, config_file)
+
+            result = self.checker.run([join(directory, 'Pipfile')])
+            assert result == 0
