@@ -2,12 +2,12 @@
 -   id: license-check-pipenv
     name: Check the licenses of a pipenv environment.
     description: This hook scans the local Pipfile against a configured list of allowed open source licenses.
-    entry: python -m pre_commit_hooks.license_check_pipenv
+    entry: python -m license_checks.license_check_pipenv
     files: Pipfile
     language: python
 -   id: license-check-npm
     name: Check the licenses of a npm environment.
     description: This hook scans the package. a configured list of allowed open source licenses.
-    entry: python -m pre_commit_hooks.license_check_npm
+    entry: python -m license_checks.license_check_npm
     files: package.json
     language: python

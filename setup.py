@@ -13,7 +13,7 @@ setup(
     packages=find_packages('.'),
     entry_points={
         'console_scripts': [
-            'license_check = pre_commit_hooks.license_check:main',
+            'license_checks = license_checks.license_checks:main',
         ],
     },
 )

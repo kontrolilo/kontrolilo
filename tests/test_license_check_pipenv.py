@@ -6,7 +6,7 @@ from shutil import copy2
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, Mock, call
 
-from pre_commit_hooks.license_check_pipenv import get_pipenv_directories, remove_duplicates, parse_licenses, \
+from license_checks.license_check_pipenv import get_pipenv_directories, remove_duplicates, parse_licenses, \
     find_forbidden_licenses, load_configuration, CONFIG_FILE_NAME, print_license_warning, install_tools, \
     extract_installed_licenses, PipenvLicenseChecker
 
@@ -132,7 +132,7 @@ def test_print_license_warning():
         print_license_warning(directory, [])
 
 
-@patch('pre_commit_hooks.license_check_pipenv.run')
+@patch('license_checks.license_check_pipenv.run')
 def test_install_tools(run_mock):
     run_mock.return_value = {}
 
@@ -144,7 +144,7 @@ def test_install_tools(run_mock):
         ])
 
 
-@patch('pre_commit_hooks.license_check_pipenv.run')
+@patch('license_checks.license_check_pipenv.run')
 def test_extract_installed_licenses(run_mock):
     result_mock = Mock()
     result_mock.configure_mock(**{'stdout': DEMO_LICENSE_OUTPUT})
