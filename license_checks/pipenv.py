@@ -9,10 +9,15 @@ from license_checks.base_checker import BaseLicenseChecker
 
 
 class PipenvLicenseChecker(BaseLicenseChecker):
-    CONFIG_FILE_NAME = '.license-check-pipenv.json'
-
     def __init__(self) -> None:
         super().__init__()
+
+    def prepare_directory(self, directory: str):
+        run('pipenv install -d', check=True, cwd=directory, shell=True)
+        run("pipenv run pip install 'pip-licenses==3.3.1'", check=True, cwd=directory, shell=True)
+
+    def get_license_checker_command(self) -> str:
+        return 'pipenv run pip-licenses --format=json'
 
     def parse_licenses(self, output: str, configuration: dict) -> List[str]:
         values = loads(output)
@@ -26,17 +31,6 @@ class PipenvLicenseChecker(BaseLicenseChecker):
                 licenses.append(license_structure['License'])
 
         return self.remove_duplicates(licenses)
-
-    def prepare_directory(self, directory: str):
-        run('pipenv install -d', check=True, cwd=directory, shell=True)
-        run("pipenv run pip install 'pip-licenses==3.3.1'", check=True, cwd=directory, shell=True)
-
-    def extract_installed_licenses(self, directory: str, configuration: dict) -> List[str]:
-        result = run('pipenv run pip-licenses --format=json', capture_output=True, check=True, cwd=directory,
-                     shell=True,
-                     text=True)
-        return self.parse_licenses(result.stdout, configuration)
-
 
 if __name__ == '__main__':
     sys.exit(PipenvLicenseChecker().run(sys.argv[1:]))
