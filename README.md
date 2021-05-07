@@ -9,6 +9,7 @@ compliance in the python ecosystem.
 - [forbiddenpre-commit-license-checks](#forbiddenpre-commit-license-checks)
   - [Installation](#installation)
   - [Available hooks](#available-hooks)
+    - [`license-check-npm`](#license-check-npm)
     - [`license-check-pipenv`](#license-check-pipenv)
   - [Contributing](#contributing)
   - [License](#license)
@@ -27,39 +28,63 @@ repos:
   - repo: https://github.com/nbyl/forbiddenpre-commit-license-checks
     rev: main
     hooks:
+      - id: license-check-npm
       - id: license-check-pipenv
 ```
 
 ## Available hooks
 
+### `license-check-npm`
+
+**What it does**
+
+* This hook checks the licenses of your dependencies declared in a `package.json` against defined list of allowed open
+  source licenses.
+
+**Configuration**
+
+To configure the list of allowed licenses, put a file called `.license-check.yaml` alongside your `package.json`.
+
+The file must be structured the following way:
+
+```yaml
+---
+allowedLicenses:
+  - [ a list of allowed licenses ]
+excludedPackages:
+  - [ any package listed here will be excluded from the check ]
+```
+
+**More info**
+
+* [npm](https://www.npmjs.com/)
+* [license-checker](https://www.npmjs.com/package/license-checker)
+
 ### `license-check-pipenv`
 
 **What it does**
 
-* This hook checks the contents of a [pipenv](https://pypi.org/project/pipenv/) environment against a definied list of allowed open source licenses.
+* This hook checks the contents of a [pipenv](https://pypi.org/project/pipenv/) environment against a defined list of
+  allowed open source licenses.
 
 **Configuration**
 
-To configure the list of allowed licenses, put a file called `.license-check-pipenv.json` alongside your `Pipfile`.
+To configure the list of allowed licenses, put a file called `.license-check.yaml` alongside your `Pipfile`.
 
 The file must be structured the following way:
 
-```json
-{
-  "allowed_licenses": [
-    "[a list of allowed licenses]",
-  ],
-  "excluded_packages": [
-    "[any package listed here will be excluded from the check]]",
-  ]
-}
+```yaml
+---
+allowedLicenses:
+  - [ a list of allowed licenses ]
+excludedPackages:
+  - [ any package listed here will be excluded from the check ]
 ```
 
 **More info**
 
 * [pipenv](https://pypi.org/project/pipenv/)
 * [pip-licenses](https://pypi.org/project/pip-licenses/)
-
 
 ## Contributing
 

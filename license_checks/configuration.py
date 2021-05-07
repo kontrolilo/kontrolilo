@@ -4,7 +4,7 @@ from pathlib import Path
 
 from yaml import load, dump
 
-CONFIG_FILE_NAME = '.license-check-pipenv.yaml'
+CONFIG_FILE_NAME = '.license-check.yaml'
 
 
 class Configuration:
