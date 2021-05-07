@@ -2,7 +2,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-__version__ = '1.0.0'
+__version__ = '0.4.0'
 
 setup(
     install_requires=['pyyaml==5.4.1'],
