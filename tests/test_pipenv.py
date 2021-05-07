@@ -10,6 +10,7 @@ from yaml import dump
 
 from license_checks.configuration import Configuration
 from license_checks.pipenv import PipenvLicenseChecker
+from tests.util import write_config_file
 
 
 class TestPipenvLicenseChecker:
@@ -79,23 +80,21 @@ class TestPipenvLicenseChecker:
             copy2('Pipfile', directory)
             copy2('Pipfile.lock', directory)
 
-            with open(Configuration.get_config_file_path(directory), 'w+') as config_file:
-                dump(
-                    {'allowedLicenses': [
-                        'Apache Software License',
-                        'Apache Software License, BSD License',
-                        'BSD License',
-                        'GNU Lesser General Public License v3 (LGPLv3)',
-                        'GNU Library or Lesser General Public License (LGPL)',
-                        'MIT',
-                        'MIT License',
-                        'MIT License, Mozilla Public License 2.0 (MPL 2.0)',
-                        'Mozilla Public License 2.0 (MPL 2.0)',
-                        'Public Domain',
-                        'Public Domain, Python Software Foundation License, BSD License, GNU General Public License (GPL)',
-                        'Python Software Foundation License',
-                        'Python Software Foundation License, MIT License'
-                    ]}, config_file)
+            write_config_file(directory, [
+                'Apache Software License',
+                'Apache Software License, BSD License',
+                'BSD License',
+                'GNU Lesser General Public License v3 (LGPLv3)',
+                'GNU Library or Lesser General Public License (LGPL)',
+                'MIT',
+                'MIT License',
+                'MIT License, Mozilla Public License 2.0 (MPL 2.0)',
+                'Mozilla Public License 2.0 (MPL 2.0)',
+                'Public Domain',
+                'Public Domain, Python Software Foundation License, BSD License, GNU General Public License (GPL)',
+                'Python Software Foundation License',
+                'Python Software Foundation License, MIT License'
+            ])
 
             result = self.checker.run([join(directory, 'Pipfile')])
             assert result == 0
