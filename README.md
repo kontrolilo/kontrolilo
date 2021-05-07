@@ -54,9 +54,24 @@ The file must be structured the following way:
 ```yaml
 ---
 allowedLicenses:
-  - [ a list of allowed licenses ]
+  - a
+  - list
+  - of
+  - allowed
+  - licenses
+  - ...
 excludedPackages:
-  - [ any package listed here will be excluded from the check ]
+  - any
+  - package
+  - listed
+  - here
+  - will
+  - be
+  - excluded
+  - from
+  - the
+  - check
+  - ...
 ```
 
 **More info**
@@ -80,9 +95,24 @@ The file must be structured the following way:
 ```yaml
 ---
 allowedLicenses:
-  - [ a list of allowed licenses ]
+  - a
+  - list
+  - of
+  - allowed
+  - licenses
+  - ...
 excludedPackages:
-  - [ any package listed here will be excluded from the check ]
+  - any
+  - package
+  - listed
+  - here
+  - will
+  - be
+  - excluded
+  - from
+  - the
+  - check
+  - ...
 ```
 
 **More info**
