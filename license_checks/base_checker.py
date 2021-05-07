@@ -30,7 +30,7 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
                      shell=True, text=True)
         return self.parse_licenses(result.stdout, configuration)
 
-    def get_pipenv_directories(self, filenames) -> List[str]:
+    def consolidate_directories(self, filenames) -> List[str]:
         directories = []
         for filename in filenames:
             directories.append(abspath(Path(filename).parent.absolute()))
@@ -43,7 +43,7 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
 
         return_code = 0
 
-        directories = self.get_pipenv_directories(args.filenames)
+        directories = self.consolidate_directories(args.filenames)
 
         for directory in directories:
             print('**************************************************************')

@@ -34,7 +34,7 @@ class TestBaseLicenseChecker:
     def test_get_pipenv_directories(self):
         filenames = ['Pipfile.lock', 'Pipfile',
                      'deployment/Pipfile', 'deployment/Pipfile.lock']
-        directories = self.checker.get_pipenv_directories(filenames)
+        directories = self.checker.consolidate_directories(filenames)
         assert len(directories) == 2
         assert directories == [str(Path('.').absolute()),
                                str(Path('.', 'deployment').absolute())]
