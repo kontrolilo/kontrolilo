@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import csv
+from subprocess import run
 from sys import argv
 from typing import List
 
@@ -12,7 +13,7 @@ class NpmLicenseChecker(BaseLicenseChecker):
         super().__init__()
 
     def prepare_directory(self, directory: str):
-        pass
+        run('npm install', check=True, cwd=directory, shell=True)
 
     def get_license_checker_command(self) -> str:
         # yes, we are using csv here. license-checker's json output does not build an array of licenses, which is

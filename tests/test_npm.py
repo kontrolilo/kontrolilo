@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
+from json import dump
+from os.path import join
+from tempfile import TemporaryDirectory
+
 from license_checks.configuration import Configuration
 from license_checks.npm import NpmLicenseChecker
+from tests.util import write_config_file
 
 
 class TestNpmLicenseChecker:
@@ -30,3 +35,38 @@ class TestNpmLicenseChecker:
     def test_parse_licenses(self):
         licenses = self.checker.parse_licenses(self.DEMO_LICENSE_OUTPUT, Configuration())
         assert licenses == ['MIT', 'ISC']
+
+    def test_main_returns_failure_on_no_config(self):
+        with TemporaryDirectory() as directory:
+            self.prepare_integration_test_directory(directory)
+
+            result = self.checker.run([join(directory, 'package.json')])
+            assert result == 1
+
+    def test_main_returns_success(self):
+        with TemporaryDirectory() as directory:
+            self.prepare_integration_test_directory(directory)
+            write_config_file(directory, ['ISC', 'MIT'])
+
+            result = self.checker.run([join(directory, 'package.json')])
+            assert result == 0
+
+    @staticmethod
+    def prepare_integration_test_directory(directory: str):
+        package = {
+            'name': 'pre-commit-integration-test',
+            'version': '1.0.0',
+            'description': 'No big deal.',
+            'main': 'index.js',
+            'scripts': {
+                'test': "echo \"Error: no test specified\" && exit 1"
+            },
+            'author': '',
+            'license': 'ISC',
+            'dependencies': {
+                'lodash': '^4.17.21'
+            }
+        }
+
+        with open(join(directory, 'package.json'), 'w+')as package_file:
+            dump(package, package_file)
