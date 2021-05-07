@@ -6,6 +6,7 @@ from subprocess import run
 from typing import List
 
 from license_checks.base_checker import BaseLicenseChecker
+from license_checks.configuration import Configuration
 
 
 class PipenvLicenseChecker(BaseLicenseChecker):
@@ -19,18 +20,16 @@ class PipenvLicenseChecker(BaseLicenseChecker):
     def get_license_checker_command(self) -> str:
         return 'pipenv run pip-licenses --format=json'
 
-    def parse_licenses(self, output: str, configuration: dict) -> List[str]:
+    def parse_licenses(self, output: str, configuration: Configuration) -> List[str]:
         values = loads(output)
         licenses = []
-        excluded_packages = []
-        if 'excluded_packages' in configuration:
-            excluded_packages = configuration['excluded_packages']
 
         for license_structure in values:
-            if not license_structure['Name'] in excluded_packages:
+            if not license_structure['Name'] in configuration.excludedPackages:
                 licenses.append(license_structure['License'])
 
         return self.remove_duplicates(licenses)
+
 
 if __name__ == '__main__':
     sys.exit(PipenvLicenseChecker().run(sys.argv[1:]))

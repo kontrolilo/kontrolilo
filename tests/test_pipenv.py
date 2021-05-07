@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-from json import dump
+
 from os.path import join
 from pathlib import Path
 from shutil import copy2
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, call
 
+from yaml import dump
+
+from license_checks.configuration import Configuration
 from license_checks.pipenv import PipenvLicenseChecker
 
 
@@ -68,37 +71,13 @@ class TestPipenvLicenseChecker:
           }
         ]
         '''
-        configuration = {}
-        licenses = self.checker.parse_licenses(stdout, configuration)
+
+        licenses = self.checker.parse_licenses(stdout, Configuration())
         assert licenses == ['BSD License', 'MIT License']
 
     def test_parse_licenses_with_excluded_packages(self):
-        configuration = {
-            'excluded_packages': [
-                'demo1234'
-            ]
-        }
-        licenses = self.checker.parse_licenses(self.DEMO_LICENSE_OUTPUT, configuration)
+        licenses = self.checker.parse_licenses(self.DEMO_LICENSE_OUTPUT, Configuration(excludedPackages=['demo1234']))
         assert licenses == ['BSD License', 'MIT License']
-
-    def test_load_configuration_without_file(self):
-        with TemporaryDirectory() as directory:
-            configuration = self.checker.load_configuration(directory)
-            assert configuration == {}
-
-    def test_load_configuration_with_file(self):
-        demo_configuration = {
-            'excluded_packages': [
-                'demo1234'
-            ]
-        }
-
-        with TemporaryDirectory() as directory:
-            with open(str(Path(directory, PipenvLicenseChecker.CONFIG_FILE_NAME).absolute()), 'w') as config_file:
-                dump(demo_configuration, config_file)
-
-            configuration = self.checker.load_configuration(directory)
-            assert configuration == demo_configuration
 
     @patch('license_checks.pipenv.run')
     def prepare_directory(self, run_mock):
@@ -124,9 +103,9 @@ class TestPipenvLicenseChecker:
             copy2('Pipfile', directory)
             copy2('Pipfile.lock', directory)
 
-            with open(join(directory, PipenvLicenseChecker.CONFIG_FILE_NAME), 'w+') as config_file:
+            with open(Configuration.get_config_file_path(directory), 'w+') as config_file:
                 dump(
-                    {'allowed_licenses': [
+                    {'allowedLicenses': [
                         'Apache Software License',
                         'Apache Software License, BSD License',
                         'BSD License',

@@ -5,6 +5,7 @@ from typing import List
 from unittest.mock import patch, Mock
 
 from license_checks.base_checker import BaseLicenseChecker
+from license_checks.configuration import Configuration
 
 
 class SimpleLicenseChecker(BaseLicenseChecker):
@@ -39,12 +40,9 @@ class TestBaseLicenseChecker:
                                str(Path('.', 'deployment').absolute())]
 
     def test_find_forbidden_licenses(self):
-        configuration = {
-            'allowed_licenses': ['BSD License', 'MIT License']
-        }
         used_licenses = ['BSD License', 'GPL', 'MIT License']
-
-        forbidden_licenses = self.checker.find_forbidden_licenses(used_licenses, configuration)
+        forbidden_licenses = self.checker.find_forbidden_licenses(used_licenses, Configuration(
+            allowedLicenses=['BSD License', 'MIT License']))
         assert forbidden_licenses == ['GPL']
 
     def test_print_license_warning(self):
