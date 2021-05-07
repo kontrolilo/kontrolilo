@@ -30,31 +30,11 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
                      shell=True, text=True)
         return self.parse_licenses(result.stdout, configuration)
 
-    def remove_duplicates(self, values: List[str]) -> List[str]:
-        return list(dict.fromkeys(values))
-
     def get_pipenv_directories(self, filenames) -> List[str]:
         directories = []
         for filename in filenames:
             directories.append(abspath(Path(filename).parent.absolute()))
         return self.remove_duplicates(directories)
-
-    def find_forbidden_licenses(self, used_licenses: List[str], configuration) -> List[str]:
-        return list(set(used_licenses) - set(configuration.allowedLicenses))
-
-    def print_license_warning(self, directory: str, forbidden_licenses: List[str]):
-        forbidden_licenses.sort()
-        demo_configuration = Configuration(allowedLicenses=forbidden_licenses)
-
-        print('**************************************************************')
-        print(f'Not all licenses used by pipenv in directory {directory} are allowed.')
-        print()
-        print('If you want to allow these licenses, please put the following lines into')
-        print(f'the allow list file: {Configuration.get_config_file_path(directory)}: ')
-        print()
-        print(demo_configuration.dump())
-        print()
-        print('**************************************************************')
 
     def run(self, argv=None) -> int:
         parser = argparse.ArgumentParser()
@@ -78,3 +58,26 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
                 self.print_license_warning(directory, forbidden_licenses)
 
         return return_code
+
+    @staticmethod
+    def remove_duplicates(values: List[str]) -> List[str]:
+        return list(dict.fromkeys(values))
+
+    @staticmethod
+    def print_license_warning(directory: str, forbidden_licenses: List[str]):
+        forbidden_licenses.sort()
+        demo_configuration = Configuration(allowedLicenses=forbidden_licenses)
+
+        print('**************************************************************')
+        print(f'Not all licenses used by pipenv in directory {directory} are allowed.')
+        print()
+        print('If you want to allow these licenses, please put the following lines into')
+        print(f'the allow list file: {Configuration.get_config_file_path(directory)}: ')
+        print()
+        print(demo_configuration.dump())
+        print()
+        print('**************************************************************')
+
+    @staticmethod
+    def find_forbidden_licenses(used_licenses: List[str], configuration) -> List[str]:
+        return list(set(used_licenses) - set(configuration.allowedLicenses))
