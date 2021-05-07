@@ -81,11 +81,15 @@ class TestPipenvLicenseChecker:
             copy2('Pipfile.lock', directory)
 
             write_config_file(directory, [
+                'Apache License 2.0',
                 'Apache Software License',
                 'Apache Software License, BSD License',
                 'BSD License',
+                'BSD License, Apache Software License',
+                'Freely Distributable',
                 'GNU Lesser General Public License v3 (LGPLv3)',
                 'GNU Library or Lesser General Public License (LGPL)',
+                'ISC License (ISCL)',
                 'MIT',
                 'MIT License',
                 'MIT License, Mozilla Public License 2.0 (MPL 2.0)',
