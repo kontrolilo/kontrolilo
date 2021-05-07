@@ -1,4 +1,8 @@
-# forbiddenpre-commit-license-checks
+# pre-commit-license-checks
+
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/nbyl/pre-commit-license-checks/release%20project?label=Release&style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/nbyl/pre-commit-license-checks/run%20all%20tests?label=PR%20tests&style=for-the-badge)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/nbyl/pre-commit-license-checks?style=for-the-badge)
 
 This repo contains git hooks to integrate with [pre-commit](http://pre-commit.com). These are centered around license
 compliance in the python ecosystem.
@@ -6,7 +10,7 @@ compliance in the python ecosystem.
 
 <!--TOC-->
 
-- [forbiddenpre-commit-license-checks](#forbiddenpre-commit-license-checks)
+- [pre-commit-license-checks](#pre-commit-license-checks)
   - [Installation](#installation)
   - [Available hooks](#available-hooks)
     - [`license-check-npm`](#license-check-npm)
@@ -25,7 +29,7 @@ Afterwards put the need hook into your `.pre-commit-config.yaml`:
 ```
 ---
 repos:
-  - repo: https://github.com/nbyl/forbiddenpre-commit-license-checks
+  - repo: https://github.com/nbyl/pre-commit-license-checks
     rev: main
     hooks:
       - id: license-check-npm
