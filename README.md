@@ -1,4 +1,4 @@
-# pre-commit-license-check-python
+# forbiddenpre-commit-license-checks
 
 This repo contains git hooks to integrate with [pre-commit](http://pre-commit.com). These are centered around license
 compliance in the python ecosystem.
@@ -6,7 +6,7 @@ compliance in the python ecosystem.
 
 <!--TOC-->
 
-- [pre-commit-license-check-python](#pre-commit-license-check-python)
+- [forbiddenpre-commit-license-checks](#forbiddenpre-commit-license-checks)
   - [Installation](#installation)
   - [Available hooks](#available-hooks)
     - [`license-check-pipenv`](#license-check-pipenv)
@@ -24,7 +24,7 @@ Afterwards put the need hook into your `.pre-commit-config.yaml`:
 ```
 ---
 repos:
-  - repo: https://github.com/nbyl/pre-commit-license-check-python
+  - repo: https://github.com/nbyl/forbiddenpre-commit-license-checks
     rev: main
     hooks:
       - id: license-check-pipenv
