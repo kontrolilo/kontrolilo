@@ -2,8 +2,7 @@
 from os.path import exists
 from pathlib import Path
 
-import yaml
-from yaml import load
+from yaml import load, dump
 
 CONFIG_FILE_NAME = '.license-check-pipenv.yaml'
 
@@ -38,7 +37,7 @@ class Configuration:
         return f'Configuration(allowedLicenses={self.allowedLicenses},excludedPackages{self.excludedPackages})'
 
     def dump(self) -> str:
-        return yaml.dump({
+        return dump({
             'allowedLicenses': self.allowedLicenses,
             'excludedPackages': self.excludedPackages
         })

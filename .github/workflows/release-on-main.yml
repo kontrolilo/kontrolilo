@@ -20,9 +20,10 @@ jobs:
       run: |
         make ci-setup-environment
         make local-setup
+    - name: run linter
+      run: make lint
     - name: run test
-      run: |
-        make test
+      run: make test
     - name: publish release
       run: |
         git config --global user.name "github-actions"
