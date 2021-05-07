@@ -1,8 +1,5 @@
 name: run all tests
 on:
-  push:
-    branches-ignore:
-      - main
   pull_request:
     branches: [ main ]
 jobs:
@@ -27,7 +24,7 @@ jobs:
         make local-setup
     - name: run linter
       run: make lint
-    - name: Test & publish code coverage
+    - name: test & publish code coverage
       uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CodeClimateReporterID }}
