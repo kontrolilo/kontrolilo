@@ -8,6 +8,7 @@ local-setup:
 
 test:
 	pipenv run pytest --cov=license_checks tests/
+	pipenv run coverage xml
 
 ci-setup-environment:
 	pip install pipenv
