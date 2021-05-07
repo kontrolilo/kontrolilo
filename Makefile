@@ -7,7 +7,7 @@ local-setup:
 	pipenv run pre-commit install --hook-type commit-msg
 
 test:
-	pipenv run pytest --cov=pre_commit_hooks --cov-report term-missing tests/
+	pipenv run pytest --cov=license_checks tests/
 
 ci-setup-environment:
 	pip install pipenv
