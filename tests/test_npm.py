@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+from license_checks.configuration import Configuration
+from license_checks.npm import NpmLicenseChecker
+
+
+class TestNpmLicenseChecker:
+    checker: NpmLicenseChecker
+
+    DEMO_LICENSE_OUTPUT = \
+        '''"module name","license","repository"
+"xtend@4.0.2","MIT","https://github.com/Raynos/xtend"
+"y18n@4.0.0","ISC","https://github.com/yargs/y18n"
+"y18n@5.0.5","ISC","https://github.com/yargs/y18n"
+"yallist@3.1.1","ISC","https://github.com/isaacs/yallist"
+"yallist@4.0.0","ISC","https://github.com/isaacs/yallist"
+"yaml@1.10.0","ISC","https://github.com/eemeli/yaml"
+"yargs-parser@13.1.2","ISC","https://github.com/yargs/yargs-parser"
+"yargs-parser@18.1.3","ISC","https://github.com/yargs/yargs-parser"
+"yargs-parser@20.2.4","ISC","https://github.com/yargs/yargs-parser"
+"yargs@13.3.2","MIT","https://github.com/yargs/yargs"
+"yargs@15.4.1","MIT","https://github.com/yargs/yargs"
+"yargs@16.1.1","MIT","https://github.com/yargs/yargs"
+"yauzl@2.10.0","MIT","https://github.com/thejoshwolfe/yauzl"
+"yn@3.1.1","MIT","https://github.com/sindresorhus/yn"
+"yocto-queue@0.1.0","MIT","https://github.com/sindresorhus/yocto-queue"'''
+
+    def setup(self):
+        self.checker = NpmLicenseChecker()
+
+    def test_parse_licenses(self):
+        licenses = self.checker.parse_licenses(self.DEMO_LICENSE_OUTPUT, Configuration())
+        assert licenses == ['MIT', 'ISC']

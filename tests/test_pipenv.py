@@ -48,32 +48,8 @@ class TestPipenvLicenseChecker:
         self.checker = PipenvLicenseChecker()
 
     def test_parse_licenses(self):
-        stdout = '''[
-          {
-            "License": "BSD License",
-            "Name": "starlette",
-            "Version": "0.14.1"
-          },
-          {
-            "License": "MIT License",
-            "Name": "urllib3",
-            "Version": "1.26.4"
-          },
-          {
-            "License": "BSD License",
-            "Name": "uvicorn",
-            "Version": "0.13.3"
-          },
-          {
-            "License": "MIT License",
-            "Name": "zipp",
-            "Version": "3.4.1"
-          }
-        ]
-        '''
-
-        licenses = self.checker.parse_licenses(stdout, Configuration())
-        assert licenses == ['BSD License', 'MIT License']
+        licenses = self.checker.parse_licenses(self.DEMO_LICENSE_OUTPUT, Configuration())
+        assert licenses == ['BSD License', 'GPL', 'MIT License']
 
     def test_parse_licenses_with_excluded_packages(self):
         licenses = self.checker.parse_licenses(self.DEMO_LICENSE_OUTPUT, Configuration(excludedPackages=['demo1234']))
