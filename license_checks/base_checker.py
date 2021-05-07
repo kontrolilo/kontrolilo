@@ -3,15 +3,15 @@ import abc
 
 import argparse
 from builtins import dict
-from json import load, dumps
 from os.path import abspath, exists
 from pathlib import Path
 from subprocess import run
 from typing import List
 
+from license_checks.configuration import Configuration
+
 
 class BaseLicenseChecker(metaclass=abc.ABCMeta):
-    CONFIG_FILE_NAME = '.license-check-pipenv.json'
 
     @abc.abstractmethod
     def prepare_directory(self, directory: str):
@@ -39,36 +39,20 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
             directories.append(abspath(Path(filename).parent.absolute()))
         return self.remove_duplicates(directories)
 
-    def get_config_file_path(self, directory: str) -> str:
-        return str(Path(directory, self.CONFIG_FILE_NAME).absolute())
-
-    def load_configuration(self, directory) -> dict:
-        config_file_path = self.get_config_file_path(directory)
-        if not exists(config_file_path):
-            return {}
-
-        with open(config_file_path) as list_file:
-            return load(list_file)
-
     def find_forbidden_licenses(self, used_licenses: List[str], configuration) -> List[str]:
-        license_list = []
-        if 'allowed_licenses' in configuration:
-            license_list = configuration['allowed_licenses']
-        return list(set(used_licenses) - set(license_list))
+        return list(set(used_licenses) - set(configuration.allowedLicenses))
 
     def print_license_warning(self, directory: str, forbidden_licenses: List[str]):
         forbidden_licenses.sort()
-        demo_configuration = {
-            'allowed_licenses': forbidden_licenses
-        }
+        demo_configuration = Configuration(allowedLicenses=forbidden_licenses)
 
         print('**************************************************************')
         print(f'Not all licenses used by pipenv in directory {directory} are allowed.')
         print()
         print('If you want to allow these licenses, please put the following lines into')
-        print(f'the allow list file: {self.get_config_file_path(directory)}: ')
+        print(f'the allow list file: {Configuration.get_config_file_path(directory)}: ')
         print()
-        print(dumps(demo_configuration, indent=2, sort_keys=True))
+        print(demo_configuration.dump())
         print()
         print('**************************************************************')
 
@@ -85,7 +69,7 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
             print('**************************************************************')
             print(f'Starting scan in {directory}...')
 
-            configuration = self.load_configuration(directory)
+            configuration = Configuration.load_configuration(directory)
             self.prepare_directory(directory)
             used_licenses = self.load_installed_licenses(directory, configuration)
             forbidden_licenses = self.find_forbidden_licenses(used_licenses, configuration)
