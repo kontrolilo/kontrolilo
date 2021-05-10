@@ -25,3 +25,6 @@ release:
 
 print-release:
 	pipenv run semantic-release print-version
+
+run-sample-webserver:
+	(cd examples && pipenv run python -m http.server)
