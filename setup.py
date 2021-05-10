@@ -7,12 +7,13 @@ __version__ = '1.0.0'
 setup(
     install_requires=['pyyaml==5.4.1'],
     name='pre-commit-license-check',
-    description='Check against license whitelist',
+    description='Check your repositories against a license allow list',
     url='https://github.com/nbyl/pre-commit-license-check',
-    version='0.0.0',
-    packages=find_packages('.'),
+    version=__version__,
+    package_dir={'': 'src'},
+    packages=find_packages(where='src'),
     entry_points={
-        'console_scripts': ['license_checks = license_checks.license_checks:main',],
+        'console_scripts': ['license_checks = license_checks.license_checks:main', ],
     },
     dependency_links=[],
 )
