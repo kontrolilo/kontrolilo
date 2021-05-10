@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.1 (2021-05-10)
+### Fix
+* Make npm less noisy when running install ([`a775325`](https://github.com/nbyl/pre-commit-license-checks/commit/a775325c591c14712644de73cadd79a63bac1887))
+
+### Documentation
+* Clarify output ([`6ae39ea`](https://github.com/nbyl/pre-commit-license-checks/commit/6ae39ead5b585522d50ab6534675316fb2e19317))
+* Don't use brackets ([`05a5343`](https://github.com/nbyl/pre-commit-license-checks/commit/05a5343713e62b4db9808df351960f788d939f48))
+* Add shiny badges ([`663afcb`](https://github.com/nbyl/pre-commit-license-checks/commit/663afcb50377785abacf0cb66312393e82bdf6b9))
+
 ## v1.0.0 (2021-05-07)
 ### Feature
 * Unit tests are now finished ([`902820f`](https://github.com/nbyl/pre-commit-license-checks/commit/902820f792d68ac532f38f34ab074df7796c42ba))
