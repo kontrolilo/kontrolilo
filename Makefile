@@ -7,7 +7,7 @@ local-setup:
 	pipenv run pre-commit install --hook-type commit-msg
 
 test:
-	pipenv run pytest --cov=license_checks tests/
+	pipenv run pytest --cov=license_checks .
 	pipenv run coverage xml
 
 ci-setup-environment:
