@@ -2,6 +2,7 @@
 from json import dump
 from os.path import join
 from tempfile import TemporaryDirectory
+from unittest.mock import patch, call
 
 from license_checks.configuration import Configuration
 from license_checks.npm import NpmLicenseChecker
@@ -31,6 +32,16 @@ class TestNpmLicenseChecker:
 
     def setup(self):
         self.checker = NpmLicenseChecker()
+
+    @patch('license_checks.npm.run')
+    def test_prepare_directory(self, run_mock):
+        run_mock.return_value = {}
+
+        with TemporaryDirectory() as directory:
+            self.checker.prepare_directory(directory)
+            run_mock.assert_has_calls([
+                call('npm install --no-audit --no-fund', check=True, cwd=directory, shell=True),
+            ])
 
     def test_parse_licenses(self):
         licenses = self.checker.parse_licenses(self.DEMO_LICENSE_OUTPUT, Configuration())
