@@ -55,6 +55,18 @@ class TestBaseLicenseChecker:
         with TemporaryDirectory() as directory:
             self.checker.print_license_warning(directory, [])
 
+    def test_render_demo_config_file_without_file(self):
+        with TemporaryDirectory() as directory:
+            text = self.checker.render_demo_config_file(directory, [Package('demo1234', '0.14.1', 'GPL')])
+            assert text != ''
+
+    def test_render_demo_config_file_with_file(self):
+        with TemporaryDirectory() as directory:
+            Configuration().save(directory)
+
+            text = self.checker.render_demo_config_file(directory, [Package('demo1234', '0.14.1', 'GPL')])
+            assert text == ''
+
     @patch('license_checks.base_checker.run')
     def test_load_installed_licenses(self, run_mock):
         result_mock = Mock()

@@ -80,10 +80,24 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
 Not all licenses used in directory {directory} are allowed:
 
 {license_table.draw()}
+{BaseLicenseChecker.render_demo_config_file(directory, invalid_packages)}
 '''
-        # TODO: print file contents only if it does not exist
-
         print(text)
+
+    @staticmethod
+    def render_demo_config_file(directory: str, invalid_packages: List[Package]) -> str:
+        if Configuration.exists_in_directory(directory):
+            return ''
+
+        licenses = BaseLicenseChecker.remove_duplicates(list(map(lambda package: package.license, invalid_packages)))
+        licenses.sort()
+        demo_configuration = Configuration(allowedLicenses=licenses)
+
+        return f'''
+
+To allow all licenses, create a file called {Configuration.get_config_file_path(directory)}:
+---
+{demo_configuration.render()}'''
 
     @staticmethod
     def find_invalid_packages(installed_packages: List[Package], configuration) -> List[Package]:
