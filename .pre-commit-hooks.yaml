@@ -1,6 +1,6 @@
 ---
 -   id: license-check-pipenv
-    name: Check the licenses of the  pipenv environment
+    name: Check the licenses of the pipenv environment
     description: This hook scans the local Pipfile against a configured list of allowed open source licenses.
     entry: python -m license_checks.pipenv
     files: Pipfile

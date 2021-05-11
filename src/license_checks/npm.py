@@ -5,7 +5,7 @@ from sys import argv
 from typing import List
 
 from license_checks.base_checker import BaseLicenseChecker
-from license_checks.configuration import Configuration
+from license_checks.package import Package
 
 
 class NpmLicenseChecker(BaseLicenseChecker):
@@ -20,12 +20,21 @@ class NpmLicenseChecker(BaseLicenseChecker):
         # pretty hard to parse.
         return 'npx license-checker --csv'
 
-    def parse_licenses(self, output: str, configuration: Configuration) -> List[str]:
-        licenses = []
-        license_reader = csv.DictReader(output.splitlines())
-        for row in license_reader:
-            licenses.append(row['license'])
-        return self.remove_duplicates(licenses)
+    def parse_packages(self, output: str, configuration: dict) -> List[Package]:
+        packages = []
+        package_reader = csv.DictReader(output.splitlines())
+        for row in package_reader:
+            module = row['module name']
+            name = module
+            version = module
+            index = module.find('@')
+            if index > 0:
+                name = module[:index]
+                version = module[index + 1:]
+
+            packages.append(Package(name, version, row['license']))
+
+        return packages
 
 
 if __name__ == '__main__':

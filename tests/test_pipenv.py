@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from os.path import join
-from pathlib import Path
 from shutil import copy2
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, call
 
-from yaml import dump
-
 from license_checks.configuration import Configuration
+from license_checks.package import Package
 from license_checks.pipenv import PipenvLicenseChecker
 from tests.util import write_config_file
 
@@ -48,13 +46,14 @@ class TestPipenvLicenseChecker:
     def setup(self):
         self.checker = PipenvLicenseChecker()
 
-    def test_parse_licenses(self):
-        licenses = self.checker.parse_licenses(self.DEMO_LICENSE_OUTPUT, Configuration())
-        assert licenses == ['BSD License', 'GPL', 'MIT License']
-
-    def test_parse_licenses_with_excluded_packages(self):
-        licenses = self.checker.parse_licenses(self.DEMO_LICENSE_OUTPUT, Configuration(excludedPackages=['demo1234']))
-        assert licenses == ['BSD License', 'MIT License']
+    def test_parse_packages(self):
+        packages = self.checker.parse_packages(self.DEMO_LICENSE_OUTPUT, Configuration())
+        assert packages == [
+            Package('starlette', '0.14.1', 'BSD License'),
+            Package('demo1234', '0.14.1', 'GPL'),
+            Package('urllib3', '1.26.4', 'MIT License'),
+            Package('uvicorn', '0.13.3', 'BSD License'),
+            Package('zipp', '3.4.1', 'MIT License')]
 
     @patch('license_checks.pipenv.run')
     def prepare_directory(self, run_mock):

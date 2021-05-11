@@ -1,4 +1,6 @@
 ---
+# TODO: can we run make sync before commit?
+# TODO: add license list
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v2.16.0
