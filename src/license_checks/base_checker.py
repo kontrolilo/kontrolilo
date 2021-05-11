@@ -9,6 +9,7 @@ from subprocess import run
 from typing import List
 
 from license_checks.configuration import Configuration
+from license_checks.package import Package
 
 
 class BaseLicenseChecker(metaclass=abc.ABCMeta):
@@ -22,13 +23,13 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
         """Return the command needed to run in the target directory"""
 
     @abc.abstractmethod
-    def parse_licenses(self, output: str, configuration: dict) -> List[str]:
+    def parse_packages(self, output: str, configuration: dict) -> List[Package]:
         """Parse the licenses from the output of the checker program."""
 
-    def load_installed_licenses(self, directory: str, configuration: dict) -> List[str]:
+    def load_installed_packages(self, directory: str, configuration: dict) -> List[Package]:
         result = run(self.get_license_checker_command(), capture_output=True, check=True, cwd=directory,
                      shell=True, text=True)
-        return self.parse_licenses(result.stdout, configuration)
+        return self.parse_packages(result.stdout, configuration)
 
     def consolidate_directories(self, filenames) -> List[str]:
         directories = []
@@ -51,8 +52,8 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
 
             configuration = Configuration.load_configuration(directory)
             self.prepare_directory(directory)
-            used_licenses = self.load_installed_licenses(directory, configuration)
-            forbidden_licenses = self.find_forbidden_licenses(used_licenses, configuration)
+            installed_packages = self.load_installed_packages(directory, configuration)
+            forbidden_licenses = self.find_forbidden_licenses(installed_packages, configuration)
             if len(forbidden_licenses) > 0:
                 return_code = 1
                 self.print_license_warning(directory, forbidden_licenses)
