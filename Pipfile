@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 pyyaml = "*"
+ignore = "*"
 
 [dev-packages]
 pre-commit = "*"

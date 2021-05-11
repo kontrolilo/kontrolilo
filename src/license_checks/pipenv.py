@@ -7,6 +7,7 @@ from typing import List
 
 from license_checks.base_checker import BaseLicenseChecker
 from license_checks.configuration import Configuration
+from license_checks.package import Package
 
 
 class PipenvLicenseChecker(BaseLicenseChecker):
@@ -20,15 +21,16 @@ class PipenvLicenseChecker(BaseLicenseChecker):
     def get_license_checker_command(self) -> str:
         return 'pipenv run pip-licenses --format=json'
 
-    def parse_licenses(self, output: str, configuration: Configuration) -> List[str]:
+    def parse_packages(self, output: str, configuration: Configuration) -> List[Package]:
         values = loads(output)
-        licenses = []
+        packages = []
 
         for license_structure in values:
             if not license_structure['Name'] in configuration.excludedPackages:
-                licenses.append(license_structure['License'])
+                packages.append(
+                    Package(license_structure['Name'], license_structure['Version'], license_structure['License']))
 
-        return self.remove_duplicates(licenses)
+        return packages
 
 
 if __name__ == '__main__':

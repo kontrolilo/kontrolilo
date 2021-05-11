@@ -6,6 +6,7 @@ from unittest.mock import patch, Mock
 
 from license_checks.base_checker import BaseLicenseChecker
 from license_checks.configuration import Configuration
+from license_checks.package import Package
 
 
 class SimpleLicenseChecker(BaseLicenseChecker):
@@ -16,8 +17,8 @@ class SimpleLicenseChecker(BaseLicenseChecker):
     def get_license_checker_command(self) -> str:
         return "echo 'Hello World!'"
 
-    def parse_licenses(self, output: str, configuration: dict) -> List[str]:
-        return ''
+    def parse_packages(self, output: str, configuration: dict) -> List[Package]:
+        return []
 
 
 class TestBaseLicenseChecker:
@@ -57,6 +58,6 @@ class TestBaseLicenseChecker:
         run_mock.return_value = result_mock
 
         with TemporaryDirectory() as directory:
-            self.checker.load_installed_licenses(directory, {})
+            self.checker.load_installed_packages(directory, {})
             run_mock.assert_called_once_with('echo \'Hello World!\'', capture_output=True, check=True,
                                              cwd=directory, shell=True, text=True)
