@@ -67,6 +67,19 @@ class TestBaseLicenseChecker:
             text = self.checker.render_demo_config_file(directory, [Package('demo1234', '0.14.1', 'GPL')])
             assert text == ''
 
+    def test_remove_excluded_packages(self):
+        packages = [
+            Package('starlette', '0.14.1', 'BSD License'),
+            Package('demo1234', '0.14.1', 'GPL'),
+            Package('urllib3', '1.26.4', 'MIT License'),
+        ]
+        filtered_packages = BaseLicenseChecker.remove_excluded_packages(packages,
+                                                                        Configuration(excludedPackages=['demo1234']))
+        assert filtered_packages == [
+            Package('starlette', '0.14.1', 'BSD License'),
+            Package('urllib3', '1.26.4', 'MIT License'),
+        ]
+
     @patch('license_checks.base_checker.run')
     def test_load_installed_licenses(self, run_mock):
         result_mock = Mock()

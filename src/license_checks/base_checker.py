@@ -54,13 +54,17 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
             configuration = Configuration.load_configuration(directory)
             self.prepare_directory(directory)
             installed_packages = self.load_installed_packages(directory, configuration)
-            # TODO: add exclude here
-            invalid_packages = self.find_invalid_packages(installed_packages, configuration)
+            filtered_packages = self.remove_excluded_packages(installed_packages, configuration)
+            invalid_packages = self.find_invalid_packages(filtered_packages, configuration)
             if len(invalid_packages) > 0:
                 return_code = 1
                 self.print_license_warning(directory, invalid_packages)
 
         return return_code
+
+    @staticmethod
+    def remove_excluded_packages(installed_packages: List[Package], configuration: Configuration) -> List[Package]:
+        return list(filter(lambda package: package.name not in configuration.excludedPackages, installed_packages))
 
     @staticmethod
     def remove_duplicates(values: List[str]) -> List[str]:
