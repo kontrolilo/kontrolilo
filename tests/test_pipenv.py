@@ -57,10 +57,6 @@ class TestPipenvLicenseChecker:
             Package('uvicorn', '0.13.3', 'BSD License'),
             Package('zipp', '3.4.1', 'MIT License')]
 
-    def test_parse_packages_with_excluded_packages(self):
-        licenses = self.checker.parse_packages(self.DEMO_LICENSE_OUTPUT, Configuration(excludedPackages=['demo1234']))
-        assert licenses == ['BSD License', 'MIT License']
-
     @patch('license_checks.pipenv.run')
     def prepare_directory(self, run_mock):
         run_mock.return_value = {}
@@ -72,7 +68,7 @@ class TestPipenvLicenseChecker:
                 call("pipenv run pip install 'pip-licenses==3.3.1'", check=True, cwd=directory, shell=True),
             ])
 
-    @pytest.mark.skip
+    #@pytest.mark.skip
     def test_main_returns_failure_on_no_config(self):
         with TemporaryDirectory() as directory:
             copy2('Pipfile', directory)
@@ -81,7 +77,7 @@ class TestPipenvLicenseChecker:
             result = self.checker.run([join(directory, 'Pipfile')])
             assert result == 1
 
-    @pytest.mark.skip
+    #@pytest.mark.skip
     def test_main_returns_success(self):
         with TemporaryDirectory() as directory:
             copy2('Pipfile', directory)
