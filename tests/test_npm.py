@@ -29,7 +29,7 @@ class TestNpmLicenseChecker:
         with TemporaryDirectory() as directory:
             self.checker.prepare_directory(directory)
             run_mock.assert_has_calls([
-                call('npm install --no-audit --no-fund', check=True, cwd=directory, shell=True),
+                call('npm install --no-audit --no-fund', capture_output=True, check=True, cwd=directory, shell=True),
             ])
 
     def test_parse_packages(self):
