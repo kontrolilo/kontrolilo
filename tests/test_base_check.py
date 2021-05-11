@@ -32,7 +32,7 @@ class TestBaseLicenseChecker:
         consolidated_list = self.checker.remove_duplicates(list)
         assert consolidated_list == ['a', 'b', 'c']
 
-    def test_get_pipenv_directories(self):
+    def test_consolidate_directories(self):
         filenames = ['Pipfile.lock', 'Pipfile',
                      'deployment/Pipfile', 'deployment/Pipfile.lock']
         directories = self.checker.consolidate_directories(filenames)
@@ -40,11 +40,15 @@ class TestBaseLicenseChecker:
         assert directories == [str(Path('.').absolute()),
                                str(Path('.', 'deployment').absolute())]
 
-    def test_find_forbidden_licenses(self):
-        used_licenses = ['BSD License', 'GPL', 'MIT License']
-        forbidden_licenses = self.checker.find_forbidden_licenses(used_licenses, Configuration(
+    def test_find_invalid_packages(self):
+        packages = [
+            Package('starlette', '0.14.1', 'BSD License'),
+            Package('demo1234', '0.14.1', 'GPL'),
+            Package('urllib3', '1.26.4', 'MIT License'),
+        ]
+        invalid_packages = self.checker.find_invalid_packages(packages, Configuration(
             allowedLicenses=['BSD License', 'MIT License']))
-        assert forbidden_licenses == ['GPL']
+        assert invalid_packages == [Package('demo1234', '0.14.1', 'GPL')]
 
     def test_print_license_warning(self):
         # this test is mainly run, to verify syntactic correctness

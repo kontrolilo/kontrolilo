@@ -53,10 +53,11 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
             configuration = Configuration.load_configuration(directory)
             self.prepare_directory(directory)
             installed_packages = self.load_installed_packages(directory, configuration)
-            forbidden_licenses = self.find_forbidden_licenses(installed_packages, configuration)
-            if len(forbidden_licenses) > 0:
+            # TODO: add exclude here
+            invalid_packages = self.find_invalid_packages(installed_packages, configuration)
+            if len(invalid_packages) > 0:
                 return_code = 1
-                self.print_license_warning(directory, forbidden_licenses)
+                self.print_license_warning(directory, invalid_packages)
 
         return return_code
 
@@ -65,20 +66,28 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
         return list(dict.fromkeys(values))
 
     @staticmethod
-    def print_license_warning(directory: str, forbidden_licenses: List[str]):
-        forbidden_licenses.sort()
-        demo_configuration = Configuration(allowedLicenses=forbidden_licenses)
+    def print_license_warning(directory: str, invalid_packages: List[str]):
+        invalid_packages.sort(key=lambda package: package.name)
+        # demo_configuration = Configuration(allowedLicenses=forbidden_licenses)
 
-        print('**************************************************************')
-        print(f'Not all licenses used by pipenv in directory {directory} are allowed.')
-        print()
-        print('If you want to allow these licenses, please put the following lines into')
-        print(f'the allow list file: {Configuration.get_config_file_path(directory)}: ')
-        print()
-        print(demo_configuration.dump())
-        print()
-        print('**************************************************************')
+        test = f'''
+        **************************************************************
+        Not all licenses used in directory {directory} are allowed.
+        **************************************************************
+        '''
+        # TODO: print list of packages
+        # TODO: print file contents only if it does not exist
+
+        # print('**************************************************************')
+        # print(f'Not all licenses used by pipenv in directory {directory} are allowed.')
+        # print()
+        # print('If you want to allow these licenses, please put the following lines into')
+        # print(f'the allow list file: {Configuration.get_config_file_path(directory)}: ')
+        # print()
+        # print(demo_configuration.dump())
+        # print()
+        # print('**************************************************************')
 
     @staticmethod
-    def find_forbidden_licenses(used_licenses: List[str], configuration) -> List[str]:
-        return list(set(used_licenses) - set(configuration.allowedLicenses))
+    def find_invalid_packages(installed_packages: List[Package], configuration) -> List[Package]:
+        return list(filter(lambda package: package.license not in configuration.allowedLicenses, installed_packages))
