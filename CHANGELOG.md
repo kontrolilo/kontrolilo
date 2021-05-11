@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.0 (2021-05-11)
+### Feature
+* Make exclusion more general and add it to npm as well ([`fd48b28`](https://github.com/nbyl/pre-commit-license-checks/commit/fd48b28badbbcb10524e36506dd17cce818ad171))
+* Print file warning only, when config file is not yet present ([`bc54f63`](https://github.com/nbyl/pre-commit-license-checks/commit/bc54f630571296b27ce6dbb1961f674c53ede600))
+* Print list of offending packages and their licenses ([`0891bb4`](https://github.com/nbyl/pre-commit-license-checks/commit/0891bb48dc9ef9f3ca85d4fc88466d2f7a59db72))
+
+### Documentation
+* Add badges for code climate ([`6b92adb`](https://github.com/nbyl/pre-commit-license-checks/commit/6b92adb9ae43c11889f60f32d2bce389c76283a9))
+
 ## v1.0.1 (2021-05-10)
 ### Fix
 * Make npm less noisy when running install ([`a775325`](https://github.com/nbyl/pre-commit-license-checks/commit/a775325c591c14712644de73cadd79a63bac1887))
