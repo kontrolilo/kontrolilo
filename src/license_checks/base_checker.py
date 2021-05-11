@@ -8,6 +8,8 @@ from pathlib import Path
 from subprocess import run
 from typing import List
 
+from texttable import Texttable
+
 from license_checks.configuration import Configuration
 from license_checks.package import Package
 
@@ -66,27 +68,23 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
         return list(dict.fromkeys(values))
 
     @staticmethod
-    def print_license_warning(directory: str, invalid_packages: List[str]):
+    def print_license_warning(directory: str, invalid_packages: List[Package]):
         invalid_packages.sort(key=lambda package: package.name)
         # demo_configuration = Configuration(allowedLicenses=forbidden_licenses)
 
-        test = f'''
-        **************************************************************
-        Not all licenses used in directory {directory} are allowed.
-        **************************************************************
-        '''
-        # TODO: print list of packages
+        license_table = Texttable()
+        license_table.header(['Name', 'Version', 'License'])
+        for package in invalid_packages:
+            license_table.add_row([package.name, package.version, package.license])
+
+        text = f'''
+Not all licenses used in directory {directory} are allowed:
+
+{license_table.draw()}
+'''
         # TODO: print file contents only if it does not exist
 
-        # print('**************************************************************')
-        # print(f'Not all licenses used by pipenv in directory {directory} are allowed.')
-        # print()
-        # print('If you want to allow these licenses, please put the following lines into')
-        # print(f'the allow list file: {Configuration.get_config_file_path(directory)}: ')
-        # print()
-        # print(demo_configuration.dump())
-        # print()
-        # print('**************************************************************')
+        print(text)
 
     @staticmethod
     def find_invalid_packages(installed_packages: List[Package], configuration) -> List[Package]:
