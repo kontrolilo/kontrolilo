@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import sys
-from builtins import dict
 from json import loads
 from subprocess import run
 from typing import List

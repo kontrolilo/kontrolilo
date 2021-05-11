@@ -5,8 +5,6 @@ from shutil import copy2
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, call
 
-import pytest
-
 from license_checks.configuration import Configuration
 from license_checks.package import Package
 from license_checks.pipenv import PipenvLicenseChecker
@@ -68,7 +66,6 @@ class TestPipenvLicenseChecker:
                 call("pipenv run pip install 'pip-licenses==3.3.1'", check=True, cwd=directory, shell=True),
             ])
 
-    #@pytest.mark.skip
     def test_main_returns_failure_on_no_config(self):
         with TemporaryDirectory() as directory:
             copy2('Pipfile', directory)
@@ -77,7 +74,6 @@ class TestPipenvLicenseChecker:
             result = self.checker.run([join(directory, 'Pipfile')])
             assert result == 1
 
-    #@pytest.mark.skip
     def test_main_returns_success(self):
         with TemporaryDirectory() as directory:
             copy2('Pipfile', directory)
