@@ -14,6 +14,7 @@ from license_checks.package import Package
 
 
 class BaseLicenseChecker(metaclass=abc.ABCMeta):
+    debug = False
 
     @abc.abstractmethod
     def prepare_directory(self, directory: str):
@@ -40,8 +41,11 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
 
     def run(self, argv=None) -> int:
         parser = argparse.ArgumentParser()
+        parser.add_argument('--debug', action='store_true', help='print debug messages to stderr')
         parser.add_argument('filenames', nargs='*', help='filenames to check')
         args = parser.parse_args(argv)
+
+        self.debug = args.debug
 
         return_code = 0
 
@@ -73,7 +77,6 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
     @staticmethod
     def print_license_warning(directory: str, invalid_packages: List[Package]):
         invalid_packages.sort(key=lambda package: package.name)
-        # demo_configuration = Configuration(allowedLicenses=forbidden_licenses)
 
         license_table = Texttable()
         license_table.header(['Name', 'Version', 'License'])
