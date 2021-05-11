@@ -13,7 +13,10 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
     entry_points={
-        'console_scripts': ['license_checks = license_checks.license_checks:main',],
+        'console_scripts': [
+            'license-check-npm = license_checks.npm:main',
+            'license-check-pipenv = license_checks.pipenv:main'
+        ],
     },
     dependency_links=[],
 )

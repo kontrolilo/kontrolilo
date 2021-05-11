@@ -2,7 +2,7 @@
 from os.path import exists
 from pathlib import Path
 
-from yaml import load, dump
+from yaml import dump, safe_load
 
 CONFIG_FILE_NAME = '.license-check.yaml'
 
@@ -35,7 +35,7 @@ class Configuration:
             return Configuration([], [])
 
         with open(config_file_path) as list_file:
-            content = load(list_file)
+            content = safe_load(list_file)
 
             return Configuration(**content)
 
