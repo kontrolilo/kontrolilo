@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.1 (2021-05-11)
+### Fix
+* Suppress output of license tools unless debug is set ([`6220cb9`](https://github.com/nbyl/pre-commit-license-checks/commit/6220cb9cea4c957a92a7d04475a1386b6d7ee0a7))
+
 ## v1.1.0 (2021-05-11)
 ### Feature
 * Make exclusion more general and add it to npm as well ([`fd48b28`](https://github.com/nbyl/pre-commit-license-checks/commit/fd48b28badbbcb10524e36506dd17cce818ad171))
