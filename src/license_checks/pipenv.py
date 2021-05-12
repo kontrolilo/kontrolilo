@@ -24,7 +24,7 @@ class PipenvLicenseChecker(BaseLicenseChecker):
         packages = []
 
         for license_structure in values:
-            if not license_structure['Name'] in configuration.excludedPackages:
+            if not license_structure['Name'] in configuration.excluded_packages:
                 packages.append(
                     Package(license_structure['Name'], license_structure['Version'], license_structure['License']))
 

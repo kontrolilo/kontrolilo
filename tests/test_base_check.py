@@ -47,7 +47,7 @@ class TestBaseLicenseChecker:
             Package('urllib3', '1.26.4', 'MIT License'),
         ]
         invalid_packages = self.checker.find_invalid_packages(packages, Configuration(
-            allowedLicenses=['BSD License', 'MIT License']))
+            allowed_licenses=['BSD License', 'MIT License']))
         assert invalid_packages == [Package('demo1234', '0.14.1', 'GPL')]
 
     def test_print_license_warning(self):
@@ -74,7 +74,7 @@ class TestBaseLicenseChecker:
             Package('urllib3', '1.26.4', 'MIT License'),
         ]
         filtered_packages = BaseLicenseChecker.remove_excluded_packages(packages,
-                                                                        Configuration(excludedPackages=['demo1234']))
+                                                                        Configuration(excluded_packages=['demo1234']))
         assert filtered_packages == [
             Package('starlette', '0.14.1', 'BSD License'),
             Package('urllib3', '1.26.4', 'MIT License'),

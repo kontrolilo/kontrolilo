@@ -68,7 +68,7 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
 
     @staticmethod
     def remove_excluded_packages(installed_packages: List[Package], configuration: Configuration) -> List[Package]:
-        return list(filter(lambda package: package.name not in configuration.excludedPackages, installed_packages))
+        return list(filter(lambda package: package.name not in configuration.excluded_packages, installed_packages))
 
     @staticmethod
     def remove_duplicates(values: List[str]) -> List[str]:
@@ -98,7 +98,7 @@ Not all licenses used in directory {directory} are allowed:
 
         licenses = BaseLicenseChecker.remove_duplicates(list(map(lambda package: package.license, invalid_packages)))
         licenses.sort()
-        demo_configuration = Configuration(allowedLicenses=licenses)
+        demo_configuration = Configuration(allowed_licenses=licenses)
 
         return f'''
 
@@ -108,4 +108,4 @@ To allow all licenses, create a file called {Configuration.get_config_file_path(
 
     @staticmethod
     def find_invalid_packages(installed_packages: List[Package], configuration) -> List[Package]:
-        return list(filter(lambda package: package.license not in configuration.allowedLicenses, installed_packages))
+        return list(filter(lambda package: package.license not in configuration.allowed_licenses, installed_packages))
