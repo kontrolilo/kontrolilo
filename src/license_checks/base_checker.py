@@ -55,7 +55,7 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
             print('**************************************************************')
             print(f'Starting scan in {directory}...')
 
-            configuration = Configuration.load_configuration(directory)
+            configuration = Configuration.load_from_directory(directory).merge_includes()
             self.prepare_directory(directory)
             installed_packages = self.load_installed_packages(directory, configuration)
             filtered_packages = self.remove_excluded_packages(installed_packages, configuration)
