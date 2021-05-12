@@ -34,5 +34,9 @@ class NpmLicenseChecker(BaseLicenseChecker):
         return packages
 
 
-if __name__ == '__main__':
+def main():
     exit(NpmLicenseChecker().run(argv[1:]))
+
+
+if __name__ == '__main__':
+    main()

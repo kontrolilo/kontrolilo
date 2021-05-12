@@ -31,5 +31,9 @@ class PipenvLicenseChecker(BaseLicenseChecker):
         return packages
 
 
-if __name__ == '__main__':
+def main():
     sys.exit(PipenvLicenseChecker().run(sys.argv[1:]))
+
+
+if __name__ == '__main__':
+    main()
