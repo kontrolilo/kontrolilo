@@ -6,12 +6,14 @@ name = "pypi"
 [packages]
 pyyaml = "*"
 ignore = "*"
+texttable = "*"
 
 [dev-packages]
 pre-commit = "*"
 pytest = "*"
 pytest-cov = "*"
-python-semantic-release="*"
+pytest-xdist = { version = "*", extras = ['psutil'] }
+python-semantic-release = "*"
 pipenv-setup = "*"
 
 [requires]

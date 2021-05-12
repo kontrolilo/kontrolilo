@@ -2,10 +2,9 @@
 
 from os.path import join
 from shutil import copy2
+from subprocess import run
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, call
-
-import pytest
 
 from license_checks.configuration import Configuration
 from license_checks.package import Package
@@ -64,8 +63,9 @@ class TestPipenvLicenseChecker:
         with TemporaryDirectory() as directory:
             self.checker.prepare_directory(directory)
             run_mock.assert_has_calls([
-                call('pipenv install -d', check=True, cwd=directory, shell=True),
-                call("pipenv run pip install 'pip-licenses==3.3.1'", check=True, cwd=directory, shell=True),
+                call('pipenv install -d', capture_output=False, check=True, cwd=directory, shell=True),
+                call("pipenv run pip install 'pip-licenses==3.3.1'", capture_output=False, check=True, cwd=directory,
+                     shell=True),
             ])
 
     #@pytest.mark.skip
@@ -80,8 +80,7 @@ class TestPipenvLicenseChecker:
     #@pytest.mark.skip
     def test_main_returns_success(self):
         with TemporaryDirectory() as directory:
-            copy2('Pipfile', directory)
-            copy2('Pipfile.lock', directory)
+            self.prepare_integration_test_directory(directory)
 
             write_config_file(directory, [
                 'Apache License 2.0',
@@ -105,3 +104,20 @@ class TestPipenvLicenseChecker:
 
             result = self.checker.run([join(directory, 'Pipfile')])
             assert result == 0
+
+    @staticmethod
+    def prepare_integration_test_directory(directory: str):
+        with open(join(directory, 'Pipfile'), 'w') as pipfile:
+            pipfile.write('''[[source]]
+        url = "https://pypi.python.org/simple"
+        verify_ssl = true
+        name = "pypi"
+
+        [packages]
+        texttable = "*"
+
+        [dev-packages]
+
+        [requires]
+        python_version = "3.8"''')
+            run('pipenv lock', check=True, cwd=directory, shell=True)
