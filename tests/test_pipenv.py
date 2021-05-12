@@ -68,7 +68,6 @@ class TestPipenvLicenseChecker:
                      shell=True),
             ])
 
-    #@pytest.mark.skip
     def test_main_returns_failure_on_no_config(self):
         with TemporaryDirectory() as directory:
             copy2('Pipfile', directory)
@@ -77,7 +76,6 @@ class TestPipenvLicenseChecker:
             result = self.checker.run([join(directory, 'Pipfile')])
             assert result == 1
 
-    #@pytest.mark.skip
     def test_main_returns_success(self):
         with TemporaryDirectory() as directory:
             self.prepare_integration_test_directory(directory)
