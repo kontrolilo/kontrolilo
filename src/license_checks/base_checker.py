@@ -104,7 +104,7 @@ Not all licenses used in directory {directory} are allowed:
 
 To allow all licenses, create a file called {Configuration.get_config_file_path(directory)}:
 ---
-{demo_configuration.render()}'''
+{demo_configuration.to_yaml()}'''
 
     @staticmethod
     def find_invalid_packages(installed_packages: List[Package], configuration) -> List[Package]:
