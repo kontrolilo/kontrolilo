@@ -2,7 +2,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-__version__ = '1.2.0'
+__version__ = '1.3.0'
 
 setup(
     install_requires=['ignore==0.1.4', 'pyyaml==5.4.1', 'texttable==1.6.3'],

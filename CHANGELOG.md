@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.0 (2021-05-13)
+### Feature
+* Include other configuration file from external url ([`3b59ae1`](https://github.com/nbyl/pre-commit-license-checks/commit/3b59ae16e4c9410c87248b3b86ed0ae5cab25674))
+
 ## v1.2.0 (2021-05-12)
 ### Feature
 * Make startup scripts more robust ([`39806b4`](https://github.com/nbyl/pre-commit-license-checks/commit/39806b4df67ac48da9d83795148ee2142111d7c2))
