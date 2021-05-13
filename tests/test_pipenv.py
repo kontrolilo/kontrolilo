@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from os.path import join
-from shutil import copy2
 from subprocess import run
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, call
@@ -48,7 +47,8 @@ class TestPipenvLicenseChecker:
         self.checker = PipenvLicenseChecker()
 
     def test_parse_packages(self):
-        packages = self.checker.parse_packages(self.DEMO_LICENSE_OUTPUT, Configuration())
+        configuration = Configuration()
+        packages = self.checker.parse_packages(self.DEMO_LICENSE_OUTPUT, configuration)
         assert packages == [
             Package('starlette', '0.14.1', 'BSD License'),
             Package('demo1234', '0.14.1', 'GPL'),
@@ -70,8 +70,7 @@ class TestPipenvLicenseChecker:
 
     def test_main_returns_failure_on_no_config(self):
         with TemporaryDirectory() as directory:
-            copy2('Pipfile', directory)
-            copy2('Pipfile.lock', directory)
+            self.prepare_integration_test_directory(directory)
 
             result = self.checker.run([join(directory, 'Pipfile')])
             assert result == 1

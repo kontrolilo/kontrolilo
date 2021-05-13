@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from copy import copy
 from os.path import exists
 from pathlib import Path
 
@@ -23,20 +22,14 @@ class ConfigurationInclude:
 
 
 class Configuration:
-    allowed_licenses = []
-    excluded_packages = []
-    includes = []
-
     def __init__(self,
                  allowed_licenses=None,
                  excluded_packages=None,
                  includes=None) -> None:
-        if allowed_licenses:
-            self.allowed_licenses = allowed_licenses
-        if excluded_packages:
-            self.excluded_packages = excluded_packages
-        if includes:
-            self.includes = includes
+
+        self.allowed_licenses = allowed_licenses if allowed_licenses else []
+        self.excluded_packages = excluded_packages if excluded_packages else []
+        self.includes = includes if includes else []
 
     def to_yaml(self) -> str:
         return dump({
@@ -50,16 +43,18 @@ class Configuration:
             dump(self, config_file)
 
     def merge_includes(self):
-        merged_configuration = copy(self)
-        merged_configuration.includes = []
+        merged_configuration = Configuration(
+            allowed_licenses=self.allowed_licenses.copy(),
+            excluded_packages=self.excluded_packages.copy(),
+        )
 
         for include in self.includes:
             response = requests.get(include.url)
             response.raise_for_status()
 
             other_configuration = Configuration.load_from_string(response.text)
-            merged_configuration.allowed_licenses.extend(other_configuration.allowed_licenses)
-            merged_configuration.excluded_packages.extend(other_configuration.excluded_packages)
+            merged_configuration.allowed_licenses += other_configuration.allowed_licenses
+            merged_configuration.excluded_packages += other_configuration.excluded_packages
 
         return merged_configuration
 
