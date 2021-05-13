@@ -33,7 +33,10 @@ class TestNpmLicenseChecker:
             ])
 
     def test_parse_packages(self):
-        packages = self.checker.parse_packages(self.DEMO_LICENSE_OUTPUT, Configuration())
+        packages = self.checker.parse_packages(self.DEMO_LICENSE_OUTPUT, Configuration(
+            allowed_licenses=[],
+            excluded_packages=[]
+        ))
         assert packages == [
             Package('xtend', '4.0.2', 'MIT'),
             Package('y18n', '4.0.0', 'ISC'),

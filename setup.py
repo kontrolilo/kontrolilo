@@ -15,7 +15,7 @@ setup(
     entry_points={
         'console_scripts': [
             'license-check-npm = license_checks.npm:main',
-            'license-check-pipenv = license_checks.pipenv:main'
+            'license-check-pipenv = license_checks.pipenv:main',
         ],
     },
     dependency_links=[],

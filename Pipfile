@@ -15,6 +15,7 @@ pytest-cov = "*"
 pytest-xdist = { version = "*", extras = ['psutil'] }
 python-semantic-release = "*"
 pipenv-setup = "*"
+httptest = "*"
 
 [requires]
 python_version = "3.8"
