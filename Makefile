@@ -6,8 +6,14 @@ local-setup:
 	pipenv run pre-commit install
 	pipenv run pre-commit install --hook-type commit-msg
 
-test:
-	pipenv run pytest -n auto --cov=license_checks .
+unit-test:
+	COVERAGE_FILE=.coverage_unit pipenv run pytest -n auto --cov=license_checks src tests/unit
+
+integration-test:
+	COVERAGE_FILE=.coverage_integration pipenv run pytest -n auto --cov=license_checks src tests/integration
+
+test: unit-test integration-test
+	pipenv run coverage combine .coverage_unit .coverage_integration
 	pipenv run coverage xml
 
 ci-setup-environment:

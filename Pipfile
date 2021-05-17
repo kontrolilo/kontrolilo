@@ -10,6 +10,7 @@ requests = "*"
 texttable = "*"
 
 [dev-packages]
+GitPython = "*"
 pre-commit = "*"
 pytest = "*"
 pytest-cov = "*"

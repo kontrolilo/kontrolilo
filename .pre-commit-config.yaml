@@ -34,3 +34,4 @@ repos:
     rev: v1.1.0
     hooks:
       - id: license-check-pipenv
+        exclude: 'tests/integration/Pipfile'
