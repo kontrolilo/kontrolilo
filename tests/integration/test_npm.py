@@ -36,6 +36,6 @@ class TestNpmCheck:
 
     def run_pre_commit(self):
         return run(
-            f'pre-commit try-repo {Path(__file__).parent.parent.parent.absolute()} license-check-npm --all-files --show-diff-on-failure',
+            f'pre-commit try-repo {Path(__file__).parent.parent.parent.absolute()} license-check-npm --all-files',
             capture_output=True, cwd=self.directory.name,
             env=dict(os.environ, PIPENV_IGNORE_VIRTUALENVS='1'), shell=True)
