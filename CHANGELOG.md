@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.1 (2021-05-17)
+### Fix
+* Add requsts library as explicit dependency ([`54ddaca`](https://github.com/nbyl/pre-commit-license-checks/commit/54ddaca4bf56a1bab619b3f6af9c62af87cd2a58))
+
 ## v1.3.0 (2021-05-13)
 ### Feature
 * Include other configuration file from external url ([`3b59ae1`](https://github.com/nbyl/pre-commit-license-checks/commit/3b59ae16e4c9410c87248b3b86ed0ae5cab25674))
