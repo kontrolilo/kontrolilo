@@ -40,7 +40,7 @@ class Configuration:
 
     def save(self, directory: str):
         with open(self.get_config_file_path(directory), 'w') as config_file:
-            dump(self, config_file)
+            config_file.write(self.to_yaml())
 
     def merge_includes(self):
         merged_configuration = Configuration(
