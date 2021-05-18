@@ -18,18 +18,22 @@ class SimpleLicenseChecker(BaseLicenseChecker):
         return "echo 'Hello World!'"
 
     def parse_packages(self, output: str, configuration: dict) -> List[Package]:
-        return []
+        return [
+            Package('starlette', '0.14.1', 'BSD License'),
+            Package('demo1234', '0.14.1', 'GPL'),
+            Package('urllib3', '1.26.4', 'MIT License'),
+        ]
 
 
 class TestBaseLicenseChecker:
-    checker: SimpleLicenseChecker
 
     def setup(self):
+        self.directory = TemporaryDirectory()
         self.checker = SimpleLicenseChecker()
 
     def test_remove_duplicates(self):
-        list = ['a', 'b', 'c', 'a', 'c']
-        consolidated_list = self.checker.remove_duplicates(list)
+        values = ['a', 'b', 'c', 'a', 'c']
+        consolidated_list = self.checker.remove_duplicates(values)
         assert consolidated_list == ['a', 'b', 'c']
 
     def test_consolidate_directories(self):
@@ -52,20 +56,17 @@ class TestBaseLicenseChecker:
 
     def test_print_license_warning(self):
         # this test is mainly run, to verify syntactic correctness
-        with TemporaryDirectory() as directory:
-            self.checker.print_license_warning(directory, [])
+        self.checker.print_license_warning(self.directory.name, [])
 
     def test_render_demo_config_file_without_file(self):
-        with TemporaryDirectory() as directory:
-            text = self.checker.render_demo_config_file(directory, [Package('demo1234', '0.14.1', 'GPL')])
-            assert text != ''
+        text = self.checker.render_demo_config_file(self.directory.name, [Package('demo1234', '0.14.1', 'GPL')])
+        assert text != ''
 
     def test_render_demo_config_file_with_file(self):
-        with TemporaryDirectory() as directory:
-            Configuration().save(directory)
+        Configuration().save(self.directory.name)
 
-            text = self.checker.render_demo_config_file(directory, [Package('demo1234', '0.14.1', 'GPL')])
-            assert text == ''
+        text = self.checker.render_demo_config_file(self.directory.name, [Package('demo1234', '0.14.1', 'GPL')])
+        assert text == ''
 
     def test_remove_excluded_packages(self):
         packages = [
@@ -86,7 +87,6 @@ class TestBaseLicenseChecker:
         result_mock.configure_mock(**{'stdout': ''})
         run_mock.return_value = result_mock
 
-        with TemporaryDirectory() as directory:
-            self.checker.load_installed_packages(directory, {})
-            run_mock.assert_called_once_with('echo \'Hello World!\'', capture_output=True, check=True,
-                                             cwd=directory, shell=True, text=True)
+        self.checker.load_installed_packages(self.directory, {})
+        run_mock.assert_called_once_with('echo \'Hello World!\'', capture_output=True, check=True,
+                                         cwd=self.directory, shell=True, text=True)
