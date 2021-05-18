@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-from json import dump
-from os.path import join
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, call
-
-import pytest
 
 from license_checks.configuration import Configuration
 from license_checks.npm import NpmLicenseChecker
@@ -46,38 +42,3 @@ class TestNpmLicenseChecker:
             Package('y18n', '5.0.5', 'ISC'),
 
         ]
-
-    @pytest.mark.skip
-    def test_main_returns_failure_on_no_config(self):
-        self.prepare_integration_test_directory(self.directory.name)
-
-        result = self.checker.run([join(self.directory.name, 'package.json')])
-        assert result == 1
-
-    @pytest.mark.skip
-    def test_main_returns_success(self):
-        self.prepare_integration_test_directory(self.directory.name)
-        write_config_file(self.directory.name, ['ISC', 'MIT'])
-
-        result = self.checker.run([join(self.directory.name, 'package.json')])
-        assert result == 0
-
-    @staticmethod
-    def prepare_integration_test_directory(directory: str):
-        package = {
-            'name': 'pre-commit-integration-test',
-            'version': '1.0.0',
-            'description': 'No big deal.',
-            'main': 'index.js',
-            'scripts': {
-                'test': "echo \"Error: no test specified\" && exit 1"
-            },
-            'author': '',
-            'license': 'ISC',
-            'dependencies': {
-                'lodash': '^4.17.21'
-            }
-        }
-
-        with open(join(directory, 'package.json'), 'w+')as package_file:
-            dump(package, package_file)
