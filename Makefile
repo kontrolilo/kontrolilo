@@ -18,6 +18,7 @@ test: unit-test integration-test
 
 ci-setup-environment:
 	pip install pipenv
+	pipenv --python $(which python)
 
 sync:
 	pipenv run pipenv-setup sync
