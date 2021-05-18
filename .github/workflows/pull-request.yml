@@ -20,6 +20,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: setup environment
       run: |
+        which python
         make ci-setup-environment
         make local-setup
     - name: run linter
