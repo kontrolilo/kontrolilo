@@ -38,10 +38,12 @@ class TestPipenvLicenseChecker:
         ]
         '''
 
-    checker: PipenvLicenseChecker
-
     def setup(self):
+        self.directory = TemporaryDirectory()
         self.checker = PipenvLicenseChecker()
+
+    def test_get_license_checker_command(self):
+        assert self.checker.get_license_checker_command() == 'pipenv run pip-licenses --format=json'
 
     def test_parse_packages(self):
         configuration = Configuration()
@@ -54,13 +56,13 @@ class TestPipenvLicenseChecker:
             Package('zipp', '3.4.1', 'MIT License')]
 
     @patch('license_checks.pipenv.run')
-    def prepare_directory(self, run_mock):
+    def test_prepare_directory(self, run_mock):
         run_mock.return_value = {}
 
-        with TemporaryDirectory() as directory:
-            self.checker.prepare_directory(directory)
-            run_mock.assert_has_calls([
-                call('pipenv install -d', capture_output=False, check=True, cwd=directory, shell=True),
-                call("pipenv run pip install 'pip-licenses==3.3.1'", capture_output=False, check=True, cwd=directory,
-                     shell=True),
-            ])
+        self.checker.prepare_directory(self.directory.name)
+        run_mock.assert_has_calls([
+            call('pipenv install -d', capture_output=True, check=True, cwd=self.directory.name, shell=True),
+            call("pipenv run pip install 'pip-licenses==3.3.1'", capture_output=True, check=True,
+                 cwd=self.directory.name,
+                 shell=True),
+        ])

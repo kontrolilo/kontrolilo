@@ -7,6 +7,10 @@ from yaml import dump
 from license_checks.configuration import Configuration, ConfigurationInclude
 
 
+def test_configuration_include_repr():
+    assert ConfigurationInclude(url='http://example.com').__repr__() == 'ConfigurationInclude(url=http://example.com)'
+
+
 def test_load_without_file():
     with TemporaryDirectory() as directory:
         configuration = Configuration.load_from_directory(directory)
