@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.0 (2021-05-19)
+### Feature
+* Cache external configuration for one day ([`48dabef`](https://github.com/nbyl/pre-commit-license-checks/commit/48dabefb8b9f1045dbc7ddc3a8206ac16007983b))
+
 ## v1.3.1 (2021-05-17)
 ### Fix
 * Add requsts library as explicit dependency ([`54ddaca`](https://github.com/nbyl/pre-commit-license-checks/commit/54ddaca4bf56a1bab619b3f6af9c62af87cd2a58))
