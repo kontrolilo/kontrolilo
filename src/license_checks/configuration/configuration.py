@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta
 from os.path import exists
 from pathlib import Path
 
-import requests
+from requests_cache import CachedSession
 from yaml import dump, safe_load
 
 CONFIG_FILE_NAME = '.license-check.yaml'
@@ -57,7 +58,8 @@ class Configuration:
 
     @staticmethod
     def load_external_configuration(include: ConfigurationInclude):
-        response = requests.get(include.url)
+        session = CachedSession('~/.cache/pre-commit-license-check.sqlite', expire_after=timedelta(days=1))
+        response = session.get(include.url)
         response.raise_for_status()
 
         return Configuration.load_from_string(response.text)
