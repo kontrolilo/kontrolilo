@@ -4,7 +4,7 @@ from tempfile import TemporaryDirectory
 from unittest.mock import patch, call
 
 from license_checks.configuration import Configuration
-from license_checks.package import Package
+from license_checks.configuration.package import Package
 from license_checks.pipenv import PipenvLicenseChecker
 
 
