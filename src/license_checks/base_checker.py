@@ -25,13 +25,13 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
         """Return the command needed to run in the target directory"""
 
     @abc.abstractmethod
-    def parse_packages(self, output: str, configuration: dict) -> List[Package]:
+    def parse_packages(self, output: str, configuration: dict, directory: str) -> List[Package]:
         """Parse the licenses from the output of the checker program."""
 
     def load_installed_packages(self, directory: str, configuration: dict) -> List[Package]:
         result = run(self.get_license_checker_command(), capture_output=True, check=True, cwd=directory,
                      shell=True, text=True)
-        return self.parse_packages(result.stdout, configuration)
+        return self.parse_packages(result.stdout, configuration, directory)
 
     def consolidate_directories(self, filenames) -> List[str]:
         directories = []

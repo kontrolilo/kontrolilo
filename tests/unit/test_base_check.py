@@ -18,7 +18,7 @@ class SimpleLicenseChecker(BaseLicenseChecker):
     def get_license_checker_command(self) -> str:
         return "echo 'Hello World!'"
 
-    def parse_packages(self, output: str, configuration: dict) -> List[Package]:
+    def parse_packages(self, output: str, configuration: dict, directory: str = None) -> List[Package]:
         return [
             Package('starlette', '0.14.1', 'BSD License'),
             Package('demo1234', '0.14.1', 'GPL'),
