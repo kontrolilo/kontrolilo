@@ -99,6 +99,17 @@ class ConfigurationTestServer(Handler):
         self.wfile.write(contents)
 
 
+def test_load_external_configuration():
+    with Server(ConfigurationTestServer) as ts:
+        configuration = Configuration()
+
+        loaded_configuration = configuration.load_external_configuration(ConfigurationInclude(url=ts.url()))
+        assert loaded_configuration == Configuration(
+            allowed_licenses=['MIT', 'GPL'],
+            excluded_packages=['demo1234']
+        )
+
+
 def test_merge_includes():
     with Server(ConfigurationTestServer) as ts:
         base_configuration = Configuration(

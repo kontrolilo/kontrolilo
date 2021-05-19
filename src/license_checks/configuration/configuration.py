@@ -49,14 +49,18 @@ class Configuration:
         )
 
         for include in self.includes:
-            response = requests.get(include.url)
-            response.raise_for_status()
-
-            other_configuration = Configuration.load_from_string(response.text)
+            other_configuration = self.load_external_configuration(include)
             merged_configuration.allowed_licenses += other_configuration.allowed_licenses
             merged_configuration.excluded_packages += other_configuration.excluded_packages
 
         return merged_configuration
+
+    @staticmethod
+    def load_external_configuration(include: ConfigurationInclude):
+        response = requests.get(include.url)
+        response.raise_for_status()
+
+        return Configuration.load_from_string(response.text)
 
     @staticmethod
     def load_from_string(text):
