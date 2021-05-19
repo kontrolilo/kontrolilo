@@ -17,7 +17,7 @@ class NpmLicenseChecker(BaseLicenseChecker):
         # pretty hard to parse.
         return 'npx license-checker --csv'
 
-    def parse_packages(self, output: str, configuration: dict) -> List[Package]:
+    def parse_packages(self, output: str, configuration: dict, directory: str) -> List[Package]:
         packages = []
         package_reader = csv.DictReader(output.splitlines())
         for row in package_reader:

@@ -47,7 +47,7 @@ class TestPipenvLicenseChecker:
 
     def test_parse_packages(self):
         configuration = Configuration()
-        packages = self.checker.parse_packages(self.DEMO_LICENSE_OUTPUT, configuration)
+        packages = self.checker.parse_packages(self.DEMO_LICENSE_OUTPUT, configuration, self.directory.name)
         assert packages == [
             Package('starlette', '0.14.1', 'BSD License'),
             Package('demo1234', '0.14.1', 'GPL'),

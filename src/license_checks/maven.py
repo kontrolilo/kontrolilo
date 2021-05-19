@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
 from json import loads
-from subprocess import run
 from typing import List
 
 from license_checks.base_checker import BaseLicenseChecker
@@ -9,15 +8,13 @@ from license_checks.configuration import Configuration
 from license_checks.configuration.package import Package
 
 
-# TODO: ignore pip-licenses
-class PipenvLicenseChecker(BaseLicenseChecker):
+class MavenLicenseChecker(BaseLicenseChecker):
     def prepare_directory(self, directory: str):
-        run('pipenv install -d', capture_output=not self.debug, check=True, cwd=directory, shell=True)
-        run("pipenv run pip install 'pip-licenses==3.3.1'", capture_output=not self.debug, check=True, cwd=directory,
-            shell=True)
+        pass
 
     def get_license_checker_command(self) -> str:
-        return 'pipenv run pip-licenses --format=json'
+        # TODO: don't use wrapper when not present
+        return './mvnw org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses'
 
     def parse_packages(self, output: str, configuration: Configuration, directory: str) -> List[Package]:
         values = loads(output)
@@ -32,7 +29,7 @@ class PipenvLicenseChecker(BaseLicenseChecker):
 
 
 def main():
-    sys.exit(PipenvLicenseChecker().run(sys.argv[1:]))
+    sys.exit(MavenLicenseChecker().run(sys.argv[1:]))
 
 
 if __name__ == '__main__':
