@@ -10,7 +10,7 @@ from typing import List
 from texttable import Texttable
 
 from license_checks.configuration import Configuration
-from license_checks.package import Package
+from license_checks.configuration.package import Package
 
 
 class BaseLicenseChecker(metaclass=abc.ABCMeta):

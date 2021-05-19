@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from license_checks.package import Package
+from license_checks.configuration.package import Package
 
 
 class TestPackage:

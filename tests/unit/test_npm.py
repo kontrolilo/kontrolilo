@@ -4,7 +4,7 @@ from unittest.mock import patch, call
 
 from license_checks.configuration import Configuration
 from license_checks.npm import NpmLicenseChecker
-from license_checks.package import Package
+from license_checks.configuration.package import Package
 
 
 class TestNpmLicenseChecker:
