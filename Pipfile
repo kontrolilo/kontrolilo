@@ -9,6 +9,7 @@ ignore = "*"
 requests = "*"
 requests-cache = "*"
 texttable = "*"
+typing-extensions = "*"
 
 [dev-packages]
 GitPython = "*"
