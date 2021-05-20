@@ -14,7 +14,9 @@ compliance in the python ecosystem.
 
 - [pre-commit-license-checks](#pre-commit-license-checks)
   - [Installation](#installation)
+  - [Configuration](#configuration)
   - [Available hooks](#available-hooks)
+    - [`license-check-maven`](#license-check-maven)
     - [`license-check-npm`](#license-check-npm)
     - [`license-check-pipenv`](#license-check-pipenv)
   - [Contributing](#contributing)
@@ -38,18 +40,11 @@ repos:
       - id: license-check-pipenv
 ```
 
-## Available hooks
+## Configuration
 
-### `license-check-npm`
-
-**What it does**
-
-* This hook checks the licenses of your dependencies declared in a `package.json` against defined list of allowed open
-  source licenses.
-
-**Configuration**
-
-To configure the list of allowed licenses, put a file called `.license-check.yaml` alongside your `package.json`.
+All hooks in this repository share a common configuration file format. To configure the list of allowed licenses, put a
+file called `.license-check.yaml` alongside the file containing the declaration of you dependencies (e.g. `package.json`
+. `pom.xml`, ...).
 
 The file must be structured the following way:
 
@@ -75,6 +70,27 @@ excludedPackages:
   - check
   - ...
 ```
+
+## Available hooks
+
+### `license-check-maven`
+
+**What it does**
+
+* This hook checks the licenses of your maven dependencies declared in a `pom.xml` against defined list of allowed open
+  source licenses.
+
+**More info**
+
+* [maven](https://maven.apache.org/)
+* [license-maven-plugin](https://www.mojohaus.org/license-maven-plugin/)
+
+### `license-check-npm`
+
+**What it does**
+
+* This hook checks the licenses of your dependencies declared in a `package.json` against defined list of allowed open
+  source licenses.
 
 **More info**
 
@@ -87,35 +103,6 @@ excludedPackages:
 
 * This hook checks the contents of a [pipenv](https://pypi.org/project/pipenv/) environment against a defined list of
   allowed open source licenses.
-
-**Configuration**
-
-To configure the list of allowed licenses, put a file called `.license-check.yaml` alongside your `Pipfile`.
-
-The file must be structured the following way:
-
-```yaml
----
-allowedLicenses:
-  - a
-  - list
-  - of
-  - allowed
-  - licenses
-  - ...
-excludedPackages:
-  - any
-  - package
-  - listed
-  - here
-  - will
-  - be
-  - excluded
-  - from
-  - the
-  - check
-  - ...
-```
 
 **More info**
 
