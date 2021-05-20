@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from os import mkdir
 from os.path import join
+from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from license_checks.configuration import Configuration
@@ -72,6 +73,11 @@ class TestMavenLicenseChecker:
         self.checker.prepare_directory(self.directory.name)
 
     def test_get_license_checker_command(self):
+        assert self.checker.get_license_checker_command(
+            self.directory.name) == 'mvn org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses'
+
+    def test_get_license_checker_command_with_wrapper_present(self):
+        Path(join(self.directory.name, 'mvnw')).touch()
         assert self.checker.get_license_checker_command(
             self.directory.name) == f"{join(self.directory.name, 'mvnw')} org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses"
 
