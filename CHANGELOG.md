@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.0 (2021-05-20)
+### Feature
+* Maven checker uses wrapper when present ([`a71fe9e`](https://github.com/nbyl/pre-commit-license-checks/commit/a71fe9e6d7428c64dfce10fd6f95ce36235f9357))
+* Maven parser can now parse the licenses of a maven project ([`996d3b5`](https://github.com/nbyl/pre-commit-license-checks/commit/996d3b5d12db1b806feeb0300f615d775f62f8c2))
+
+### Documentation
+* Consolidate the configuration docs ([`7072aff`](https://github.com/nbyl/pre-commit-license-checks/commit/7072aff47e0e3fb236b21a7685ba4e8ccfe838e7))
+
 ## v1.4.0 (2021-05-19)
 ### Feature
 * Cache external configuration for one day ([`48dabef`](https://github.com/nbyl/pre-commit-license-checks/commit/48dabefb8b9f1045dbc7ddc3a8206ac16007983b))
