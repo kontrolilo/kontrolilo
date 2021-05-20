@@ -21,7 +21,7 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
         """Prepare the directory for the license check, e.g. by installing all needed tools."""
 
     @abc.abstractmethod
-    def get_license_checker_command(self) -> str:
+    def get_license_checker_command(self, directory: str) -> str:
         """Return the command needed to run in the target directory"""
 
     @abc.abstractmethod
@@ -29,7 +29,7 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
         """Parse the licenses from the output of the checker program."""
 
     def load_installed_packages(self, directory: str, configuration: dict) -> List[Package]:
-        result = run(self.get_license_checker_command(), capture_output=True, check=True, cwd=directory,
+        result = run(self.get_license_checker_command(directory), capture_output=True, check=True, cwd=directory,
                      shell=True, text=True)
         return self.parse_packages(result.stdout, configuration, directory)
 

@@ -72,7 +72,8 @@ class TestMavenLicenseChecker:
         self.checker.prepare_directory(self.directory.name)
 
     def test_get_license_checker_command(self):
-        assert self.checker.get_license_checker_command() == './mvnw org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses'
+        assert self.checker.get_license_checker_command(
+            self.directory.name) == f"{join(self.directory.name, 'mvnw')} org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses"
 
     def test_parse_packages(self):
         target_directory = join(self.directory.name, 'target')

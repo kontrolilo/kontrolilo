@@ -15,7 +15,7 @@ class SimpleLicenseChecker(BaseLicenseChecker):
     def prepare_directory(self, directory: str):
         pass
 
-    def get_license_checker_command(self) -> str:
+    def get_license_checker_command(self, directory: str) -> str:
         return "echo 'Hello World!'"
 
     def parse_packages(self, output: str, configuration: dict, directory: str = None) -> List[Package]:

@@ -29,7 +29,7 @@ class TestNpmLicenseChecker:
             ])
 
     def test_get_license_checker_command(self):
-        assert self.checker.get_license_checker_command() == 'npx license-checker --csv'
+        assert self.checker.get_license_checker_command('') == 'npx license-checker --csv'
 
     def test_parse_packages(self):
         packages = self.checker.parse_packages(self.DEMO_LICENSE_OUTPUT, Configuration(

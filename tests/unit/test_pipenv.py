@@ -43,7 +43,7 @@ class TestPipenvLicenseChecker:
         self.checker = PipenvLicenseChecker()
 
     def test_get_license_checker_command(self):
-        assert self.checker.get_license_checker_command() == 'pipenv run pip-licenses --format=json'
+        assert self.checker.get_license_checker_command('') == 'pipenv run pip-licenses --format=json'
 
     def test_parse_packages(self):
         configuration = Configuration()
