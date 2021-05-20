@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-from os.path import join
+from os.path import join, exists
 from typing import List
 from xml.etree import ElementTree
 
@@ -15,9 +15,13 @@ class MavenLicenseChecker(BaseLicenseChecker):
         pass
 
     def get_license_checker_command(self, directory: str) -> str:
-        wrapper = join(directory, 'mvnw')
-        # TODO: don't use wrapper when not present
-        return f'{wrapper} org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses'
+        wrapper_path = join(directory, 'mvnw')
+
+        binary = 'mvn'
+        if exists(wrapper_path):
+            binary = wrapper_path
+
+        return f'{binary} org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses'
 
     def parse_packages(self, output: str, configuration: Configuration, directory: str) -> List[Package]:
         packages = []
