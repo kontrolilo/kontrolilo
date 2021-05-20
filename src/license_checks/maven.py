@@ -14,9 +14,10 @@ class MavenLicenseChecker(BaseLicenseChecker):
     def prepare_directory(self, directory: str):
         pass
 
-    def get_license_checker_command(self) -> str:
+    def get_license_checker_command(self, directory: str) -> str:
+        wrapper = join(directory, 'mvnw')
         # TODO: don't use wrapper when not present
-        return 'mvnw org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses'
+        return f'{wrapper} org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses'
 
     def parse_packages(self, output: str, configuration: Configuration, directory: str) -> List[Package]:
         packages = []
@@ -39,7 +40,6 @@ class MavenLicenseChecker(BaseLicenseChecker):
                 version.text,
                 ';'.join(license_names)
             ))
-            print(group_id.text)
 
         return packages
 

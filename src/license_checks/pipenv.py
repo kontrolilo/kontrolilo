@@ -16,7 +16,7 @@ class PipenvLicenseChecker(BaseLicenseChecker):
         run("pipenv run pip install 'pip-licenses==3.3.1'", capture_output=not self.debug, check=True, cwd=directory,
             shell=True)
 
-    def get_license_checker_command(self) -> str:
+    def get_license_checker_command(self, directory: str) -> str:
         return 'pipenv run pip-licenses --format=json'
 
     def parse_packages(self, output: str, configuration: Configuration, directory: str) -> List[Package]:

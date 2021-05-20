@@ -12,7 +12,7 @@ class NpmLicenseChecker(BaseLicenseChecker):
     def prepare_directory(self, directory: str):
         run('npm install --no-audit --no-fund', capture_output=not self.debug, check=True, cwd=directory, shell=True)
 
-    def get_license_checker_command(self) -> str:
+    def get_license_checker_command(self, directory: str) -> str:
         # yes, we are using csv here. license-checker's json output does not build an array of licenses, which is
         # pretty hard to parse.
         return 'npx license-checker --csv'
