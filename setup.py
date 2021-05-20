@@ -28,6 +28,7 @@ setup(
     packages=find_packages(where='src'),
     entry_points={
         'console_scripts': [
+            'license-check-maven = license_checks.maven:main',
             'license-check-npm = license_checks.npm:main',
             'license-check-pipenv = license_checks.pipenv:main',
         ],

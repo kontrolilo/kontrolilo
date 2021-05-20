@@ -26,7 +26,7 @@ class MavenLicenseChecker(BaseLicenseChecker):
     def parse_packages(self, output: str, configuration: Configuration, directory: str) -> List[Package]:
         packages = []
 
-        licenses_file_path = join(directory, 'target', 'licenses.xml')
+        licenses_file_path = join(directory, 'target', 'generated-resources', 'licenses.xml')
         tree = ElementTree.parse(licenses_file_path)
         root = tree.getroot()
         for dependency in root.findall('./dependencies/dependency'):

@@ -82,10 +82,10 @@ class TestMavenLicenseChecker:
             self.directory.name) == f"{join(self.directory.name, 'mvnw')} org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses"
 
     def test_parse_packages(self):
-        target_directory = join(self.directory.name, 'target')
-        mkdir(target_directory)
+        target_directory = Path(self.directory.name, 'target', 'generated-resources')
+        target_directory.mkdir(parents=True)
 
-        with open(join(target_directory, 'licenses.xml'), 'w') as licenses_file:
+        with open(join(target_directory.absolute(), 'licenses.xml'), 'w') as licenses_file:
             licenses_file.write(self.LICENSES_XML)
 
         packages = self.checker.parse_packages('', Configuration(
