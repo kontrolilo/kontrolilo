@@ -1,92 +1,85 @@
 # -*- coding: utf-8 -*-
-from os import mkdir
 from os.path import join
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+import license_checks
 from license_checks.configuration import Configuration
 from license_checks.configuration.package import Package
-from license_checks.maven import MavenLicenseChecker
+from license_checks.gradle import GradleLicenseChecker
 
 
-class TestMavenLicenseChecker:
-    LICENSES_XML = \
-        '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licenseSummary>
-  <dependencies>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.3</version>
-      <licenses>
-        <license>
-          <name>Eclipse Public License - v 1.0</name>
-          <url>http://www.eclipse.org/legal/epl-v10.html</url>
-          <file>eclipse public license - v 1.0 - epl-v10.html</file>
-        </license>
-        <license>
-          <name>GNU Lesser General Public License</name>
-          <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
-          <file>gnu lesser general public license - lgpl-2.1.html</file>
-        </license>
-      </licenses>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-core</artifactId>
-      <version>1.2.3</version>
-      <licenses>
-        <license>
-          <name>Eclipse Public License - v 1.0</name>
-          <url>http://www.eclipse.org/legal/epl-v10.html</url>
-          <file>eclipse public license - v 1.0 - epl-v10.html</file>
-        </license>
-        <license>
-          <name>GNU Lesser General Public License</name>
-          <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
-          <file>gnu lesser general public license - lgpl-2.1.html</file>
-        </license>
-      </licenses>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-      <version>2.11.4</version>
-      <licenses>
-        <license>
-          <name>The Apache Software License, Version 2.0</name>
-          <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-          <distribution>repo</distribution>
-          <file>the apache software license, version 2.0 - license-2.0.txt</file>
-        </license>
-      </licenses>
-    </dependency>
-  </dependencies>
-</licenseSummary>
-'''
+class TestGradleLicenseChecker:
+    LICENSE_REPORT_JSON = '''[
+      {
+        "project": "Apache Log4j API",
+        "description": "The Apache Log4j API",
+        "version": "2.13.3",
+        "developers": [],
+        "url": null,
+        "year": null,
+        "licenses": [
+          {
+            "license": "Apache License, Version 2.0",
+            "license_url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "dependency": "org.apache.logging.log4j:log4j-api:2.13.3"
+      },
+      {
+        "project": "Apache Log4j to SLF4J Adapter",
+        "description": "The Apache Log4j binding between Log4j 2 API and SLF4J.",
+        "version": "2.13.3",
+        "developers": [],
+        "url": null,
+        "year": null,
+        "licenses": [
+          {
+            "license": "Apache License, Version 2.0",
+            "license_url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "dependency": "org.apache.logging.log4j:log4j-to-slf4j:2.13.3"
+      },
+      {
+        "project": "Jackson datatype: jdk8",
+        "description": "Add-on module for Jackson (http://jackson.codehaus.org) to support\\nJDK 8 data types.",
+        "version": "2.11.4",
+        "developers": [],
+        "url": null,
+        "year": null,
+        "licenses": [
+          {
+            "license": "The Apache Software License, Version 2.0",
+            "license_url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "dependency": "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.11.4"
+      }
+    ]'''
 
     def setup(self):
         self.directory = TemporaryDirectory()
-        self.checker = MavenLicenseChecker()
+        self.checker = GradleLicenseChecker()
 
     def test_prepare_directory(self):
         self.checker.prepare_directory(self.directory.name)
 
     def test_get_license_checker_command(self):
         assert self.checker.get_license_checker_command(
-            self.directory.name) == 'mvn org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses'
+            self.directory.name) == f"gradlew -I {Path(Path(license_checks.gradle.__file__).parent, 'init.gradle').absolute()} licenseReport"
 
     def test_get_license_checker_command_with_wrapper_present(self):
-        Path(join(self.directory.name, 'mvnw')).touch()
+        Path(join(self.directory.name, 'gradlew')).touch()
         assert self.checker.get_license_checker_command(
-            self.directory.name) == f"{join(self.directory.name, 'mvnw')} org.codehaus.mojo:license-maven-plugin:2.0.0:download-licenses"
+            self.directory.name) == f"{join(self.directory.name, 'gradlew')} -I {Path(Path(license_checks.gradle.__file__).parent, 'init.gradle').absolute()} licenseReport"
 
     def test_parse_packages(self):
-        target_directory = Path(self.directory.name, 'target', 'generated-resources')
+        target_directory = Path(self.directory.name, 'build', 'reports', 'licenses')
         target_directory.mkdir(parents=True)
 
-        with open(join(target_directory.absolute(), 'licenses.xml'), 'w') as licenses_file:
-            licenses_file.write(self.LICENSES_XML)
+        with open(join(target_directory.absolute(), 'licenseReport.json'), 'w') as licenses_file:
+            licenses_file.write(self.LICENSE_REPORT_JSON)
 
         packages = self.checker.parse_packages('', Configuration(
             allowed_licenses=[],
@@ -94,10 +87,10 @@ class TestMavenLicenseChecker:
         ),
                                                self.directory.name)
         assert packages == [
-            Package('ch.qos.logback:logback-classic', '1.2.3',
-                    'Eclipse Public License - v 1.0;GNU Lesser General Public License'),
-            Package('ch.qos.logback:logback-core', '1.2.3',
-                    'Eclipse Public License - v 1.0;GNU Lesser General Public License'),
-            Package('com.fasterxml.jackson.core:jackson-annotations', '2.11.4',
-                    'The Apache Software License, Version 2.0')
+            Package('org.apache.logging.log4j:log4j-api', '2.13.3',
+                    'Apache License, Version 2.0'),
+            Package('org.apache.logging.log4j:log4j-to-slf4j', '2.13.3',
+                    'Apache License, Version 2.0'),
+            Package('com.fasterxml.jackson.datatype:jackson-datatype-jdk8', '2.11.4',
+                    'The Apache Software License, Version 2.0'),
         ]
