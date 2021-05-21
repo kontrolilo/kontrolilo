@@ -9,7 +9,7 @@ from license_checks.configuration import Configuration
 from license_checks.configuration.package import Package
 
 
-class MavenLicenseChecker(BaseLicenseChecker):
+class GradleLicenseChecker(BaseLicenseChecker):
 
     def prepare_directory(self, directory: str):
         pass
@@ -49,7 +49,7 @@ class MavenLicenseChecker(BaseLicenseChecker):
 
 
 def main():
-    sys.exit(MavenLicenseChecker().run(sys.argv[1:]))
+    sys.exit(GradleLicenseChecker().run(sys.argv[1:]))
 
 
 if __name__ == '__main__':
