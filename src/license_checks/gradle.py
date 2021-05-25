@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import sys
 from json import load
-from logging import DEBUG, basicConfig, getLogger
+from logging import getLogger
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 from typing import List
 
 from license_checks.base_checker import BaseLicenseChecker, shared_main
@@ -14,6 +14,36 @@ logger = getLogger(__name__)
 
 
 class GradleLicenseChecker(BaseLicenseChecker):
+    INIT_SCRIPT = '''
+initscript {
+    repositories {
+        repositories {
+            jcenter()
+            google()
+        }
+        dependencies {
+            classpath 'com.jaredsburrows:gradle-license-plugin:0.8.90'
+        }
+    }
+}
+allprojects {
+    apply plugin: com.jaredsburrows.license.LicensePlugin
+
+    licenseReport {
+        generateCsvReport = false
+        generateHtmlReport = false
+        generateJsonReport = true
+    }
+}
+'''
+
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.init_script = NamedTemporaryFile(prefix='init.gradle')
+
+        with open(self.init_script.name, 'w') as init_script_file:
+            init_script_file.write(self.INIT_SCRIPT)
 
     def prepare_directory(self, directory: str):
         pass
@@ -25,7 +55,7 @@ class GradleLicenseChecker(BaseLicenseChecker):
         if wrapper_path.exists():
             binary = wrapper_path.absolute()
 
-        return f'{binary} -I {Path(Path(__file__).parent.absolute(), "init.gradle").absolute()} licenseReport'
+        return f'{binary} -I {self.init_script.name} licenseReport'
 
     def parse_packages(self, output: str, configuration: Configuration, directory: str) -> List[Package]:
         packages = []
