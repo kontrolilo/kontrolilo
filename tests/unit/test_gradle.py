@@ -3,7 +3,6 @@ from os.path import join
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-import license_checks
 from license_checks.configuration import Configuration
 from license_checks.configuration.package import Package
 from license_checks.gradle import GradleLicenseChecker
@@ -67,12 +66,12 @@ class TestGradleLicenseChecker:
 
     def test_get_license_checker_command(self):
         assert self.checker.get_license_checker_command(
-            self.directory.name) == f"gradlew -I {Path(Path(license_checks.gradle.__file__).parent, 'init.gradle').absolute()} licenseReport"
+            self.directory.name) == f'gradlew -I {self.checker.init_script.name} licenseReport'
 
     def test_get_license_checker_command_with_wrapper_present(self):
         Path(join(self.directory.name, 'gradlew')).touch()
         assert self.checker.get_license_checker_command(
-            self.directory.name) == f"{join(self.directory.name, 'gradlew')} -I {Path(Path(license_checks.gradle.__file__).parent, 'init.gradle').absolute()} licenseReport"
+            self.directory.name) == f"{join(self.directory.name, 'gradlew')} -I {self.checker.init_script.name} licenseReport"
 
     def test_parse_packages(self):
         target_directory = Path(self.directory.name, 'build', 'reports', 'licenses')
