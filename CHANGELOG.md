@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.0 (2021-05-25)
+### Feature
+* Add support to check licenses against a gradle setup ([`16c3744`](https://github.com/nbyl/pre-commit-license-checks/commit/16c374403e6087cfffecddbe0ee370ba0ecf02e0))
+
 ## v1.5.0 (2021-05-20)
 ### Feature
 * Maven checker uses wrapper when present ([`a71fe9e`](https://github.com/nbyl/pre-commit-license-checks/commit/a71fe9e6d7428c64dfce10fd6f95ce36235f9357))
