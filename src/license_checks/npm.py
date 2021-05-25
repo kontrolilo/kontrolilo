@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 import csv
 from subprocess import run
-from sys import argv
 from typing import List
 
-from license_checks.base_checker import BaseLicenseChecker
+from license_checks.base_checker import BaseLicenseChecker, shared_main
 from license_checks.configuration.package import Package
 
 
 class NpmLicenseChecker(BaseLicenseChecker):
     def prepare_directory(self, directory: str):
-        run('npm install --no-audit --no-fund', capture_output=not self.debug, check=True, cwd=directory, shell=True)
+        run('npm install --no-audit --no-fund', capture_output=True, check=True, cwd=directory, shell=True)
 
     def get_license_checker_command(self, directory: str) -> str:
         # yes, we are using csv here. license-checker's json output does not build an array of licenses, which is
@@ -35,7 +34,7 @@ class NpmLicenseChecker(BaseLicenseChecker):
 
 
 def main():
-    exit(NpmLicenseChecker().run(argv[1:]))
+    shared_main(NpmLicenseChecker())
 
 
 if __name__ == '__main__':

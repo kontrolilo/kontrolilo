@@ -48,4 +48,4 @@ class IntegrationTestBase:
         return run(
             f'pre-commit try-repo {Path(__file__).parent.parent.parent.absolute()} {self.get_hook_id()} --all-files',
             capture_output=True, cwd=self.directory.name,
-            env=dict(os.environ, PIPENV_IGNORE_VIRTUALENVS='1'), shell=True)
+            env=dict(os.environ, PIPENV_IGNORE_VIRTUALENVS='1', DEBUG='true'), shell=True)

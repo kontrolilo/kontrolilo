@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-import sys
 from pathlib import Path
 from typing import List
 from xml.etree import ElementTree
 
-from license_checks.base_checker import BaseLicenseChecker
+from license_checks.base_checker import BaseLicenseChecker, shared_main
 from license_checks.configuration import Configuration
 from license_checks.configuration.package import Package
 
@@ -49,7 +48,7 @@ class MavenLicenseChecker(BaseLicenseChecker):
 
 
 def main():
-    sys.exit(MavenLicenseChecker().run(sys.argv[1:]))
+    shared_main(MavenLicenseChecker())
 
 
 if __name__ == '__main__':

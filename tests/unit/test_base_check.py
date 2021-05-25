@@ -92,12 +92,19 @@ class TestBaseLicenseChecker:
         run_mock.assert_called_once_with('echo \'Hello World!\'', capture_output=True, check=True,
                                          cwd=self.directory, shell=True, text=True)
 
+    class Object(object):
+        pass
+
     def test_run_returns_failure_on_no_config(self):
-        result = self.checker.run([join(self.directory.name, 'package.json')])
+        args = self.Object()
+        args.filenames = [join(self.directory.name, 'package.json')]
+        result = self.checker.run(args)
         assert result == 1
 
     def test_run_returns_success(self):
         Configuration(allowed_licenses=['BSD License', 'GPL', 'MIT License']).save(self.directory.name)
 
-        result = self.checker.run([join(self.directory.name, 'package.json')])
+        args = self.Object()
+        args.filenames = [join(self.directory.name, 'package.json')]
+        result = self.checker.run(args)
         assert result == 0

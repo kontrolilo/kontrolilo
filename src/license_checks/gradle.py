@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
+
 import sys
 from json import load
+from logging import DEBUG, basicConfig, getLogger
 from pathlib import Path
 from typing import List
 
-from license_checks.base_checker import BaseLicenseChecker
+from license_checks.base_checker import BaseLicenseChecker, shared_main
 from license_checks.configuration import Configuration
 from license_checks.configuration.package import Package
+
+logger = getLogger(__name__)
 
 
 class GradleLicenseChecker(BaseLicenseChecker):
@@ -28,6 +32,8 @@ class GradleLicenseChecker(BaseLicenseChecker):
 
         licenses_file_path = Path(directory, 'build', 'reports', 'licenses', 'licenseReport.json')
 
+        logger.debug('Loading license data from [%s]', licenses_file_path.absolute())
+
         with open(licenses_file_path.absolute()) as license_file:
             dependencies = load(license_file)
             for dependency in dependencies:
@@ -46,11 +52,13 @@ class GradleLicenseChecker(BaseLicenseChecker):
 
                 packages.append(Package(artifact_name, version, ';'.join(license_names)))
 
+        logger.debug('Found %s packages in license file.', len(packages))
+
         return packages
 
 
 def main():
-    sys.exit(GradleLicenseChecker().run(sys.argv[1:]))
+    shared_main(GradleLicenseChecker())
 
 
 if __name__ == '__main__':

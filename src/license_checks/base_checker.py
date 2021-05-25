@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import abc
 import argparse
+import sys
 from builtins import dict
+from logging import getLogger, basicConfig, DEBUG, INFO
+from os import getenv
 from os.path import abspath
 from pathlib import Path
 from subprocess import run
@@ -12,9 +15,10 @@ from texttable import Texttable
 from license_checks.configuration import Configuration
 from license_checks.configuration.package import Package
 
+logger = getLogger(__name__)
+
 
 class BaseLicenseChecker(metaclass=abc.ABCMeta):
-    debug = False
 
     @abc.abstractmethod
     def prepare_directory(self, directory: str):
@@ -29,8 +33,14 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
         """Parse the licenses from the output of the checker program."""
 
     def load_installed_packages(self, directory: str, configuration: dict) -> List[Package]:
-        result = run(self.get_license_checker_command(directory), capture_output=True, check=True, cwd=directory,
+        license_checker_command = self.get_license_checker_command(directory)
+
+        logger.debug('Running license checker command [%s]', license_checker_command)
+
+        result = run(license_checker_command, capture_output=True, check=True, cwd=directory,
                      shell=True, text=True)
+        logger.debug('Result of license checker command [%s]', result)
+
         return self.parse_packages(result.stdout, configuration, directory)
 
     def consolidate_directories(self, filenames) -> List[str]:
@@ -39,21 +49,13 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
             directories.append(abspath(Path(filename).parent.absolute()))
         return self.remove_duplicates(directories)
 
-    def run(self, argv=None) -> int:
-        parser = argparse.ArgumentParser()
-        parser.add_argument('--debug', action='store_true', help='print debug messages to stderr')
-        parser.add_argument('filenames', nargs='*', help='filenames to check')
-        args = parser.parse_args(argv)
-
-        self.debug = args.debug
-
+    def run(self, args) -> int:
         return_code = 0
 
         directories = self.consolidate_directories(args.filenames)
 
         for directory in directories:
-            print('**************************************************************')
-            print(f'Starting scan in {directory}...')
+            logger.info(f'Starting scan in %s...', directory)
 
             configuration = Configuration.load_from_directory(directory).merge_includes()
             self.prepare_directory(directory)
@@ -109,3 +111,15 @@ To allow all licenses, create a file called {Configuration.get_config_file_path(
     @staticmethod
     def find_invalid_packages(installed_packages: List[Package], configuration) -> List[Package]:
         return list(filter(lambda package: package.license not in configuration.allowed_licenses, installed_packages))
+
+
+def shared_main(checker: BaseLicenseChecker):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--debug', action='store_true', help='print debug messages to stderr')
+    parser.add_argument('filenames', nargs='*', help='filenames to check')
+    args = parser.parse_args(sys.argv[1:])
+
+    debug = args.debug or (getenv('DEBUG', 'false').lower() == 'true')
+
+    basicConfig(level=DEBUG if debug else INFO)
+    sys.exit(checker.run(args))
