@@ -41,11 +41,12 @@ class IntegrationTestBase:
         Configuration(allowed_licenses=self.get_allowed_licenses(), excluded_packages=[], includes=[]).save(
             self.directory.name)
         result = self.run_pre_commit()
-        print(result.stdout.replace('\\n', '\n'))
         assert result.returncode == 0
 
     def run_pre_commit(self):
-        return run(
+        result = run(
             f'pre-commit try-repo {Path(__file__).parent.parent.parent.absolute()} {self.get_hook_id()} --all-files -v',
             capture_output=True, cwd=self.directory.name,
             env=dict(os.environ, PIPENV_IGNORE_VIRTUALENVS='1', DEBUG='true'), shell=True)
+        print(result.stdout.decode('utf-8').replace('\\n', '\n'))
+        return result

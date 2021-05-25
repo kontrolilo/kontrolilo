@@ -89,8 +89,8 @@ class TestBaseLicenseChecker:
         run_mock.return_value = result_mock
 
         self.checker.load_installed_packages(self.directory, {})
-        run_mock.assert_called_once_with('echo \'Hello World!\'', capture_output=True, check=True,
-                                         cwd=self.directory, shell=True, text=True)
+        run_mock.assert_called_once_with('echo \'Hello World!\'', capture_output=True, cwd=self.directory, shell=True,
+                                         text=True)
 
     class Object(object):
         pass

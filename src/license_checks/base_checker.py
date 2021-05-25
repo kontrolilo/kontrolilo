@@ -37,9 +37,10 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
 
         logger.debug('Running license checker command [%s]', license_checker_command)
 
-        result = run(license_checker_command, capture_output=True, check=True, cwd=directory,
+        result = run(license_checker_command, capture_output=True, cwd=directory,
                      shell=True, text=True)
         logger.debug('Result of license checker command [%s]', result)
+        result.check_returncode()
 
         return self.parse_packages(result.stdout, configuration, directory)
 
