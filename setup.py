@@ -8,7 +8,7 @@ setup(
     install_requires=[
         'certifi==2021.5.30',
         "chardet==4.0.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
-        "idna==2.10; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+        "idna==3.2; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
         'ignore==0.1.4',
         "itsdangerous==2.0.1; python_version >= '3.6'",
         'pyyaml==5.4.1',
