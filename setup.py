@@ -13,7 +13,7 @@ setup(
         "itsdangerous==2.0.1; python_version >= '3.6'",
         'pyyaml==5.4.1',
         'requests==2.25.1',
-        'requests-cache==0.6.3',
+        'requests-cache==0.6.4',
         "six==1.16.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
         'texttable==1.6.3',
         'typing-extensions==3.10.0.0',
