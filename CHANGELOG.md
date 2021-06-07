@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.0 (2021-06-07)
+### Feature
+* Invalidate cached urls on error ([`3d10542`](https://github.com/nbyl/pre-commit-license-checks/commit/3d1054297fecb53781683d4e786ded9e308b713c))
+
 ## v1.6.0 (2021-05-25)
 ### Feature
 * Add support to check licenses against a gradle setup ([`16c3744`](https://github.com/nbyl/pre-commit-license-checks/commit/16c374403e6087cfffecddbe0ee370ba0ecf02e0))
