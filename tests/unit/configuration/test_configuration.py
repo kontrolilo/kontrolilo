@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from tempfile import TemporaryDirectory
+from tempfile import TemporaryDirectory, NamedTemporaryFile
 
 from httptest import Handler, Server
 from yaml import dump
@@ -100,25 +100,46 @@ class ConfigurationTestServer(Handler):
 
 
 def test_load_external_configuration():
-    with Server(ConfigurationTestServer) as ts:
-        configuration = Configuration()
+    with NamedTemporaryFile() as cache_file:
+        with Server(ConfigurationTestServer) as ts:
+            configuration = Configuration(cache_name=cache_file.name)
 
-        loaded_configuration = configuration.load_external_configuration(ConfigurationInclude(url=ts.url()))
-        assert loaded_configuration == Configuration(
-            allowed_licenses=['MIT', 'GPL'],
-            excluded_packages=['demo1234']
-        )
+            loaded_configuration = configuration.load_external_configuration(ConfigurationInclude(url=ts.url()))
+            assert loaded_configuration == Configuration(
+                allowed_licenses=['MIT', 'GPL'],
+                excluded_packages=['demo1234']
+            )
 
 
 def test_merge_includes():
-    with Server(ConfigurationTestServer) as ts:
-        base_configuration = Configuration(
-            allowed_licenses=['Apache 2.0'],
-            includes=[ConfigurationInclude(url=ts.url())]
-        )
-        merged_configuration = base_configuration.merge_includes()
+    with NamedTemporaryFile() as cache_file:
+        with Server(ConfigurationTestServer) as ts:
+            base_configuration = Configuration(
+                allowed_licenses=['Apache 2.0'],
+                includes=[ConfigurationInclude(url=ts.url())],
+                cache_name=cache_file.name
+            )
+            merged_configuration = base_configuration.merge_includes()
 
-        assert merged_configuration == Configuration(
-            allowed_licenses=['Apache 2.0', 'MIT', 'GPL'],
-            excluded_packages=['demo1234']
-        )
+            assert merged_configuration == Configuration(
+                allowed_licenses=['Apache 2.0', 'MIT', 'GPL'],
+                excluded_packages=['demo1234'],
+                includes=[ConfigurationInclude(url=ts.url())]
+            )
+
+
+def test_invalidate_cache():
+    with NamedTemporaryFile() as cache_file:
+        with Server(ConfigurationTestServer) as ts:
+            base_configuration = Configuration(
+                allowed_licenses=['Apache 2.0'],
+                includes=[ConfigurationInclude(url=ts.url())],
+                cache_name=cache_file.name
+            )
+            merged_configuration = base_configuration.merge_includes()
+
+            assert merged_configuration.session.cache.urls == [ts.url()]
+
+            merged_configuration.invalidate_cache()
+
+            assert merged_configuration.session.cache.urls == []

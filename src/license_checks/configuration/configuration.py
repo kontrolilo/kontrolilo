@@ -26,11 +26,14 @@ class Configuration:
     def __init__(self,
                  allowed_licenses=None,
                  excluded_packages=None,
-                 includes=None) -> None:
+                 includes=None,
+                 cache_name='~/.cache/pre-commit-license-check.sqlite') -> None:
 
         self.allowed_licenses = allowed_licenses if allowed_licenses else []
         self.excluded_packages = excluded_packages if excluded_packages else []
         self.includes = includes if includes else []
+
+        self.session = CachedSession(cache_name, expire_after=timedelta(days=1))
 
     def to_yaml(self) -> str:
         return dump({
@@ -47,7 +50,9 @@ class Configuration:
         merged_configuration = Configuration(
             allowed_licenses=self.allowed_licenses.copy(),
             excluded_packages=self.excluded_packages.copy(),
+            includes=self.includes.copy()
         )
+        merged_configuration.session = self.session
 
         for include in self.includes:
             other_configuration = self.load_external_configuration(include)
@@ -56,13 +61,15 @@ class Configuration:
 
         return merged_configuration
 
-    @staticmethod
-    def load_external_configuration(include: ConfigurationInclude):
-        session = CachedSession('~/.cache/pre-commit-license-check.sqlite', expire_after=timedelta(days=1))
-        response = session.get(include.url)
+    def load_external_configuration(self, include: ConfigurationInclude):
+        response = self.session.get(include.url)
         response.raise_for_status()
 
         return Configuration.load_from_string(response.text)
+
+    def invalidate_cache(self):
+        for include in self.includes:
+            self.session.cache.delete_url(include.url)
 
     @staticmethod
     def load_from_string(text):

@@ -59,11 +59,13 @@ class BaseLicenseChecker(metaclass=abc.ABCMeta):
             logger.info(f'Starting scan in %s...', directory)
 
             configuration = Configuration.load_from_directory(directory).merge_includes()
+            logger.debug('Loaded configuration %s', configuration)
             self.prepare_directory(directory)
             installed_packages = self.load_installed_packages(directory, configuration)
             filtered_packages = self.remove_excluded_packages(installed_packages, configuration)
             invalid_packages = self.find_invalid_packages(filtered_packages, configuration)
             if len(invalid_packages) > 0:
+                configuration.invalidate_cache()
                 return_code = 1
                 self.print_license_warning(directory, invalid_packages)
 
