@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 import abc
-import argparse
-import sys
 from builtins import dict
-from logging import getLogger, basicConfig, DEBUG, INFO
-from os import getenv
+from logging import getLogger
 from os.path import abspath
 from pathlib import Path
 from subprocess import run
@@ -14,11 +11,12 @@ from texttable import Texttable
 
 from license_checks.configuration import Configuration
 from license_checks.configuration.package import Package
+from license_checks.shared_main import BaseChecker
 
 logger = getLogger(__name__)
 
 
-class BaseLicenseChecker(metaclass=abc.ABCMeta):
+class BaseLicenseChecker(BaseChecker):
 
     @abc.abstractmethod
     def prepare_directory(self, directory: str):
@@ -114,15 +112,3 @@ To allow all licenses, create a file called {Configuration.get_config_file_path(
     @staticmethod
     def find_invalid_packages(installed_packages: List[Package], configuration) -> List[Package]:
         return list(filter(lambda package: package.license not in configuration.allowed_licenses, installed_packages))
-
-
-def shared_main(checker: BaseLicenseChecker):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--debug', action='store_true', help='print debug messages to stderr')
-    parser.add_argument('filenames', nargs='*', help='filenames to check')
-    args = parser.parse_args(sys.argv[1:])
-
-    debug = args.debug or (getenv('DEBUG', 'false').lower() == 'true')
-
-    basicConfig(level=DEBUG if debug else INFO)
-    sys.exit(checker.run(args))
