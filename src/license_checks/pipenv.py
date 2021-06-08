@@ -3,7 +3,8 @@ from json import loads
 from subprocess import run
 from typing import List
 
-from license_checks.base_checker import BaseLicenseChecker, shared_main
+from license_checks.base_checker import BaseLicenseChecker
+from license_checks.shared_main import shared_main
 from license_checks.configuration import Configuration
 from license_checks.configuration.package import Package
 
