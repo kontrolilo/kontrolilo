@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.8.0 (2021-06-09)
+### Feature
+* License list is sorted when linting ([`80884ed`](https://github.com/nbyl/pre-commit-license-checks/commit/80884ed2933752ded16ae8808dfccdbfb69051fe))
+* Create new linter for configuration files ([`7a3d42d`](https://github.com/nbyl/pre-commit-license-checks/commit/7a3d42d0c151545d8d8675f0c3ae4019ed88d080))
+
 ## v1.7.0 (2021-06-07)
 ### Feature
 * Invalidate cached urls on error ([`3d10542`](https://github.com/nbyl/pre-commit-license-checks/commit/3d1054297fecb53781683d4e786ded9e308b713c))
