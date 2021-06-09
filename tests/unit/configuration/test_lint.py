@@ -17,7 +17,7 @@ class TestConfigurationFileChecker:
 
     def test_run_returns_zero_on_valid_configuration(self):
         base_configuration = Configuration(
-            allowed_licenses=['Apache 2.0'],
+            allowed_licenses=['MIT', 'Apache 2.0'],
             includes=[ConfigurationInclude(url='https://examle.com/test.yaml')],
             cache_name=self.cache_file.name
         )
@@ -28,6 +28,12 @@ class TestConfigurationFileChecker:
         args.filenames = [Path(self.directory.name, CONFIG_FILE_NAME).absolute()]
 
         assert self.checker.run(args) == 0
+
+        assert Configuration.load_from_directory(self.directory.name) == Configuration(
+            allowed_licenses=['Apache 2.0', 'MIT'],
+            includes=[ConfigurationInclude(url='https://examle.com/test.yaml')],
+            cache_name=self.cache_file.name
+        )
 
     def test_run_returns_non_zero_on_invalid_configuration(self):
         path = Path(self.directory.name, CONFIG_FILE_NAME)

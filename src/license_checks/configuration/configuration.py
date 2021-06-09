@@ -35,6 +35,11 @@ class Configuration:
 
         self.session = CachedSession(cache_name, expire_after=timedelta(days=1))
 
+    def sort(self):
+        self.allowed_licenses.sort()
+        self.excluded_packages.sort()
+        self.includes.sort()
+
     def to_yaml(self) -> str:
         return dump({
             'allowedLicenses': self.allowed_licenses,
