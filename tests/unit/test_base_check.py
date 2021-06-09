@@ -64,7 +64,7 @@ class TestBaseLicenseChecker:
         assert text != ''
 
     def test_render_demo_config_file_with_file(self):
-        Configuration().save(self.directory.name)
+        Configuration().save_to_directory(self.directory.name)
 
         text = self.checker.render_demo_config_file(self.directory.name, [Package('demo1234', '0.14.1', 'GPL')])
         assert text == ''
@@ -102,7 +102,7 @@ class TestBaseLicenseChecker:
         assert result == 1
 
     def test_run_returns_success(self):
-        Configuration(allowed_licenses=['BSD License', 'GPL', 'MIT License']).save(self.directory.name)
+        Configuration(allowed_licenses=['BSD License', 'GPL', 'MIT License']).save_to_directory(self.directory.name)
 
         args = self.Object()
         args.filenames = [join(self.directory.name, 'package.json')]

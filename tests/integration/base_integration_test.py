@@ -38,7 +38,7 @@ class IntegrationTestBase:
         assert result.returncode == 1
 
     def test_success(self):
-        Configuration(allowed_licenses=self.get_allowed_licenses(), excluded_packages=[], includes=[]).save(
+        Configuration(allowed_licenses=self.get_allowed_licenses(), excluded_packages=[], includes=[]).save_to_directory(
             self.directory.name)
         result = self.run_pre_commit()
         assert result.returncode == 0
