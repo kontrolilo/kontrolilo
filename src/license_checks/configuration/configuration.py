@@ -89,8 +89,8 @@ class Configuration:
         )
 
     @staticmethod
-    def load_from_file(config_file_path: str, ):
-        if not exists(config_file_path):
+    def load_from_file(config_file_path: str, return_empty_if_not_present=True):
+        if not exists(config_file_path) and return_empty_if_not_present:
             return Configuration([], [])
 
         with open(config_file_path) as list_file:
