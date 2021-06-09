@@ -42,8 +42,11 @@ class Configuration:
             'include': [{'url': value.url} for value in self.includes]
         })
 
-    def save(self, directory: str):
-        with open(self.get_config_file_path(directory), 'w') as config_file:
+    def save_to_directory(self, directory: str):
+        self.save_to_file(self.get_config_file_path(directory))
+
+    def save_to_file(self, file_path: str):
+        with open(file_path, 'w') as config_file:
             config_file.write(self.to_yaml())
 
     def merge_includes(self):
@@ -86,14 +89,17 @@ class Configuration:
         )
 
     @staticmethod
-    def load_from_directory(directory: str):
-        config_file_path = Configuration.get_config_file_path(directory)
+    def load_from_file(config_file_path: str, ):
         if not exists(config_file_path):
             return Configuration([], [])
 
         with open(config_file_path) as list_file:
             content = list_file.read()
             return Configuration.load_from_string(content)
+
+    @staticmethod
+    def load_from_directory(directory: str):
+        return Configuration.load_from_file(Configuration.get_config_file_path(directory))
 
     @staticmethod
     def get_config_file_path(directory: str) -> str:
