@@ -1,5 +1,4 @@
 ---
-# TODO: can we run make sync before commit?
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v2.17.6
