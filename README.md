@@ -15,7 +15,10 @@ compliance in the python ecosystem.
 - [pre-commit-license-checks](#pre-commit-license-checks)
   - [Installation](#installation)
   - [Configuration](#configuration)
+    - [Include external configuration files](#include-external-configuration-files)
   - [Available hooks](#available-hooks)
+    - [`license-check-configuration-lint`](#license-check-configuration-lint)
+    - [`license-check-gradle`](#license-check-gradle)
     - [`license-check-maven`](#license-check-maven)
     - [`license-check-npm`](#license-check-npm)
     - [`license-check-pipenv`](#license-check-pipenv)
@@ -28,7 +31,7 @@ compliance in the python ecosystem.
 
 Please install pre-commit first according to the documentation.
 
-Afterwards put the need hook into your `.pre-commit-config.yaml`:
+Afterwards put the needed hooks into your `.pre-commit-config.yaml`:
 
 ```
 ---
@@ -36,6 +39,7 @@ repos:
   - repo: https://github.com/nbyl/pre-commit-license-checks
     rev: main
     hooks:
+      - id: license-check-configuration-lint
       - id: license-check-npm
       - id: license-check-pipenv
 ```
@@ -69,9 +73,50 @@ excludedPackages:
   - the
   - check
   - ...
+include: []
 ```
 
+### Include external configuration files
+
+Through the include keyword in the configuration file, you can load license lists from external HTTP(S) sources.
+
+By using this feature, you can build a central list of allowed licenses to keep this configuration in sync for all your projects:
+
+```yaml
+allowedLicenses: []
+excludedPackages: []
+include:
+- url: https://raw.githubusercontent.com/nbyl/license-check-config/main/commercial-use/license-check-python.yaml
+- url: https://raw.githubusercontent.com/nbyl/license-check-config/main/open-source/license-check-python.yaml
+```
+
+An examples of such a central repository can be found under [nbyl/license-check-config](https://github.com/nbyl/license-check-config).
+
 ## Available hooks
+
+### `license-check-configuration-lint`
+
+**What it does**
+
+* This hook lints configurations files as described above. It checks for correctness and sorts the licenses.
+
+**More info**
+
+* [gradle](https://gradle.org/)
+* [gradle-license-plugin](https://github.com/jaredsburrows/gradle-license-plugin)
+
+
+### `license-check-gradle`
+
+**What it does**
+
+* This hook checks the licenses of your gradle dependencies declared in a `build.gradle` against defined list of allowed open
+  source licenses.
+
+**More info**
+
+* [gradle](https://gradle.org/)
+* [gradle-license-plugin](https://github.com/jaredsburrows/gradle-license-plugin)
 
 ### `license-check-maven`
 
