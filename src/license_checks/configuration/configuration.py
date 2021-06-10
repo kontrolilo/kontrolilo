@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import timedelta
+from functools import total_ordering
 from os.path import exists
 from pathlib import Path
 
@@ -9,6 +10,7 @@ from yaml import dump, safe_load
 CONFIG_FILE_NAME = '.license-check.yaml'
 
 
+@total_ordering
 class ConfigurationInclude:
     url: str
 
@@ -20,6 +22,9 @@ class ConfigurationInclude:
 
     def __repr__(self) -> str:
         return f'ConfigurationInclude(url={self.url})'
+
+    def __lt__(self, other):
+        return self.url < other.url
 
 
 class Configuration:

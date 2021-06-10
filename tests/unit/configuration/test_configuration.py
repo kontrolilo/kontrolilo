@@ -116,7 +116,9 @@ def test_merge_includes():
         with Server(ConfigurationTestServer) as ts:
             base_configuration = Configuration(
                 allowed_licenses=['Apache 2.0'],
-                includes=[ConfigurationInclude(url=ts.url())],
+                includes=[
+                    ConfigurationInclude(url=ts.url()),
+                ],
                 cache_name=cache_file.name
             )
             merged_configuration = base_configuration.merge_includes()
