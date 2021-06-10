@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.8.1 (2021-06-10)
+### Fix
+* Configuration file linter breaks when sorting multiple includes ([`d37c436`](https://github.com/nbyl/pre-commit-license-checks/commit/d37c43628d9e37ac9663cb05069332e80d034e70))
+
 ## v1.8.0 (2021-06-09)
 ### Feature
 * License list is sorted when linting ([`80884ed`](https://github.com/nbyl/pre-commit-license-checks/commit/80884ed2933752ded16ae8808dfccdbfb69051fe))
