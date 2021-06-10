@@ -1,26 +1,6 @@
----
 allowedLicenses:
-- 3-Clause BSD License
-- Apache 2.0
-- Apache-2.0
-- Apache License 2.0
-- Apache Software License
-- Apache Software License, BSD License
-- BSD License
-- BSD License, Apache Software License
-- Freely Distributable
-- GNU General Public License v2 (GPLv2)
-- GNU Lesser General Public License v2 (LGPLv2)
-- GNU Lesser General Public License v3 (LGPLv3)
-- GNU Library or Lesser General Public License (LGPL)
-- ISC License (ISCL)
-- MIT
-- MIT License
-- MIT License, Mozilla Public License 2.0 (MPL 2.0)
-- Mozilla Public License 2.0 (MPL 2.0)
-- Public Domain
-- Public Domain, Python Software Foundation License, BSD License, GNU General Public
-  License (GPL)
-- Python Software Foundation License
-- Python Software Foundation License, MIT License
+
 excludedPackages: []
+include:
+- url: http://127.0.0.1:8000/commercial-use/license-check-python.yaml
+- url: http://127.0.0.1:8000/open-source/license-check-python.yaml
