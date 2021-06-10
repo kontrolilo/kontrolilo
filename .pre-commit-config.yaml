@@ -31,7 +31,7 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/nbyl/pre-commit-license-checks
-    rev: v1.8.0
+    rev: v1.8.1
     hooks:
       - id: license-check-configuration-lint
       - id: license-check-pipenv

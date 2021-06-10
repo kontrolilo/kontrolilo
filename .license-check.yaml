@@ -1,6 +1,5 @@
-allowedLicenses:
-
+allowedLicenses: []
 excludedPackages: []
 include:
-- url: http://127.0.0.1:8000/commercial-use/license-check-python.yaml
-- url: http://127.0.0.1:8000/open-source/license-check-python.yaml
+- url: https://raw.githubusercontent.com/nbyl/license-check-config/main/commercial-use/license-check-python.yaml
+- url: https://raw.githubusercontent.com/nbyl/license-check-config/main/open-source/license-check-python.yaml
