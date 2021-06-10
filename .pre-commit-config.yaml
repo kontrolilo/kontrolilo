@@ -1,5 +1,4 @@
 ---
-# TODO: can we run make sync before commit?
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v2.17.6
@@ -31,7 +30,8 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/nbyl/pre-commit-license-checks
-    rev: v1.5.0
+    rev: v1.8.1
     hooks:
+      - id: license-check-configuration-lint
       - id: license-check-pipenv
         exclude: 'tests/integration/Pipfile'

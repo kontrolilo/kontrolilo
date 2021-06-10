@@ -1,3 +1,4 @@
----
+allowedLicenses: []
+excludedPackages: []
 include:
-  - url: http://localhost:8000/license-check-node.yaml
+- url: http://localhost:8000/license-check-node.yaml
