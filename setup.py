@@ -28,11 +28,11 @@ setup(
     packages=find_packages(where='src'),
     entry_points={
         'console_scripts': [
-            'license-check-configuration-lint = license_checks.configuration.lint:main',
-            'license-check-gradle = license_checks.gradle:main',
-            'license-check-maven = license_checks.maven:main',
-            'license-check-npm = license_checks.npm:main',
-            'license-check-pipenv = license_checks.pipenv:main',
+            'license-check-configuration-lint = kontrolilo.configuration.lint:main',
+            'license-check-gradle = kontrolilo.gradle:main',
+            'license-check-maven = kontrolilo.maven:main',
+            'license-check-npm = kontrolilo.npm:main',
+            'license-check-pipenv = kontrolilo.pipenv:main',
         ],
     },
     dependency_links=[],

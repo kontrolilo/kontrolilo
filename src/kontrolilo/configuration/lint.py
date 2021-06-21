@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from logging import getLogger
 
-from license_checks.configuration import Configuration
-from license_checks.shared_main import BaseChecker, shared_main
+from kontrolilo.configuration import Configuration
+from kontrolilo.shared_main import BaseChecker, shared_main
 
 logger = getLogger(__name__)
 

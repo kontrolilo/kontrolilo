@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from typing import List
 
-from license_checks.configuration import Configuration
+from kontrolilo.configuration import Configuration
 from tests.integration.base_integration_test import IntegrationTestBase
 
 

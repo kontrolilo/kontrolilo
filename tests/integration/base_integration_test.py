@@ -8,7 +8,7 @@ from typing import List
 
 from git import Repo
 
-from license_checks.configuration import Configuration
+from kontrolilo.configuration import Configuration
 
 
 class IntegrationTestBase:

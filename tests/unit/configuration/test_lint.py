@@ -3,9 +3,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 from unittest.mock import Mock
 
-from license_checks.configuration import Configuration, ConfigurationInclude
-from license_checks.configuration.configuration import CONFIG_FILE_NAME
-from license_checks.configuration.lint import ConfigurationFileChecker
+from kontrolilo.configuration import Configuration, ConfigurationInclude
+from kontrolilo.configuration.configuration import CONFIG_FILE_NAME
+from kontrolilo.configuration.lint import ConfigurationFileChecker
 
 
 class TestConfigurationFileChecker:

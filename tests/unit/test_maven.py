@@ -4,9 +4,9 @@ from os.path import join
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from license_checks.configuration import Configuration
-from license_checks.configuration.package import Package
-from license_checks.maven import MavenLicenseChecker
+from kontrolilo.configuration import Configuration
+from kontrolilo.configuration.package import Package
+from kontrolilo.maven import MavenLicenseChecker
 
 
 class TestMavenLicenseChecker:

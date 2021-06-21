@@ -3,9 +3,9 @@
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, call
 
-from license_checks.configuration import Configuration
-from license_checks.configuration.package import Package
-from license_checks.pipenv import PipenvLicenseChecker
+from kontrolilo.configuration import Configuration
+from kontrolilo.configuration.package import Package
+from kontrolilo.pipenv import PipenvLicenseChecker
 
 
 class TestPipenvLicenseChecker:
@@ -55,7 +55,7 @@ class TestPipenvLicenseChecker:
             Package('uvicorn', '0.13.3', 'BSD License'),
             Package('zipp', '3.4.1', 'MIT License')]
 
-    @patch('license_checks.pipenv.run')
+    @patch('kontrolilo.pipenv.run')
     def test_prepare_directory(self, run_mock):
         run_mock.return_value = {}
 
