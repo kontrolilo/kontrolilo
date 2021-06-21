@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.0 (2021-06-21)
+### Breaking
+* This changes the name and url of the project which will potentially break some builds.  ([`b0717b1`](https://github.com/kontrolilo/kontrolilo/commit/b0717b1a9beee75a81f4b27608d74547d8a606d0))
+
+### Documentation
+* Rename project in all documents ([`0ed31cf`](https://github.com/kontrolilo/kontrolilo/commit/0ed31cf4afed945b416d8edd05e2cc41ca776be6))
+* Describe missing hooks and how to include external configs ([`cc0c0ed`](https://github.com/kontrolilo/kontrolilo/commit/cc0c0ed1de610a42fdff8e519a51839b4aee1ef9))
+
 ## v1.8.1 (2021-06-10)
 ### Fix
 * Configuration file linter breaks when sorting multiple includes ([`d37c436`](https://github.com/nbyl/pre-commit-license-checks/commit/d37c43628d9e37ac9663cb05069332e80d034e70))
