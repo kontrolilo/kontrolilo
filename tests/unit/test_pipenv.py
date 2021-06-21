@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import os
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, call
 
@@ -61,8 +61,8 @@ class TestPipenvLicenseChecker:
 
         self.checker.prepare_directory(self.directory.name)
         run_mock.assert_has_calls([
-            call('pipenv install -d', capture_output=True, check=True, cwd=self.directory.name, shell=True),
+            call('pipenv install -d', capture_output=True, check=True, cwd=self.directory.name,
+                 env=dict(os.environ, PIPENV_IGNORE_VIRTUALENVS='1'), shell=True),
             call("pipenv run pip install 'pip-licenses==3.3.1'", capture_output=True, check=True,
-                 cwd=self.directory.name,
-                 shell=True),
+                 cwd=self.directory.name, env=dict(os.environ, PIPENV_IGNORE_VIRTUALENVS='1'), shell=True),
         ])
