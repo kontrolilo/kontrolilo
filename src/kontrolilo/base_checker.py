@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abc
+import os
 from builtins import dict
 from logging import getLogger
 from os.path import abspath
@@ -35,12 +36,16 @@ class BaseLicenseChecker(BaseChecker):
 
         logger.debug('Running license checker command [%s]', license_checker_command)
 
+        environ = self.get_license_checker_env()
         result = run(license_checker_command, capture_output=True, cwd=directory,
-                     shell=True, text=True)
+                     env=environ, shell=True, text=True)
         logger.debug('Result of license checker command [%s]', result)
         result.check_returncode()
 
         return self.parse_packages(result.stdout, configuration, directory)
+
+    def get_license_checker_env(self):
+        return os.environ
 
     def consolidate_directories(self, filenames) -> List[str]:
         directories = []
