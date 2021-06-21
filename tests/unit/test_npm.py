@@ -2,9 +2,9 @@
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, call
 
-from license_checks.configuration import Configuration
-from license_checks.configuration.package import Package
-from license_checks.npm import NpmLicenseChecker
+from kontrolilo.configuration import Configuration
+from kontrolilo.configuration.package import Package
+from kontrolilo.npm import NpmLicenseChecker
 
 
 class TestNpmLicenseChecker:
@@ -18,7 +18,7 @@ class TestNpmLicenseChecker:
         self.directory = TemporaryDirectory()
         self.checker = NpmLicenseChecker()
 
-    @patch('license_checks.npm.run')
+    @patch('kontrolilo.npm.run')
     def test_prepare_directory(self, run_mock):
         run_mock.return_value = {}
 

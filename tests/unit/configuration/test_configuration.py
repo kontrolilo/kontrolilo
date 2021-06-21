@@ -4,7 +4,7 @@ from tempfile import TemporaryDirectory, NamedTemporaryFile
 from httptest import Handler, Server
 from yaml import dump
 
-from license_checks.configuration import Configuration, ConfigurationInclude
+from kontrolilo.configuration import Configuration, ConfigurationInclude
 
 
 def test_configuration_include_repr():

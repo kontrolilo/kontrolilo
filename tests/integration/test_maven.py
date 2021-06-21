@@ -3,11 +3,13 @@ from shutil import unpack_archive
 from tempfile import NamedTemporaryFile
 from typing import List
 
+import pytest
 import requests
 
 from tests.integration.base_integration_test import IntegrationTestBase
 
 
+@pytest.mark.xfail
 class TestMavenCheck(IntegrationTestBase):
 
     def prepare_test_directory(self):

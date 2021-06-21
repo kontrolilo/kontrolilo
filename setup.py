@@ -2,7 +2,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-__version__ = '1.8.1'
+__version__ = '2.1.0'
 
 setup(
     install_requires=[
@@ -13,7 +13,7 @@ setup(
         "itsdangerous==2.0.1; python_version >= '3.6'",
         'pyyaml==5.4.1',
         'requests==2.25.1',
-        'requests-cache==0.6.3',
+        'requests-cache==0.6.4',
         "six==1.16.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
         'texttable==1.6.3',
         'typing-extensions==3.10.0.0',
@@ -28,11 +28,11 @@ setup(
     packages=find_packages(where='src'),
     entry_points={
         'console_scripts': [
-            'license-check-configuration-lint = license_checks.configuration.lint:main',
-            'license-check-gradle = license_checks.gradle:main',
-            'license-check-maven = license_checks.maven:main',
-            'license-check-npm = license_checks.npm:main',
-            'license-check-pipenv = license_checks.pipenv:main',
+            'license-check-configuration-lint = kontrolilo.configuration.lint:main',
+            'license-check-gradle = kontrolilo.gradle:main',
+            'license-check-maven = kontrolilo.maven:main',
+            'license-check-npm = kontrolilo.npm:main',
+            'license-check-pipenv = kontrolilo.pipenv:main',
         ],
     },
     dependency_links=[],

@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+import os
 from os.path import join
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import List
 from unittest.mock import patch, Mock
 
-from license_checks.base_checker import BaseLicenseChecker
-from license_checks.configuration import Configuration
-from license_checks.configuration.package import Package
+from kontrolilo.base_checker import BaseLicenseChecker
+from kontrolilo.configuration import Configuration
+from kontrolilo.configuration.package import Package
 
 
 class SimpleLicenseChecker(BaseLicenseChecker):
@@ -82,29 +83,29 @@ class TestBaseLicenseChecker:
             Package('urllib3', '1.26.4', 'MIT License'),
         ]
 
-    @patch('license_checks.base_checker.run')
+    @patch('kontrolilo.base_checker.run')
     def test_load_installed_licenses(self, run_mock):
         result_mock = Mock()
         result_mock.configure_mock(**{'stdout': ''})
         run_mock.return_value = result_mock
 
         self.checker.load_installed_packages(self.directory, {})
-        run_mock.assert_called_once_with('echo \'Hello World!\'', capture_output=True, cwd=self.directory, shell=True,
-                                         text=True)
+        run_mock.assert_called_once_with('echo \'Hello World!\'', capture_output=True, cwd=self.directory,
+                                         env=os.environ, shell=True, text=True)
 
-    class Object(object):
-        pass
+        class Object(object):
+            pass
 
-    def test_run_returns_failure_on_no_config(self):
-        args = self.Object()
-        args.filenames = [join(self.directory.name, 'package.json')]
-        result = self.checker.run(args)
-        assert result == 1
+        def test_run_returns_failure_on_no_config(self):
+            args = self.Object()
+            args.filenames = [join(self.directory.name, 'package.json')]
+            result = self.checker.run(args)
+            assert result == 1
 
-    def test_run_returns_success(self):
-        Configuration(allowed_licenses=['BSD License', 'GPL', 'MIT License']).save_to_directory(self.directory.name)
+        def test_run_returns_success(self):
+            Configuration(allowed_licenses=['BSD License', 'GPL', 'MIT License']).save_to_directory(self.directory.name)
 
-        args = self.Object()
-        args.filenames = [join(self.directory.name, 'package.json')]
-        result = self.checker.run(args)
-        assert result == 0
+            args = self.Object()
+            args.filenames = [join(self.directory.name, 'package.json')]
+            result = self.checker.run(args)
+            assert result == 0

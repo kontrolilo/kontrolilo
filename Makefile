@@ -8,10 +8,10 @@ local-setup:
 	pipenv run pre-commit install --hook-type commit-msg
 
 unit-test:
-	COVERAGE_FILE=.coverage_unit pipenv run pytest -n auto --cov=license_checks src tests/unit
+	COVERAGE_FILE=.coverage_unit pipenv run pytest -n auto --cov=kontrolilo src tests/unit
 
 integration-test:
-	COVERAGE_FILE=.coverage_integration pipenv run pytest -n auto --cov=license_checks src tests/integration
+	COVERAGE_FILE=.coverage_integration pipenv run pytest -n auto --cov=kontrolilo src tests/integration
 
 test: unit-test integration-test
 	pipenv run coverage combine .coverage_unit .coverage_integration

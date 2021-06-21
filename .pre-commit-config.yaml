@@ -29,7 +29,7 @@ repos:
       - id: fix-encoding-pragma
       - id: mixed-line-ending
       - id: trailing-whitespace
-  - repo: https://github.com/nbyl/pre-commit-license-checks
+  - repo: https://github.com/kontrolilo/kontrolilo
     rev: v1.8.1
     hooks:
       - id: license-check-configuration-lint

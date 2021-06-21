@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from license_checks.configuration.package import Package
+from kontrolilo.configuration.package import Package
 
 
 class TestPackage:
