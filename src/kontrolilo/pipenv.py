@@ -10,7 +10,6 @@ from kontrolilo.configuration.package import Package
 from kontrolilo.shared_main import shared_main
 
 
-# TODO: ignore pip-licenses
 class PipenvLicenseChecker(BaseLicenseChecker):
     def prepare_directory(self, directory: str):
         run('pipenv install -d', capture_output=True, check=True, cwd=directory, env=self.get_license_checker_env(),
