@@ -5,9 +5,9 @@ from tempfile import TemporaryDirectory
 from typing import List
 from unittest.mock import patch, Mock
 
-from license_checks.base_checker import BaseLicenseChecker
-from license_checks.configuration import Configuration
-from license_checks.configuration.package import Package
+from kontrolilo.base_checker import BaseLicenseChecker
+from kontrolilo.configuration import Configuration
+from kontrolilo.configuration.package import Package
 
 
 class SimpleLicenseChecker(BaseLicenseChecker):
@@ -82,7 +82,7 @@ class TestBaseLicenseChecker:
             Package('urllib3', '1.26.4', 'MIT License'),
         ]
 
-    @patch('license_checks.base_checker.run')
+    @patch('kontrolilo.base_checker.run')
     def test_load_installed_licenses(self, run_mock):
         result_mock = Mock()
         result_mock.configure_mock(**{'stdout': ''})

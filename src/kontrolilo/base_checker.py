@@ -9,9 +9,9 @@ from typing import List
 
 from texttable import Texttable
 
-from license_checks.configuration import Configuration
-from license_checks.configuration.package import Package
-from license_checks.shared_main import BaseChecker
+from kontrolilo.configuration import Configuration
+from kontrolilo.configuration.package import Package
+from kontrolilo.shared_main import BaseChecker
 
 logger = getLogger(__name__)
 
