@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.0 (2021-06-21)
+### Feature
+* When calling the hook from a Pipenv shell, a new shell is enforced ([`0d573a9`](https://github.com/kontrolilo/kontrolilo/commit/0d573a9f62621183478f4ec7c5046cf3d8e97af8))
+
 ## v2.0.0 (2021-06-21)
 ### Breaking
 * This changes the name and url of the project which will potentially break some builds.  ([`b0717b1`](https://github.com/kontrolilo/kontrolilo/commit/b0717b1a9beee75a81f4b27608d74547d8a606d0))
