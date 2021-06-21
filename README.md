@@ -1,10 +1,10 @@
-# pre-commit-license-checks
+# kontrolilo
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/nbyl/pre-commit-license-checks/release%20project?label=Release&style=for-the-badge)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/nbyl/pre-commit-license-checks/run%20all%20tests?label=PR%20tests&style=for-the-badge)
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/nbyl/pre-commit-license-checks?style=for-the-badge)
-![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/nbyl/pre-commit-license-checks?style=for-the-badge)
-![Code Climate coverage](https://img.shields.io/codeclimate/coverage/nbyl/pre-commit-license-checks?style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/kontrolilo/kontrolilo/release%20project?label=Release&style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/kontrolilo/kontrolilo/run%20all%20tests?label=PR%20tests&style=for-the-badge)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/kontrolilo/kontrolilo?style=for-the-badge)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/kontrolilo/kontrolilo?style=for-the-badge)
+![Code Climate coverage](https://img.shields.io/codeclimate/coverage/kontrolilo/kontrolilo?style=for-the-badge)
 
 This repo contains git hooks to integrate with [pre-commit](http://pre-commit.com). These are centered around license
 compliance in the python ecosystem.
@@ -12,7 +12,7 @@ compliance in the python ecosystem.
 
 <!--TOC-->
 
-- [pre-commit-license-checks](#pre-commit-license-checks)
+- [kontrolilo](#kontrolilo)
   - [Installation](#installation)
   - [Configuration](#configuration)
     - [Include external configuration files](#include-external-configuration-files)
@@ -36,7 +36,7 @@ Afterwards put the needed hooks into your `.pre-commit-config.yaml`:
 ```
 ---
 repos:
-  - repo: https://github.com/nbyl/pre-commit-license-checks
+  - repo: https://github.com/kontrolilo/kontrolilo
     rev: main
     hooks:
       - id: license-check-configuration-lint
