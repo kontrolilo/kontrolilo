@@ -24,6 +24,7 @@ compliance in the python ecosystem.
     - [`license-check-pipenv`](#license-check-pipenv)
   - [Contributing](#contributing)
   - [License](#license)
+  - [Docs](#docs)
 
 <!--TOC-->
 
@@ -161,3 +162,8 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 ## License
 
 The code in this repo is licensed under the [MIT License](LICENSE).
+
+
+## Docs
+
+git remote add theme https://github.com/matcornic/hugo-theme-learn.git
