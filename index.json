@@ -1,0 +1,36 @@
+[
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/credits/",
+	"title": "Credits",
+	"tags": [],
+	"description": "",
+	"content": "Contributors Thanks to them for making Open Source Software a better place !\nAnd a special thanks to @vjeantet for his work on docdock, a fork of hugo-theme-learn. v2.0.0 of this theme is inspired by his work.\nPackages and libraries  mermaid - generation of diagram and flowchart from text in a similar manner as markdown font awesome - the iconic font and CSS framework jQuery - The Write Less, Do More, JavaScript Library lunr - Lunr enables you to provide a great search experience without the need for external, server-side, search services\u0026hellip; horsey - Progressive and customizable autocomplete component clipboard.js - copy text to clipboard highlight.js - Javascript syntax highlighter modernizr - A JavaScript toolkit that allows web developers to use new CSS3 and HTML5 features while maintaining a fine level of control over browsers that don\u0026rsquo;t support  Tooling  Netlify - Continuous deployement and hosting of this documentation Hugo  "
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/",
+	"title": "kontrolilo",
+	"tags": [],
+	"description": "",
+	"content": "kontrolilo Hugo-theme-learn is a theme for Hugo, a fast and modern static website engine written in Go. Where Hugo is often used for blogs, this multilingual-ready theme is fully designed for documentation.\nThis theme is a partial porting of the Learn theme of Grav, a modern flat-file CMS written in PHP.\nLearn theme works with a page tree structure to organize content : All contents are pages, which belong to other pages. read more about this\n Main features  [Automatic Search] [Multilingual mode] Unlimited menu levels Automatic next/prev buttons to navigate through menu entries [Image resizing, shadow\u0026hellip;] [Attachments files] [List child pages] [Mermaid diagram] (flowchart, sequence, gantt) [Customizable look and feel and themes variants]( [Buttons]([Tip/Note/Info/Warning boxes]  Contribute to this documentation Feel free to update this content, just click the Edit this page link displayed on top right of each page, and pullrequest it\nYour modification will be deployed automatically when merged.\n Documentation website This current documentation has been statically generated with Hugo with a simple command : hugo -t hugo-theme-learn \u0026ndash; source code is available here at GitHub\nAutomatically published and hosted thanks to Netlify. Read more about Automated HUGO deployments with Netlify\n "
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/showcase/",
+	"title": "Showcase",
+	"tags": [],
+	"description": "",
+	"content": "TAT by OVH Tshark.dev by Ross Jacobs inteliver by Amir Lavasani "
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]

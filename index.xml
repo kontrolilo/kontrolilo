@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kontrolilo on Documentation for kontrolilo</title>
+    <link>https://kontrolio.github.io/kontrolilo/</link>
+    <description>Recent content in kontrolilo on Documentation for kontrolilo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="https://kontrolio.github.io/kontrolilo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Credits</title>
+      <link>https://kontrolio.github.io/kontrolilo/credits/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kontrolio.github.io/kontrolilo/credits/</guid>
+      <description>Contributors Thanks to them for making Open Source Software a better place !
+And a special thanks to @vjeantet for his work on docdock, a fork of hugo-theme-learn. v2.0.0 of this theme is inspired by his work.
+Packages and libraries  mermaid - generation of diagram and flowchart from text in a similar manner as markdown font awesome - the iconic font and CSS framework jQuery - The Write Less, Do More, JavaScript Library lunr - Lunr enables you to provide a great search experience without the need for external, server-side, search services&amp;hellip; horsey - Progressive and customizable autocomplete component clipboard.</description>
+    </item>
+    
+    <item>
+      <title>Showcase</title>
+      <link>https://kontrolio.github.io/kontrolilo/showcase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kontrolio.github.io/kontrolilo/showcase/</guid>
+      <description>TAT by OVH Tshark.dev by Ross Jacobs inteliver by Amir Lavasani </description>
+    </item>
+    
+  </channel>
+</rss>
