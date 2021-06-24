@@ -9,6 +9,7 @@ repos:
     rev: 7.2.0
     hooks:
       - id: md-toc
+        exclude: '^docs/themes'
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1
     hooks:
@@ -16,7 +17,9 @@ repos:
       - id: check-builtin-literals
       - id: check-case-conflict
       - id: check-executables-have-shebangs
+        exclude: '^docs/themes'
       - id: check-json
+        exclude: '^docs/themes'
       - id: check-merge-conflict
       - id: check-symlinks
       - id: check-toml
@@ -25,10 +28,12 @@ repos:
       - id: detect-private-key
       - id: double-quote-string-fixer
       - id: end-of-file-fixer
-        exclude: '.license-check.yaml'
+        exclude: '(.license-check.yaml|^docs/themes)'
       - id: fix-encoding-pragma
       - id: mixed-line-ending
+        exclude: '^docs/themes'
       - id: trailing-whitespace
+        exclude: '^docs/themes'
   - repo: https://github.com/kontrolilo/kontrolilo
     rev: v1.8.1
     hooks:
