@@ -1,3 +1,4 @@
+.PHONY: docs
 help:	## Show this help.
 		@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
@@ -35,3 +36,9 @@ print-release:
 
 run-sample-webserver:
 	(cd examples && pipenv run python -m http.server)
+
+docs:
+	hugo -s docs
+
+docs-server:
+	hugo server -s docs
