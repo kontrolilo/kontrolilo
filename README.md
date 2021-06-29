@@ -34,5 +34,3 @@ The code in this repo is licensed under the [MIT License](LICENSE).
 
 
 ## Docs
-
-git remote add theme https://github.com/matcornic/hugo-theme-learn.git
