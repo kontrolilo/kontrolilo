@@ -12,10 +12,10 @@ kontrolilo is an tool to collaboratively manage your open source licenses and de
 
 ## Main features
 
-* [Check of used open source licenses against an allow list](http_///)[TODO]
-* [Support for multiple package managers]()(TODO)
-* [Can be used as an pre-commit hook]()(TODO)
-* [CLI to check manually or in CI/CD pipelines]
+* [Check of used open source licenses against an allow list]({{% relref "/configuration" %}})
+* [Support for multiple package managers]({{% relref "/usage" %}})
+* [Can be used as an pre-commit hook]({{% relref "/usage/pre-commit/" %}})
+* [CLI to check manually or in CI/CD pipelines]({{% relref "/usage/cli/" %}})
 
 ## Contribute to this documentation
 Feel free to update this content, just click the **Edit this page** link displayed on top right of each page, and pullrequest it
