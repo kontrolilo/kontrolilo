@@ -135,6 +135,7 @@ make local-setup
 This will automatically set up your local environment.
 
 ## Styleguides
+
 ### Commit Messages
 
 This project uses [conventional commits](https://www.conventionalcommits.org/) to structure it's automatic releases. Theses are automatically enforced using [commitizen](https://github.com/commitizen-tools/commitizen).

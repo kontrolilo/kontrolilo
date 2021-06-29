@@ -8,16 +8,18 @@ metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= true
 
 [params]
-  editURL = "https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/"
-  description = "Documentation for kontrolilo"
-  author = "Mathieu Cornic"
-  showVisitedLinks = true
-  disableBreadcrumb = false
-  disableNextPrev = false
-  disableLandingPageButton = true
-  disableMermaid = false
-  customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
-  titleSeparator = "::"
+editURL = "https://github.com/kontrolilo/kontrolilo/edit/main/docs/content"
+themeVariant = "red"
+description = "Documentation for kontrolilo"
+author = "Nicolas Byl"
+showVisitedLinks = false
+disableBreadcrumb = false
+disableNextPrev = false
+disableLandingPageButton = true
+disableMermaid = false
+customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
+titleSeparator = "::"
+
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
@@ -27,27 +29,19 @@ home = [ "HTML", "RSS", "JSON"]
 title = "Documentation for kontrolilo"
 weight = 1
 languageName = "English"
-landingPageURL = "/en"
+landingPageURL = "/kontrolilo"
 landingPageName = "<i class='fas fa-home'></i> Home"
 
 [[Languages.en.menu.shortcuts]]
 name = "<i class='fab fa-fw fa-github'></i> GitHub repo"
 identifier = "ds"
-url = "https://github.com/matcornic/hugo-theme-learn"
+url = "https://github.com/kontrolilo/kontrolilo"
 weight = 10
-
-[[Languages.en.menu.shortcuts]]
-name = "<i class='fas fa-fw fa-camera'></i> Showcases"
-url = "showcase"
-weight = 11
-
-[[Languages.en.menu.shortcuts]]
-name = "<i class='fas fa-fw fa-bookmark'></i> Hugo Documentation"
-identifier = "hugodoc"
-url = "https://gohugo.io/"
-weight = 20
 
 [[Languages.en.menu.shortcuts]]
 name = "<i class='fas fa-fw fa-bullhorn'></i> Credits"
 url = "/credits"
-weight = 30
+weight = 20
+
+[markup.goldmark.renderer]
+unsafe = true

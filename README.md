@@ -15,7 +15,6 @@ compliance in the python ecosystem.
 - [kontrolilo](#kontrolilo)
   - [Installation](#installation)
   - [Configuration](#configuration)
-    - [Include external configuration files](#include-external-configuration-files)
   - [Available hooks](#available-hooks)
     - [`license-check-configuration-lint`](#license-check-configuration-lint)
     - [`license-check-gradle`](#license-check-gradle)
@@ -30,68 +29,9 @@ compliance in the python ecosystem.
 
 ## Installation
 
-Please install pre-commit first according to the documentation.
 
-Afterwards put the needed hooks into your `.pre-commit-config.yaml`:
-
-```
----
-repos:
-  - repo: https://github.com/kontrolilo/kontrolilo
-    rev: main
-    hooks:
-      - id: license-check-configuration-lint
-      - id: license-check-npm
-      - id: license-check-pipenv
-```
 
 ## Configuration
-
-All hooks in this repository share a common configuration file format. To configure the list of allowed licenses, put a
-file called `.license-check.yaml` alongside the file containing the declaration of you dependencies (e.g. `package.json`
-. `pom.xml`, ...).
-
-The file must be structured the following way:
-
-```yaml
----
-allowedLicenses:
-  - a
-  - list
-  - of
-  - allowed
-  - licenses
-  - ...
-excludedPackages:
-  - any
-  - package
-  - listed
-  - here
-  - will
-  - be
-  - excluded
-  - from
-  - the
-  - check
-  - ...
-include: []
-```
-
-### Include external configuration files
-
-Through the include keyword in the configuration file, you can load license lists from external HTTP(S) sources.
-
-By using this feature, you can build a central list of allowed licenses to keep this configuration in sync for all your projects:
-
-```yaml
-allowedLicenses: []
-excludedPackages: []
-include:
-- url: https://raw.githubusercontent.com/nbyl/license-check-config/main/commercial-use/license-check-python.yaml
-- url: https://raw.githubusercontent.com/nbyl/license-check-config/main/open-source/license-check-python.yaml
-```
-
-An examples of such a central repository can be found under [nbyl/license-check-config](https://github.com/nbyl/license-check-config).
 
 ## Available hooks
 
