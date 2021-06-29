@@ -20,7 +20,6 @@ disableMermaid = false
 customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
 titleSeparator = "::"
 
-
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
 
@@ -29,7 +28,6 @@ home = [ "HTML", "RSS", "JSON"]
 title = "Documentation for kontrolilo"
 weight = 1
 languageName = "English"
-landingPageURL = "/kontrolilo"
 landingPageName = "<i class='fas fa-home'></i> Home"
 
 [[Languages.en.menu.shortcuts]]
