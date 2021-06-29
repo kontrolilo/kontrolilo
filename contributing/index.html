@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/kontrolilo/images/favicon.png" type="image/png">
 
-    <title>Categories :: Documentation for kontrolilo</title>
+    <title>Contributing :: Documentation for kontrolilo</title>
 
     
     <link href="/kontrolilo/css/nucleus.css?1624973904" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/kontrolilo/categories/">
+  <body class="" data-url="/kontrolilo/contributing/">
     <nav id="sidebar" class="">
 
 
@@ -310,8 +310,8 @@
   
     
     <li data-nav-id="/kontrolilo/contributing/" title="Contributing" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/kontrolilo/contributing/">
@@ -364,6 +364,17 @@
               <div>
                 <div id="top-bar">
                 
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/kontrolilo/kontrolilo/edit/main/docs/contentcontributing/_index.en.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
                 
                 <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
                     <span id="sidebar-toggle-span">
@@ -384,7 +395,7 @@
             
           
           
-            <a href='/kontrolilo/'>kontrolilo</a> > Categories
+            <a href='/kontrolilo/'>kontrolilo</a> > Contributing
           
         
           
@@ -395,7 +406,16 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#guide">Guide</a></li>
+        <li><a href="#documentation">Documentation</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -411,9 +431,7 @@
           
             <h1>
               
-                category ::
-              
-              Categories
+              Contributing
             </h1>
           
 
@@ -421,11 +439,16 @@
 
 
 
+	<h3 id="guide">Guide</h3>
+<p>A contribution guide can be found in <a href="https://github.com/kontrolilo/kontrolilo/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a></p>
+<h3 id="documentation">Documentation</h3>
+<p>The documentation is built using <a href="https://gohugo.io">hugo</a> and <a href="https://themes.gohugo.io//theme/hugo-theme-learn/en">hugo-theme-learn</a>. The theme is included in the repository using the <code>git submodule</code> command. To update the theme to the latest version, use the follwing commands:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git remote add theme https://github.com/matcornic/hugo-theme-learn.git
+git fetch theme master
+ it subtree pull --prefix docs/themes/hugo-theme-learn theme master --squash
+</code></pre></div>
 
 
-<ul>
-	
-</ul>
 
 
 <footer class=" footline" >
@@ -612,6 +635,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -631,6 +655,8 @@
 
 	 
 	 
+		
+			<a class="nav nav-prev" href="/kontrolilo/usage/pre-commit/license-check-pipenv/" title="license-check-pipenv"> <i class="fa fa-chevron-left"></i></a>
 		
 		
 			<a class="nav nav-next" href="/kontrolilo/configuration/" title="Configuration" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>

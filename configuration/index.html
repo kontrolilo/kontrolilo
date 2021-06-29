@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/kontrolilo/images/favicon.png" type="image/png">
 
-    <title>Categories :: Documentation for kontrolilo</title>
+    <title>Configuration :: Documentation for kontrolilo</title>
 
     
     <link href="/kontrolilo/css/nucleus.css?1624973904" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/kontrolilo/categories/">
+  <body class="" data-url="/kontrolilo/configuration/">
     <nav id="sidebar" class="">
 
 
@@ -83,8 +83,8 @@
   
     
     <li data-nav-id="/kontrolilo/configuration/" title="Configuration" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/kontrolilo/configuration/">
@@ -364,6 +364,17 @@
               <div>
                 <div id="top-bar">
                 
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/kontrolilo/kontrolilo/edit/main/docs/contentconfiguration/_index.en.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
                 
                 <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
                     <span id="sidebar-toggle-span">
@@ -384,7 +395,7 @@
             
           
           
-            <a href='/kontrolilo/'>kontrolilo</a> > Categories
+            <a href='/kontrolilo/'>kontrolilo</a> > Configuration
           
         
           
@@ -395,7 +406,15 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#include-external-configuration-files">Include external configuration files</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -411,9 +430,7 @@
           
             <h1>
               
-                category ::
-              
-              Categories
+              Configuration
             </h1>
           
 
@@ -421,11 +438,45 @@
 
 
 
+	<p>kontrolilo is configured by using a configuration file. To configure the list of allowed licenses, put a file
+called <code>.license-check.yaml</code> alongside the file containing the declaration of your dependencies (e.g. <code>package.json</code>
+. <code>pom.xml</code>, &hellip;).</p>
+<p>The file must be structured the following way:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+<span style="color:#f92672">allowedLicenses</span>:
+  - <span style="color:#ae81ff">a</span>
+  - <span style="color:#ae81ff">list</span>
+  - <span style="color:#ae81ff">of</span>
+  - <span style="color:#ae81ff">allowed</span>
+  - <span style="color:#ae81ff">licenses</span>
+  - <span style="color:#ae81ff">...</span>
+<span style="color:#f92672">excludedPackages</span>:
+  - <span style="color:#ae81ff">any</span>
+  - <span style="color:#ae81ff">package</span>
+  - <span style="color:#ae81ff">listed</span>
+  - <span style="color:#ae81ff">here</span>
+  - <span style="color:#ae81ff">will</span>
+  - <span style="color:#ae81ff">be</span>
+  - <span style="color:#ae81ff">excluded</span>
+  - <span style="color:#ae81ff">from</span>
+  - <span style="color:#ae81ff">the</span>
+  - <span style="color:#ae81ff">check</span>
+  - <span style="color:#ae81ff">...</span>
+<span style="color:#f92672">include</span>: []
+</code></pre></div><h3 id="include-external-configuration-files">Include external configuration files</h3>
+<p>Through the include keyword in the configuration file, you can load license lists from external HTTP(S) sources.</p>
+<p>By using this feature, you can build a central list of allowed licenses to keep this configuration in sync for all your
+projects:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">allowedLicenses</span>: []
+<span style="color:#f92672">excludedPackages</span>: []
+<span style="color:#f92672">include</span>:
+  - <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://raw.githubusercontent.com/nbyl/license-check-config/main/commercial-use/license-check-python.yaml</span>
+  - <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://raw.githubusercontent.com/nbyl/license-check-config/main/open-source/license-check-python.yaml</span>
+</code></pre></div><p>An examples of such a central repository can be found
+under <a href="https://github.com/nbyl/license-check-config">nbyl/license-check-config</a>.</p>
 
 
-<ul>
-	
-</ul>
+
 
 
 <footer class=" footline" >
@@ -463,8 +514,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -481,6 +530,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -632,8 +684,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="/kontrolilo/" title="kontrolilo"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="/kontrolilo/configuration/" title="Configuration" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="/kontrolilo/usage/" title="Usage" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

@@ -1,5 +1,75 @@
 [
 {
+	"uri": "https://kontrolio.github.io/kontrolilo/usage/cli/",
+	"title": "CLI",
+	"tags": [],
+	"description": "",
+	"content": "A CLI for usage is currently under development. If you are interested in helping or just want follow the progress take a look at the corresponding ticket.\n"
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/configuration/",
+	"title": "Configuration",
+	"tags": [],
+	"description": "",
+	"content": "kontrolilo is configured by using a configuration file. To configure the list of allowed licenses, put a file called .license-check.yaml alongside the file containing the declaration of your dependencies (e.g. package.json . pom.xml, \u0026hellip;).\nThe file must be structured the following way:\n--- allowedLicenses: - a - list - of - allowed - licenses - ... excludedPackages: - any - package - listed - here - will - be - excluded - from - the - check - ... include: [] Include external configuration files Through the include keyword in the configuration file, you can load license lists from external HTTP(S) sources.\nBy using this feature, you can build a central list of allowed licenses to keep this configuration in sync for all your projects:\nallowedLicenses: [] excludedPackages: [] include: - url: https://raw.githubusercontent.com/nbyl/license-check-config/main/commercial-use/license-check-python.yaml - url: https://raw.githubusercontent.com/nbyl/license-check-config/main/open-source/license-check-python.yaml An examples of such a central repository can be found under nbyl/license-check-config.\n"
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/usage/pre-commit/license-check-configuration-lint/",
+	"title": "license-check-configuration-lint",
+	"tags": [],
+	"description": "",
+	"content": "What it does  This hook lints configurations files as described. It checks for correctness and sorts the licenses.  "
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/usage/pre-commit/license-check-gradle/",
+	"title": "license-check-gradle",
+	"tags": [],
+	"description": "",
+	"content": "What it does  This hook checks the licenses of your gradle dependencies declared in a build.gradle against defined list of allowed open source licenses.  More info  gradle gradle-license-plugin  "
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/usage/pre-commit/license-check-maven/",
+	"title": "license-check-maven",
+	"tags": [],
+	"description": "",
+	"content": "What it does This hook checks the licenses of your maven dependencies declared in a pom.xml against defined list of allowed open source licenses.\nMore info  maven license-maven-plugin  "
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/usage/pre-commit/",
+	"title": "pre-commit Hooks",
+	"tags": [],
+	"description": "",
+	"content": "kontrolilo can be used as a git pre-commit hook. This will check your package files before committing changes to you repository that contain invalid licenses and enable you to shift your changes even more to the left.\nInstallation Please install pre-commit first according to the documentation.\nAfterwards put the needed hooks into your .pre-commit-config.yaml:\n--- repos: - repo: https://github.com/kontrolilo/kontrolilo rev: v2.1.0 hooks: - id: license-check-configuration-lint - id: license-check-gradle - id: license-check-maven - id: license-check-npm - id: license-check-pipenv Available Hooks  license-check-configuration-lint   license-check-gradle   license-check-maven   license-check-npm   license-check-pipenv   "
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/usage/",
+	"title": "Usage",
+	"tags": [],
+	"description": "",
+	"content": "kontrolilo can be used and integrated in multiple ways:\n CLI   pre-commit Hooks   "
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/contributing/",
+	"title": "Contributing",
+	"tags": [],
+	"description": "",
+	"content": "Guide A contribution guide can be found in CONTRIBUTING.md\nDocumentation The documentation is built using hugo and hugo-theme-learn. The theme is included in the repository using the git submodule command. To update the theme to the latest version, use the follwing commands:\ngit remote add theme https://github.com/matcornic/hugo-theme-learn.git git fetch theme master it subtree pull --prefix docs/themes/hugo-theme-learn theme master --squash "
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/usage/pre-commit/license-check-npm/",
+	"title": "license-check-npm",
+	"tags": [],
+	"description": "",
+	"content": "What it does  This hook checks the licenses of your dependencies declared in a package.json against defined list of allowed open source licenses.  More info  npm license-checker  "
+},
+{
+	"uri": "https://kontrolio.github.io/kontrolilo/usage/pre-commit/license-check-pipenv/",
+	"title": "license-check-pipenv",
+	"tags": [],
+	"description": "",
+	"content": "What it does  This hook checks the contents of a pipenv environment against a defined list of allowed open source licenses.  More info  pipenv pip-licenses  "
+},
+{
 	"uri": "https://kontrolio.github.io/kontrolilo/categories/",
 	"title": "Categories",
 	"tags": [],
@@ -11,14 +81,14 @@
 	"title": "Credits",
 	"tags": [],
 	"description": "",
-	"content": "Contributors Thanks to them for making Open Source Software a better place !\nAnd a special thanks to @vjeantet for his work on docdock, a fork of hugo-theme-learn. v2.0.0 of this theme is inspired by his work.\nPackages and libraries  mermaid - generation of diagram and flowchart from text in a similar manner as markdown font awesome - the iconic font and CSS framework jQuery - The Write Less, Do More, JavaScript Library lunr - Lunr enables you to provide a great search experience without the need for external, server-side, search services\u0026hellip; horsey - Progressive and customizable autocomplete component clipboard.js - copy text to clipboard highlight.js - Javascript syntax highlighter modernizr - A JavaScript toolkit that allows web developers to use new CSS3 and HTML5 features while maintaining a fine level of control over browsers that don\u0026rsquo;t support  Tooling  Netlify - Continuous deployement and hosting of this documentation Hugo  "
+	"content": "Contributors .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start } .ghContributors  div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors  div label{ padding-left: 4px ; } .ghContributors  div span{ font-size: x-small; padding-left: 4px ; }   @nbyl 141 commits   @dependabot[bot] 9 commits   @pre-commit-ci[bot] 1 commits   "
 },
 {
 	"uri": "https://kontrolio.github.io/kontrolilo/",
 	"title": "kontrolilo",
 	"tags": [],
 	"description": "",
-	"content": "kontrolilo Hugo-theme-learn is a theme for Hugo, a fast and modern static website engine written in Go. Where Hugo is often used for blogs, this multilingual-ready theme is fully designed for documentation.\nThis theme is a partial porting of the Learn theme of Grav, a modern flat-file CMS written in PHP.\nLearn theme works with a page tree structure to organize content : All contents are pages, which belong to other pages. read more about this\n Main features  [Automatic Search] [Multilingual mode] Unlimited menu levels Automatic next/prev buttons to navigate through menu entries [Image resizing, shadow\u0026hellip;] [Attachments files] [List child pages] [Mermaid diagram] (flowchart, sequence, gantt) [Customizable look and feel and themes variants]( [Buttons]([Tip/Note/Info/Warning boxes]  Contribute to this documentation Feel free to update this content, just click the Edit this page link displayed on top right of each page, and pullrequest it\nYour modification will be deployed automatically when merged.\n Documentation website This current documentation has been statically generated with Hugo with a simple command : hugo -t hugo-theme-learn \u0026ndash; source code is available here at GitHub\nAutomatically published and hosted thanks to Netlify. Read more about Automated HUGO deployments with Netlify\n "
+	"content": "kontrolilo kontrolilo is a word from the esperanto language and means controller or controlling device.\n kontrolilo is an tool to collaboratively manage your open source licenses and dependencies. It lets you define a list of allowed licenses that can be used in your environment. These list can be in the git repository of your project or being shared by an unlimited number of projects.\nMain features  Check of used open source licenses against an allow list[TODO] Support for multiple package managers(TODO) Can be used as an pre-commit hook(TODO) [CLI to check manually or in CI/CD pipelines]  Contribute to this documentation Feel free to update this content, just click the Edit this page link displayed on top right of each page, and pullrequest it\nYour modification will be deployed automatically when merged.\n "
 },
 {
 	"uri": "https://kontrolio.github.io/kontrolilo/showcase/",

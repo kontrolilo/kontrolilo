@@ -2,6 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://kontrolio.github.io/kontrolilo/usage/cli/</loc>
+  </url><url>
+    <loc>https://kontrolio.github.io/kontrolilo/configuration/</loc>
+  </url><url>
+    <loc>https://kontrolio.github.io/kontrolilo/usage/pre-commit/license-check-configuration-lint/</loc>
+  </url><url>
+    <loc>https://kontrolio.github.io/kontrolilo/usage/pre-commit/license-check-gradle/</loc>
+  </url><url>
+    <loc>https://kontrolio.github.io/kontrolilo/usage/pre-commit/license-check-maven/</loc>
+  </url><url>
+    <loc>https://kontrolio.github.io/kontrolilo/usage/pre-commit/</loc>
+  </url><url>
+    <loc>https://kontrolio.github.io/kontrolilo/usage/</loc>
+  </url><url>
+    <loc>https://kontrolio.github.io/kontrolilo/contributing/</loc>
+  </url><url>
+    <loc>https://kontrolio.github.io/kontrolilo/usage/pre-commit/license-check-npm/</loc>
+  </url><url>
+    <loc>https://kontrolio.github.io/kontrolilo/usage/pre-commit/license-check-pipenv/</loc>
+  </url><url>
     <loc>https://kontrolio.github.io/kontrolilo/categories/</loc>
   </url><url>
     <loc>https://kontrolio.github.io/kontrolilo/credits/</loc>
