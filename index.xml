@@ -58,7 +58,7 @@ More info  maven license-maven-plugin  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kontrolio.github.io/kontrolilo/credits/</guid>
-      <description>Contributors .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start } .ghContributors  div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors  div label{ padding-left: 4px ; } .ghContributors  div span{ font-size: x-small; padding-left: 4px ; }   @nbyl 141 commits   @dependabot[bot] 9 commits   @pre-commit-ci[bot] 1 commits   </description>
+      <description>Contributors .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start } .ghContributors  div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors  div label{ padding-left: 4px ; } .ghContributors  div span{ font-size: x-small; padding-left: 4px ; }   @nbyl 161 commits   @dependabot[bot] 9 commits   @pre-commit-ci[bot] 1 commits   </description>
     </item>
     
     <item>

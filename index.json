@@ -81,7 +81,7 @@
 	"title": "Credits",
 	"tags": [],
 	"description": "",
-	"content": "Contributors .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start } .ghContributors  div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors  div label{ padding-left: 4px ; } .ghContributors  div span{ font-size: x-small; padding-left: 4px ; }   @nbyl 141 commits   @dependabot[bot] 9 commits   @pre-commit-ci[bot] 1 commits   "
+	"content": "Contributors .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start } .ghContributors  div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors  div label{ padding-left: 4px ; } .ghContributors  div span{ font-size: x-small; padding-left: 4px ; }   @nbyl 161 commits   @dependabot[bot] 9 commits   @pre-commit-ci[bot] 1 commits   "
 },
 {
 	"uri": "https://kontrolio.github.io/kontrolilo/",
