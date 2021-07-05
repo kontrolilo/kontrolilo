@@ -2,6 +2,10 @@
 help:	## Show this help.
 		@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+pyenv-setup:
+	pyenv install
+	pip install pipenv
+
 local-setup:
 	pipenv --python $(shell which python)
 	pipenv install -d
