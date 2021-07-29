@@ -8,7 +8,7 @@ title: "kontrolilo"
 *kontrolilo* is a word from the esperanto language and means *controller* or *controlling device*.
 {{% /notice %}}
 
-kontrolilo is an tool to collaboratively manage your open source licenses and dependencies. It lets you define a list of allowed licenses that can be used in your environment. These list can be in the git repository of your project or being shared by an unlimited number of projects.
+kontrolilo is a tool to collaboratively manage your open source licenses and dependencies. It lets you define a list of allowed licenses that can be used in your environment. This list can be in the git repository of your project or being shared by an unlimited number of projects.
 
 ## Main features
 
