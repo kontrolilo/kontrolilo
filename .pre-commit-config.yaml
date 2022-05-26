@@ -1,10 +1,10 @@
 ---
 repos:
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.17.6
-    hooks:
-      - id: commitizen
-        stages: [commit-msg]
+  # - repo: https://github.com/commitizen-tools/commitizen
+  #   rev: v2.17.6
+  #   hooks:
+  #     - id: commitizen
+  #       stages: [commit-msg]
   - repo: https://github.com/frnmst/md-toc
     rev: 7.2.0
     hooks:
