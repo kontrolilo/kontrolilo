@@ -63,6 +63,6 @@ class TestPipenvLicenseChecker:
         run_mock.assert_has_calls([
             call('pipenv install -d', capture_output=True, check=True, cwd=self.directory.name,
                  env=dict(os.environ, PIPENV_IGNORE_VIRTUALENVS='1'), shell=True),
-            call("pipenv run pip install 'pip-licenses==*'", capture_output=True, check=True,
+            call("pipenv run pip install 'pip-licenses'", capture_output=True, check=True,
                  cwd=self.directory.name, env=dict(os.environ, PIPENV_IGNORE_VIRTUALENVS='1'), shell=True),
         ])
