@@ -2,6 +2,25 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.0 (2022-05-29)
+### Feature
+* Use current version of pip-licenses ([`a7df448`](https://github.com/kontrolilo/kontrolilo/commit/a7df4485a09ee5c5a100d52eafe037c68cfd1a18))
+
+### Fix
+* Allow all version if pip-licenses ([`47f1c74`](https://github.com/kontrolilo/kontrolilo/commit/47f1c74f0a9a7ff44be0faef2f7181a873162d51))
+
+### Documentation
+* Add gitpod button to test commitizen ([`78fe151`](https://github.com/kontrolilo/kontrolilo/commit/78fe1511672b739594e0993bd3694693ac2da2a3))
+* Fix link to home page ([`13ca31c`](https://github.com/kontrolilo/kontrolilo/commit/13ca31cf51d2f121274749410d1b6071e94d441a))
+* Fix links on main page ([`4ad36df`](https://github.com/kontrolilo/kontrolilo/commit/4ad36dfb59eddc128770d5a4aad18eb0b7d2a867))
+* Add some more contribution docs ([`08ba2a5`](https://github.com/kontrolilo/kontrolilo/commit/08ba2a522e20c4afcd85a1ebcdd3ff078839696b))
+* Move descriptions of hooks into docs page ([`3c49b42`](https://github.com/kontrolilo/kontrolilo/commit/3c49b424e4223a2d3615563b504777d52147515c))
+* Describe configuration and usage ([`184b818`](https://github.com/kontrolilo/kontrolilo/commit/184b8185d1446f7e7d2c98ae19234a40815fcaa9))
+* Fix ([`1a496c0`](https://github.com/kontrolilo/kontrolilo/commit/1a496c04e1b3dc453eca77919096c610b724a04d))
+* Add basic skeleton for docs ([`804fce9`](https://github.com/kontrolilo/kontrolilo/commit/804fce9f7c0887e3650dd17d962762bf888c09e3))
+* Add docs ([`c1d953b`](https://github.com/kontrolilo/kontrolilo/commit/c1d953bf3e9c45f591014bb8a94cf130fa411f79))
+* Add github action for pages ([`3f9f6dd`](https://github.com/kontrolilo/kontrolilo/commit/3f9f6dd8ba6acad44bfb00b2138d21e0bbb48c96))
+
 ## v2.1.0 (2021-06-21)
 ### Feature
 * When calling the hook from a Pipenv shell, a new shell is enforced ([`0d573a9`](https://github.com/kontrolilo/kontrolilo/commit/0d573a9f62621183478f4ec7c5046cf3d8e97af8))
