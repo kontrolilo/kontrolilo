@@ -26,6 +26,8 @@ For a description how to use kontrolilo checkout the [documentation](https://kon
 
 ## Contributing
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kontrolilo/kontrolilo)
+
 Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
