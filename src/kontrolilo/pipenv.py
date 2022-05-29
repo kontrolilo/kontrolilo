@@ -14,7 +14,7 @@ class PipenvLicenseChecker(BaseLicenseChecker):
     def prepare_directory(self, directory: str):
         run('pipenv install -d', capture_output=True, check=True, cwd=directory, env=self.get_license_checker_env(),
             shell=True)
-        run("pipenv run pip install 'pip-licenses==*'", capture_output=True, check=True, cwd=directory,
+        run("pipenv run pip install 'pip-licenses'", capture_output=True, check=True, cwd=directory,
             env=self.get_license_checker_env(), shell=True)
 
     def get_license_checker_command(self, directory: str) -> str:
