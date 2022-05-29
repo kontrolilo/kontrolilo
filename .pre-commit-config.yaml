@@ -35,11 +35,7 @@ repos:
       - id: trailing-whitespace
         exclude: '^docs/themes'
   - repo: https://github.com/kontrolilo/kontrolilo
-<<<<<<< HEAD
     rev: v2.2.0
-=======
-    rev: v2.1.0
->>>>>>> 2be1524 (ci: update hooks)
     hooks:
       - id: license-check-configuration-lint
       - id: license-check-pipenv
