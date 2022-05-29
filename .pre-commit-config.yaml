@@ -34,9 +34,9 @@ repos:
         exclude: '^docs/themes'
       - id: trailing-whitespace
         exclude: '^docs/themes'
-  - repo: https://github.com/kontrolilo/kontrolilo
-    rev: v1.8.1
-    hooks:
-      - id: license-check-configuration-lint
-      - id: license-check-pipenv
-        exclude: 'tests/integration/Pipfile'
+  # - repo: https://github.com/kontrolilo/kontrolilo
+  #   rev: v1.8.1
+  #   hooks:
+  #     - id: license-check-configuration-lint
+  #     - id: license-check-pipenv
+  #       exclude: 'tests/integration/Pipfile'
