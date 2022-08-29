@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 from pathlib import Path
 from subprocess import run
 from tempfile import TemporaryDirectory
@@ -11,7 +11,7 @@ from git import Repo
 from kontrolilo.configuration import Configuration
 
 
-class IntegrationTestBase:
+class IntegrationTestBase(ABC):
 
     def setup(self):
         self.directory = TemporaryDirectory()

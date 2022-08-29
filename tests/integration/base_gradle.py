@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from abc import abstractmethod
 from shutil import unpack_archive
 from tempfile import NamedTemporaryFile
 from typing import List
@@ -8,14 +9,19 @@ import requests
 from tests.integration.base_integration_test import IntegrationTestBase
 
 
-class TestGradleCheck(IntegrationTestBase):
+class GradleCheckBase(IntegrationTestBase):
+
+    @abstractmethod
+    def get_language(self) -> str:
+        """Return the language to use"""
 
     def prepare_test_directory(self):
         with NamedTemporaryFile() as temp_archive:
             response = requests.post('https://start.spring.io/starter.tgz', data={
                 'dependencies': 'web,devtools',
                 'bootVersion': '2.3.5.RELEASE',
-                'type': 'gradle-project'
+                'type': 'gradle-project',
+                'language': self.get_language()
             })
             response.raise_for_status()
             open(temp_archive.name, 'wb').write(response.content)
