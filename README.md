@@ -1,7 +1,7 @@
 # kontrolilo
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/kontrolilo/kontrolilo/release%20project?label=Release&style=for-the-badge)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/kontrolilo/kontrolilo/run%20all%20tests?label=PR%20tests&style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/kontrolilo/kontrolilo/release-on-main.yml?branch=main&style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/kontrolilo/kontrolilo/pull-request.yml?&style=for-the-badge&label=PR%20tests)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/kontrolilo/kontrolilo?style=for-the-badge)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/kontrolilo/kontrolilo?style=for-the-badge)
 ![Code Climate coverage](https://img.shields.io/codeclimate/coverage/kontrolilo/kontrolilo?style=for-the-badge)
