@@ -1,0 +1,4 @@
+allowedLicenses:
+  - APACHE-2
+  - MIT
+excludedPackages: []

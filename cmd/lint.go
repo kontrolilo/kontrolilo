@@ -1,27 +1,34 @@
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
 
+	"github.com/kontrolilo/kontrolilo/internal/pkg/configuration"
 	"github.com/spf13/cobra"
 )
 
-// lintCmd represents the lint command
 var lintCmd = &cobra.Command{
 	Use:   "lint",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Check your local configuration file",
+	Long:  `This command will try load the configuration file and show it's current configuration.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("lint called")
+		err := configuration.LoadConfiguration()
+		if err != nil {
+			panic(fmt.Errorf("fatal error config file: %w", err))
+		}
+
+		fmt.Println("Your current configuration")
+		fmt.Println("allowed licenses:")
+		for _, v := range configuration.GetAllowedLicenses() {
+			fmt.Printf(" * %s\n", v)
+		}
+		fmt.Println("excluded packages:")
+		for _, v := range configuration.GetExcludedPackages() {
+			fmt.Printf(" * %s\n", v)
+		}
 	},
 }
 
