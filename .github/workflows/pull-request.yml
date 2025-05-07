@@ -1,33 +1,21 @@
-name: run all tests
+name: test and build
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ main, v3 ]
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        python-version: [ 3.7, 3.8, 3.9 ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v5
         with:
-          python-version: ${{ matrix.python-version }}
-      - uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: '11'
-      - name: setup environment
-        run: |
-          make ci-setup-environment
-          make local-setup
-      - name: run linter
-        run: make lint
+          go-version: 1.23
       - name: run tests
         run: make test
-      - name: determine potential release version
-        run: make print-release
+      - name: build binary
+        run: make binary
