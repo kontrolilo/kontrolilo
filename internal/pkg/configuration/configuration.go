@@ -2,8 +2,8 @@ package configuration
 
 import "github.com/spf13/viper"
 
-func LoadConfiguration() error {
-	viper.SetConfigName(".kontrolilo")
+func LoadConfiguration(configFilePath string) error {
+	viper.SetConfigFile(configFilePath)
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
 	return viper.ReadInConfig()

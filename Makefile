@@ -1,4 +1,4 @@
-.PHONY: docs
+.PHONY: docs test
 help:	## Show this help.
 		@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
@@ -12,15 +12,8 @@ local-setup:
 	pipenv run pre-commit install
 	pipenv run pre-commit install --hook-type commit-msg
 
-unit-test:
-	COVERAGE_FILE=.coverage_unit pipenv run pytest -n auto --cov=kontrolilo src tests/unit
-
-integration-test:
-	COVERAGE_FILE=.coverage_integration pipenv run pytest -n auto --cov=kontrolilo src tests/integration
-
-test: unit-test integration-test
-	pipenv run coverage combine .coverage_unit .coverage_integration
-	pipenv run coverage xml
+test:
+	go test ./...
 
 ci-setup-environment:
 	pip install pipenv
