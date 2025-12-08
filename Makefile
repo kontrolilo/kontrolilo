@@ -7,39 +7,35 @@ pyenv-setup:
 	pip install pipenv
 
 local-setup:
-	pipenv --python $(shell which python)
-	pipenv install -d
-	pipenv run pre-commit install
-	pipenv run pre-commit install --hook-type commit-msg
+	pip3 install -r requirements.txt
+	pip3 install -r requirements-dev.txt
+# pre-commit install
+#	 pre-commit install --hook-type commit-msg
 
 unit-test:
-	COVERAGE_FILE=.coverage_unit pipenv run pytest -n auto --cov=kontrolilo src tests/unit
+	COVERAGE_FILE=.coverage_unit  pytest -n auto --cov=kontrolilo src tests/unit
 
 integration-test:
-	COVERAGE_FILE=.coverage_integration pipenv run pytest -n auto --cov=kontrolilo src tests/integration
+	COVERAGE_FILE=.coverage_integration  pytest -n auto --cov=kontrolilo src tests/integration
 
 test: unit-test integration-test
-	pipenv run coverage combine .coverage_unit .coverage_integration
-	pipenv run coverage xml
+	coverage combine .coverage_unit .coverage_integration
+	coverage xml
 
 ci-setup-environment:
 	pip install pipenv
 
-sync:
-	pipenv run pipenv-setup sync
-
 lint:
-	pipenv run pre-commit run --all-files
-	pipenv run pipenv-setup check
-
+	pre-commit run --all-files
+	
 release:
-	pipenv run semantic-release publish
+	semantic-release publish
 
 print-release:
-	pipenv run semantic-release print-version
+	semantic-release print-version
 
 run-sample-webserver:
-	(cd examples && pipenv run python -m http.server)
+	(cd examples &&  python -m http.server)
 
 docs:
 	hugo -s docs
