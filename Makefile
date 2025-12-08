@@ -9,8 +9,8 @@ pyenv-setup:
 local-setup:
 	pip3 install -r requirements.txt
 	pip3 install -r requirements-dev.txt
-# pre-commit install
-#	 pre-commit install --hook-type commit-msg
+	pre-commit install
+	pre-commit install --hook-type commit-msg
 
 unit-test:
 	COVERAGE_FILE=.coverage_unit  pytest -n auto --cov=kontrolilo src tests/unit
@@ -27,7 +27,7 @@ ci-setup-environment:
 
 lint:
 	pre-commit run --all-files
-	
+
 release:
 	semantic-release publish
 
