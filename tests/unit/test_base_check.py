@@ -29,7 +29,7 @@ class SimpleLicenseChecker(BaseLicenseChecker):
 
 class TestBaseLicenseChecker:
 
-    def setup(self):
+    def setup_method(self):
         self.directory = TemporaryDirectory()
         self.checker = SimpleLicenseChecker()
 

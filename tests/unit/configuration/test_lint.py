@@ -10,7 +10,7 @@ from kontrolilo.configuration.lint import ConfigurationFileChecker
 
 class TestConfigurationFileChecker:
 
-    def setup(self):
+    def setup_method(self):
         self.checker = ConfigurationFileChecker()
         self.directory = TemporaryDirectory()
         self.cache_file = NamedTemporaryFile()

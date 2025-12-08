@@ -57,7 +57,7 @@ class TestGradleLicenseChecker:
       }
     ]'''
 
-    def setup(self):
+    def setup_method(self):
         self.directory = TemporaryDirectory()
         self.checker = GradleLicenseChecker()
 
