@@ -1,0 +1,6 @@
+GitPython==3.1.41
+pytest==9.0.2
+pytest-cov==7.0.0
+pytest-xdist==3.8.0
+python-semantic-release==10.5.2
+httptest==2.1.1
