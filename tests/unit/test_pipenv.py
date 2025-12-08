@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 from tempfile import TemporaryDirectory
 from unittest.mock import patch, call

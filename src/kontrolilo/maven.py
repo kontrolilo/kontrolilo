@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from pathlib import Path
 from typing import List
 from xml.etree import ElementTree

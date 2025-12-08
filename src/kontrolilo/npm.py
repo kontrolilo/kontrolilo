@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import csv
 from subprocess import run
 from typing import List

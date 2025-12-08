@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 class Package:
     name: str
     version: str

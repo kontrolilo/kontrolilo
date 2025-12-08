@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from kontrolilo.configuration.package import Package
 
 

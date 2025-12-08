@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from shutil import unpack_archive
 from tempfile import NamedTemporaryFile
 from typing import List

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from json import load
 from logging import getLogger
 from pathlib import Path

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 from abc import abstractmethod, ABC
 from pathlib import Path

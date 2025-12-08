@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from os import mkdir
 from os.path import join
 from pathlib import Path
