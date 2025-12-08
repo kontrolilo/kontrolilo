@@ -81,8 +81,7 @@ class Configuration:
         return Configuration.load_from_string(response.text)
 
     def invalidate_cache(self):
-        for include in self.includes:
-            self.session.cache.delete_url(include.url)
+        self.session.cache.clear()
 
     @staticmethod
     def load_from_string(text):
