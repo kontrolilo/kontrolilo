@@ -140,8 +140,8 @@ def test_invalidate_cache():
             )
             merged_configuration = base_configuration.merge_includes()
 
-            assert merged_configuration.session.cache.urls == [ts.url()]
+            assert merged_configuration.session.cache.urls() == [ts.url()]
 
             merged_configuration.invalidate_cache()
 
-            assert merged_configuration.session.cache.urls == []
+            assert merged_configuration.session.cache.urls() == []
