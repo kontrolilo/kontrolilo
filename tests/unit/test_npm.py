@@ -14,7 +14,7 @@ class TestNpmLicenseChecker:
 "y18n@4.0.0","ISC","https://github.com/yargs/y18n"
 "y18n@5.0.5","ISC","https://github.com/yargs/y18n"'''
 
-    def setup(self):
+    def setup_method(self):
         self.directory = TemporaryDirectory()
         self.checker = NpmLicenseChecker()
 

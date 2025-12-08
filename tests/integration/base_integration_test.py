@@ -13,7 +13,7 @@ from kontrolilo.configuration import Configuration
 
 class IntegrationTestBase(ABC):
 
-    def setup(self):
+    def setup_method(self):
         self.directory = TemporaryDirectory()
 
         self.prepare_test_directory()
