@@ -18,7 +18,7 @@ class GradleCheckBase(IntegrationTestBase):
         with NamedTemporaryFile() as temp_archive:
             response = requests.post('https://start.spring.io/starter.tgz', data={
                 'dependencies': 'web,devtools',
-                'bootVersion': '2.3.5.RELEASE',
+                'bootVersion': '3.5.8',
                 'type': 'gradle-project',
                 'language': self.get_language()
             })
