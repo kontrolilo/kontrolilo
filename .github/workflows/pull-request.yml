@@ -22,7 +22,9 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
       - name: setup environment
-        run: make local-setup
+        run: |
+          make ci-setup-environment
+          make local-setup
       - name: run linter
         run: make lint
       - name: run tests
