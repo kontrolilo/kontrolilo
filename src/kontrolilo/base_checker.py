@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 import abc
 import os
-from builtins import dict
 from logging import getLogger
 from os.path import abspath
 from pathlib import Path

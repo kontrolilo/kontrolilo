@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 from os.path import join
 from pathlib import Path
@@ -93,7 +92,7 @@ class TestBaseLicenseChecker:
         run_mock.assert_called_once_with('echo \'Hello World!\'', capture_output=True, cwd=self.directory,
                                          env=os.environ, shell=True, text=True)
 
-        class Object(object):
+        class Object:
             pass
 
         def test_run_returns_failure_on_no_config(self):

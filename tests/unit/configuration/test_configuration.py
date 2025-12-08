@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 
 from httptest import Handler, Server

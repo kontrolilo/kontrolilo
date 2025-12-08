@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.27.1
+    rev: v4.10.0
     hooks:
       - id: commitizen
         stages: [commit-msg]
@@ -11,7 +11,7 @@ repos:
   #     - id: md-toc
   #       exclude: '^docs/themes'
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.2.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-builtin-literals
@@ -29,11 +29,14 @@ repos:
       - id: double-quote-string-fixer
       - id: end-of-file-fixer
         exclude: '(.license-check.yaml|^docs/themes)'
-      - id: fix-encoding-pragma
       - id: mixed-line-ending
         exclude: '^docs/themes'
       - id: trailing-whitespace
         exclude: '^docs/themes'
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.21.2
+    hooks:
+    -   id: pyupgrade
   # - repo: https://github.com/kontrolilo/kontrolilo
   #   rev: v2.2.0
   #   hooks:

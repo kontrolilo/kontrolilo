@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from pathlib import Path
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 from unittest.mock import Mock
