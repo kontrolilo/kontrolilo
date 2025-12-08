@@ -23,7 +23,7 @@ test: unit-test integration-test
 	coverage xml
 
 ci-setup-environment:
-	pip install pre-commit
+	pip install pre-commit pyenv
 
 lint:
 	pre-commit run --all-files
