@@ -1,2 +1,14 @@
 [project]
-license = "MIT"
+name = "kontrolilo"
+version = "0.12.0"
+description = "Check your repositories against a license allow list"
+readme = "README.md"
+authors = [{name = "Nicolas Byl", email = "nico@nicolas-byl.eu"}]
+license = {text = "MIT"}
+
+[project.scripts]
+license-check-configuration-lint = "kontrolilo.configuration.lint:main"
+license-check-gradle = "kontrolilo.gradle:main"
+license-check-maven = "kontrolilo.maven:main"
+license-check-npm = "kontrolilo.npm:main"
+license-check-pipenv = "kontrolilo.pipenv:main"

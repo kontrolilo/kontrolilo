@@ -22,6 +22,7 @@ setup(
     name='pre-commit-license-check',
     description='Check your repositories against a license allow list',
     url='https://github.com/nbyl/pre-commit-license-check',
+    license='MIT',
     version=__version__,
     package_dir={'': 'src'},
     packages=find_packages(where='src'),

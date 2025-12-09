@@ -2,7 +2,7 @@
 	"name": "Python 3",
 	"image": "mcr.microsoft.com/devcontainers/python:2-3.14-trixie",
 	"postCreateCommand": "make local-setup",
-	"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}/.git",
+	"postStartCommand": "git config --global --add safe.directory *",
 	"features": {
 		"ghcr.io/gvatsal60/dev-container-features/pre-commit:1":{}
 	}
