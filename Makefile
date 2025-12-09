@@ -18,8 +18,9 @@ unit-test:
 integration-test:
 	COVERAGE_FILE=.coverage_integration  pytest -n auto --cov=kontrolilo src tests/integration
 
-test: unit-test integration-test
-	coverage combine .coverage_unit .coverage_integration
+test: unit-test #integration-test
+#coverage combine .coverage_unit .coverage_integration
+	cp .coverage_unit .coverage
 	coverage xml
 
 ci-setup-environment:

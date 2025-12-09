@@ -29,10 +29,10 @@ jobs:
       with:
         coverageCommand: make test
         debug: true
-    - name: publish release
-      run: |
-        git config --global user.name "github-actions"
-        git config --global user.email "action@github.com"
-        make release
-      env:
-        GH_TOKEN: ${{ secrets.GitHubToken }}
+    # - name: publish release
+    #   run: |
+    #     git config --global user.name "github-actions"
+    #     git config --global user.email "action@github.com"
+    #     make release
+    #   env:
+    #     GH_TOKEN: ${{ secrets.GitHubToken }}
