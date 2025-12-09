@@ -6,8 +6,6 @@
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/kontrolilo/kontrolilo?style=for-the-badge)
 ![Code Climate coverage](https://img.shields.io/codeclimate/coverage/kontrolilo/kontrolilo?style=for-the-badge)
 
-**This repository is under active development for a predecessor. For the next iteration, see the `v3` branch.**
-
 This repo contains git hooks to integrate with [pre-commit](http://pre-commit.com). These are centered around license
 compliance in the python ecosystem.
 
